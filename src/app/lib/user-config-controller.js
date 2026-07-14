@@ -1,4 +1,4 @@
-/**
+﻿/**
  * user-controll.json controll
  */
 
@@ -24,7 +24,7 @@ exports.saveUserConfig = async (userConfig) => {
   }
   delete userConfig.host
   delete userConfig.terminalTypes
-  delete userConfig.tokenElecterm
+  delete userConfig.tokenSarmaterm
   delete userConfig.server
   delete userConfig.port
   globalState.update('config', userConfig)

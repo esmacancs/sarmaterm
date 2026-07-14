@@ -1,4 +1,4 @@
-const {
+﻿const {
   app
 } = require('electron')
 const { createWindow } = require('./create-window')
@@ -22,7 +22,7 @@ const GPU_ERROR_SUGGESTION = `
 ⚠️  GPU Process Error Detected
 ================================================================================
 If you encounter GPU process crashes (exit_code=-2147483645 or similar),
-try running electerm with one of these flags:
+try running sarmaterm with one of these flags:
 
   1. --no-sandbox          (Recommended - run without sandbox)
   2. --disable-gpu        (Disable GPU rendering)
@@ -33,9 +33,9 @@ Or set environment variable:
   set DISABLE_GPU=1
 
 Example:
-  electerm.exe --no-sandbox
+  sarmaterm.exe --no-sandbox
   or
-  set DISABLE_GPU=1 && electerm.exe
+  set DISABLE_GPU=1 && sarmaterm.exe
 ================================================================================
 `
 

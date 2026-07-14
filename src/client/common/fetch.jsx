@@ -1,4 +1,4 @@
-// the final fetch wrapper
+﻿// the final fetch wrapper
 import { isString, isFunction } from 'lodash-es'
 import { notification } from '../components/common/notification'
 
@@ -6,7 +6,7 @@ function jsonHeader () {
   return {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    token: window.store?.config.tokenElecterm
+    token: window.store?.config.tokenSarmaterm
   }
 }
 

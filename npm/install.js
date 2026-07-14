@@ -1,9 +1,9 @@
-/**
- * install electerm from binary
- * After npm i -g electerm, running `electerm` command will:
+﻿/**
+ * install sarmaterm from binary
+ * After npm i -g sarmaterm, running `sarmaterm` command will:
  * 1. Download the appropriate binary for the platform
- * 2. Extract it to the package directory (electerm/)
- * 3. The bash script (npm/electerm) then launches the extracted binary
+ * 2. Extract it to the package directory (sarmaterm/)
+ * 3. The bash script (npm/sarmaterm) then launches the extracted binary
  *
  * This script only downloads and extracts. Launching is handled by the bash script.
  */
@@ -19,13 +19,13 @@ const plat = os.platform()
 const arch = os.arch()
 const { homepage } = require('../package.json')
 
-const releaseInfoUrl = `${homepage}/data/electerm-github-release.json?_=${+new Date()}`
+const releaseInfoUrl = `${homepage}/data/sarmaterm-github-release.json?_=${+new Date()}`
 const versionUrl = `${homepage}/version.html?_=${+new Date()}`
 
-// Directory where electerm package is installed
+// Directory where sarmaterm package is installed
 const packageRoot = resolve(__dirname, '..')
 // Directory where the extracted binary will live
-const extractDir = join(packageRoot, 'electerm')
+const extractDir = join(packageRoot, 'sarmaterm')
 
 // ---------------------------------------------------------------------------
 // Security helpers
@@ -79,13 +79,13 @@ function getReleaseInfo (filter) {
 function showFinalMessage () {
   console.log('')
   console.log('========================================')
-  console.log('electerm installation complete!')
+  console.log('sarmaterm installation complete!')
   console.log('========================================')
   console.log('')
   console.log('For more information, documentation, and updates, please visit:')
-  console.log('https://electerm.org')
+  console.log('https://sarmaterm.github.io')
   console.log('')
-  console.log('Thank you for using electerm!')
+  console.log('Thank you for using sarmaterm!')
   console.log('========================================')
   console.log('')
 }
@@ -125,21 +125,21 @@ function isLinuxLegacy (platform) {
 // ---------------------------------------------------------------------------
 
 /**
- * Get the path to the extracted electerm executable
+ * Get the path to the extracted sarmaterm executable
  */
-function getElectermExePath () {
+function getSarmatermExePath () {
   if (plat === 'win32') {
-    return join(extractDir, 'electerm.exe')
+    return join(extractDir, 'sarmaterm.exe')
   }
   // Linux and macOS (if extracted)
-  return join(extractDir, 'electerm')
+  return join(extractDir, 'sarmaterm')
 }
 
 /**
- * Check if the electerm binary has been extracted already
+ * Check if the sarmaterm binary has been extracted already
  */
-function isElectermExtracted () {
-  const exePath = getElectermExePath()
+function isSarmatermExtracted () {
+  const exePath = getSarmatermExePath()
   return fs.existsSync(exePath)
 }
 
@@ -154,7 +154,7 @@ async function runLinux (folderName, filePattern) {
   console.log(`  Version: ${ver}`)
   console.log(`  Target: ${folderName}`)
 
-  const target = join(packageRoot, `electerm-${ver}-${folderName}`)
+  const target = join(packageRoot, `sarmaterm-${ver}-${folderName}`)
 
   // Clean up old installations
   rm('-rf', [target, extractDir])
@@ -167,7 +167,7 @@ async function runLinux (folderName, filePattern) {
 
   // Download without extracting to packageRoot directly
   // We'll extract to a temp location first
-  const tmpDir = join(packageRoot, '.electerm-tmp')
+  const tmpDir = join(packageRoot, '.sarmaterm-tmp')
   rm('-rf', tmpDir)
   fs.mkdirSync(tmpDir, { recursive: true })
 
@@ -200,7 +200,7 @@ async function runLinux (folderName, filePattern) {
       console.log('  Note: To enable the Electron sandbox, run:')
       console.log(`    sudo chown root:root "${chromeSandboxPath}"`)
       console.log(`    sudo chmod 4755 "${chromeSandboxPath}"`)
-      console.log('  Otherwise, electerm will launch with --no-sandbox automatically.')
+      console.log('  Otherwise, sarmaterm will launch with --no-sandbox automatically.')
     }
   }
 
@@ -217,12 +217,12 @@ async function runWin (archName) {
   console.log(`  Version: ${ver}`)
   console.log(`  Target: win-${archName}`)
 
-  const target = join(packageRoot, `electerm-${ver}-win-${archName}`)
+  const target = join(packageRoot, `sarmaterm-${ver}-win-${archName}`)
 
   rm('-rf', [target, extractDir])
   fs.mkdirSync(extractDir, { recursive: true })
 
-  const pattern = new RegExp(`electerm-\\d+\\.\\d+\\.\\d+-win-${archName}\\.tar\\.gz$`)
+  const pattern = new RegExp(`sarmaterm-\\d+\\.\\d+\\.\\d+-win-${archName}\\.tar\\.gz$`)
   console.log('  Fetching release info...')
   const releaseInfo = await getReleaseInfo(r => pattern.test(r.name))
   if (!releaseInfo) {
@@ -231,7 +231,7 @@ async function runWin (archName) {
 
   // Download to a temp file, then extract directly to extractDir with strip:1
   // (avoids a rename which can fail on Windows when AV has file locks)
-  const tmpDir = join(packageRoot, '.electerm-tmp')
+  const tmpDir = join(packageRoot, '.sarmaterm-tmp')
   rm('-rf', tmpDir)
   fs.mkdirSync(tmpDir, { recursive: true })
 
@@ -245,9 +245,9 @@ async function runWin (archName) {
 
   rm('-rf', tmpDir)
 
-  const exePath = getElectermExePath()
+  const exePath = getSarmatermExePath()
   if (!fs.existsSync(exePath)) {
-    throw new Error(`electerm.exe not found at ${exePath} after extraction. Archive may have an unexpected structure.`)
+    throw new Error(`sarmaterm.exe not found at ${exePath} after extraction. Archive may have an unexpected structure.`)
   }
 
   showFinalMessage()
@@ -260,18 +260,18 @@ async function runWin7 () {
   console.log(`  Version: ${ver}`)
   console.log('  Target: win7')
 
-  const target = join(packageRoot, `electerm-${ver}-win7`)
+  const target = join(packageRoot, `sarmaterm-${ver}-win7`)
 
   rm('-rf', [target, extractDir])
   fs.mkdirSync(extractDir, { recursive: true })
 
   console.log('  Fetching release info...')
-  const releaseInfo = await getReleaseInfo(r => /electerm-\d+\.\d+\.\d+-win7\.tar\.gz$/.test(r.name))
+  const releaseInfo = await getReleaseInfo(r => /sarmaterm-\d+\.\d+\.\d+-win7\.tar\.gz$/.test(r.name))
   if (!releaseInfo) {
     throw new Error('No release found for Windows 7')
   }
 
-  const tmpDir = join(packageRoot, '.electerm-tmp')
+  const tmpDir = join(packageRoot, '.sarmaterm-tmp')
   rm('-rf', tmpDir)
   fs.mkdirSync(tmpDir, { recursive: true })
 
@@ -285,9 +285,9 @@ async function runWin7 () {
 
   rm('-rf', tmpDir)
 
-  const exePath = getElectermExePath()
+  const exePath = getSarmatermExePath()
   if (!fs.existsSync(exePath)) {
-    throw new Error(`electerm.exe not found at ${exePath} after extraction. Archive may have an unexpected structure.`)
+    throw new Error(`sarmaterm.exe not found at ${exePath} after extraction. Archive may have an unexpected structure.`)
   }
 
   showFinalMessage()
@@ -411,7 +411,7 @@ async function runMac (archName) {
     }
 
     console.log('')
-    console.log('  Installation complete! You can now launch electerm from /Applications')
+    console.log('  Installation complete! You can now launch sarmaterm from /Applications')
   } catch (err) {
     console.error('')
     console.error('  Warning: Automatic installation failed:', err.message)
@@ -451,7 +451,7 @@ async function runMac10 () {
     }
 
     console.log('')
-    console.log('  Installation complete! You can now launch electerm from /Applications')
+    console.log('  Installation complete! You can now launch sarmaterm from /Applications')
   } catch (err) {
     console.error('')
     console.error('  Warning: Automatic installation failed:', err.message)
@@ -469,7 +469,7 @@ async function runMac10 () {
 async function main () {
   console.log('')
   console.log('========================================')
-  console.log('electerm binary installer')
+  console.log('sarmaterm binary installer')
   console.log('========================================')
   console.log(`Platform: ${plat}, Architecture: ${arch}`)
 
@@ -529,7 +529,7 @@ async function main () {
     console.error(`Error: ${err.message}`)
     console.error(`Platform: ${plat}, Architecture: ${arch}`)
     console.error('')
-    console.error('Please visit https://electerm.org for manual download options.')
+    console.error('Please visit https://sarmaterm.github.io for manual download options.')
     console.error('========================================')
     console.error('')
     process.exit(1)
@@ -546,8 +546,8 @@ module.exports = {
   isLinuxLegacy,
   sanitizeVersion,
   sanitizeFilename,
-  getElectermExePath,
-  isElectermExtracted,
+  getSarmatermExePath,
+  isSarmatermExtracted,
   // Expose for test injection
   _packageRoot: packageRoot,
   _extractDir: extractDir

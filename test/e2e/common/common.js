@@ -1,4 +1,4 @@
-const delay = require('./wait')
+﻿const delay = require('./wait')
 const {
   TEST_HOST,
   TEST_PASS,
@@ -11,7 +11,7 @@ const {
 const log = require('./log')
 
 /**
- * Common file and folder operations for electerm SFTP tests
+ * Common file and folder operations for sarmaterm SFTP tests
  */
 /**
  * Creates a new file in the specified type of file list (local/remote)

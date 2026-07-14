@@ -1,5 +1,5 @@
-#!/bin/bash
-# Build electerm for loong64 (LoongArch64) Linux - Legacy (old world)
+﻿#!/bin/bash
+# Build sarmaterm for loong64 (LoongArch64) Linux - Legacy (old world)
 #
 # Strategy:
 # 1. Build x64 version with legacy deps to get the asar
@@ -137,7 +137,7 @@ build_x64() {
     cp "$asar_file" "$WORK_DIR/app.asar"
 
     local app_dir
-    app_dir=$(find "$WORK_DIR/x64-extract" -maxdepth 1 -name "electerm*" -type d | head -1)
+    app_dir=$(find "$WORK_DIR/x64-extract" -maxdepth 1 -name "sarmaterm*" -type d | head -1)
     if [ -n "$app_dir" ]; then
         cp -r "$app_dir" "$WORK_DIR/x64-app"
     fi
@@ -297,11 +297,11 @@ rebuild_native_modules() {
 merge_loong64() {
     log_info "Step 4: Merging x64 asar with loong64 electron..."
 
-    local electerm_version
-    electerm_version=$(get_version)
+    local sarmaterm_version
+    sarmaterm_version=$(get_version)
 
     mkdir -p "$OUTPUT_DIR"
-    local output_name="electerm-${electerm_version}-linux-loong64-legacy"
+    local output_name="sarmaterm-${sarmaterm_version}-linux-loong64-legacy"
     local output_dir="$OUTPUT_DIR/$output_name"
     rm -rf "$output_dir"
     mkdir -p "$output_dir"
@@ -312,9 +312,9 @@ merge_loong64() {
     fi
 
     # Replace x64 binary with loong64 electron
-    rm -f "$output_dir/electerm"
-    cp "$WORK_DIR/electron-loong64/electron" "$output_dir/electerm"
-    chmod +x "$output_dir/electerm"
+    rm -f "$output_dir/sarmaterm"
+    cp "$WORK_DIR/electron-loong64/electron" "$output_dir/sarmaterm"
+    chmod +x "$output_dir/sarmaterm"
 
     # Copy loong64 electron runtime files (libraries, locales, etc.)
     for f in "$WORK_DIR/electron-loong64"/*; do
@@ -344,7 +344,7 @@ merge_loong64() {
             find "$output_dir" -path "*@serialport/bindings-cpp*" -name "*.node" -exec cp "$native_modules_dir/serialport-bindings.node" {} \; 2>/dev/null || true
         fi
         if [ -f "$native_modules_dir/ssh2-crypto.node" ]; then
-            find "$output_dir" -path "*@electerm/ssh2*" -name "*.node" -exec cp "$native_modules_dir/ssh2-crypto.node" {} \; 2>/dev/null || true
+            find "$output_dir" -path "*@sarmaterm/ssh2*" -name "*.node" -exec cp "$native_modules_dir/ssh2-crypto.node" {} \; 2>/dev/null || true
         fi
     fi
 
@@ -390,12 +390,12 @@ build_deb() {
     local suffix="$deb_arch"
     log_info "Step 5: Building ${suffix} deb package..."
 
-    local electerm_version
-    electerm_version=$(get_version)
+    local sarmaterm_version
+    sarmaterm_version=$(get_version)
 
-    local output_dir="$OUTPUT_DIR/electerm-${electerm_version}-linux-loong64-legacy"
+    local output_dir="$OUTPUT_DIR/sarmaterm-${sarmaterm_version}-linux-loong64-legacy"
     local deb_build="$OUTPUT_DIR/deb-build-${suffix}"
-    local deb_name="electerm_${electerm_version}_loongarch64"
+    local deb_name="sarmaterm_${sarmaterm_version}_loongarch64"
     local deb_dir="$deb_build/$deb_name"
 
     if [ ! -d "$output_dir" ]; then
@@ -413,35 +413,35 @@ build_deb() {
 
     rm -rf "$deb_build"
     mkdir -p "$deb_dir/DEBIAN"
-    mkdir -p "$deb_dir/opt/electerm"
+    mkdir -p "$deb_dir/opt/sarmaterm"
     mkdir -p "$deb_dir/usr/share/applications"
     mkdir -p "$deb_dir/usr/share/icons/hicolor/128x128/apps"
 
-    cp -r "$output_dir"/* "$deb_dir/opt/electerm/"
+    cp -r "$output_dir"/* "$deb_dir/opt/sarmaterm/"
 
     # Install icon
-    local icon_src="$PROJECT_ROOT/node_modules/@electerm/electerm-resource/res/imgs/electerm-round-128x128.png"
+    local icon_src="$PROJECT_ROOT/node_modules/@sarmaterm/sarmaterm-resource/res/imgs/sarmaterm-round-128x128.png"
     if [ -f "$icon_src" ]; then
-        cp "$icon_src" "$deb_dir/usr/share/icons/hicolor/128x128/apps/electerm.png"
+        cp "$icon_src" "$deb_dir/usr/share/icons/hicolor/128x128/apps/sarmaterm.png"
     fi
 
     # Install desktop file
-    cat > "$deb_dir/usr/share/applications/electerm.desktop" <<'DESKTOP'
+    cat > "$deb_dir/usr/share/applications/sarmaterm.desktop" <<'DESKTOP'
 [Desktop Entry]
-Name=electerm
+Name=sarmaterm
 Comment=Terminal/SSH/SFTP client
-Exec=/opt/electerm/electerm %U
-Icon=electerm
+Exec=/opt/sarmaterm/sarmaterm %U
+Icon=sarmaterm
 Terminal=false
 Type=Application
 Categories=Development;System;TerminalEmulator;
-StartupWMClass=electerm
-MimeType=x-scheme-handler/ssh;x-scheme-handler/telnet;x-scheme-handler/rdp;x-scheme-handler/vnc;x-scheme-handler/serial;x-scheme-handler/spice;x-scheme-handler/electerm;
+StartupWMClass=sarmaterm
+MimeType=x-scheme-handler/ssh;x-scheme-handler/telnet;x-scheme-handler/rdp;x-scheme-handler/vnc;x-scheme-handler/serial;x-scheme-handler/spice;x-scheme-handler/sarmaterm;
 DESKTOP
 
     cat > "$deb_dir/DEBIAN/control" <<CTRL
-Package: electerm
-Version: ${electerm_version}
+Package: sarmaterm
+Version: ${sarmaterm_version}
 Section: utils
 Priority: optional
 Architecture: ${deb_arch}
@@ -452,14 +452,14 @@ CTRL
 
     cat > "$deb_dir/DEBIAN/postinst" <<'POSTINST'
 #!/bin/bash
-chown root:root /opt/electerm/chrome-sandbox
-chmod 4755 /opt/electerm/chrome-sandbox
+chown root:root /opt/sarmaterm/chrome-sandbox
+chmod 4755 /opt/sarmaterm/chrome-sandbox
 update-desktop-database /usr/share/applications/ 2>/dev/null || true
 gtk-update-icon-cache /usr/share/icons/hicolor/ 2>/dev/null || true
 POSTINST
     chmod 755 "$deb_dir/DEBIAN/postinst"
 
-    local deb_file="$OUTPUT_DIR/electerm-${electerm_version}-linux-${suffix}-legacy.deb"
+    local deb_file="$OUTPUT_DIR/sarmaterm-${sarmaterm_version}-linux-${suffix}-legacy.deb"
     # Use gzip compression for compatibility with dpkg < 1.21.18 (e.g. Loongnix 20 has dpkg 1.19.7)
     if command -v fakeroot &>/dev/null; then
         fakeroot dpkg-deb -Zgzip --root-owner-group --build "$deb_dir" "$deb_file"
@@ -495,10 +495,10 @@ upload_to_github() {
         return 0
     fi
 
-    local electerm_version
-    electerm_version=$(get_version)
+    local sarmaterm_version
+    sarmaterm_version=$(get_version)
 
-    local release_name="v${electerm_version}"
+    local release_name="v${sarmaterm_version}"
 
     log_info "Uploading $filename to GitHub release draft '${release_name}'..."
 
@@ -519,7 +519,7 @@ upload_to_github() {
 # Main
 # ============================================================================
 main() {
-    log_info "Starting electerm loong64-legacy build..."
+    log_info "Starting sarmaterm loong64-legacy build..."
     log_info "Project root: $PROJECT_ROOT"
     log_info "Work directory: $WORK_DIR"
     log_info "Output directory: $OUTPUT_DIR"
@@ -535,24 +535,24 @@ main() {
     rebuild_native_modules
     merge_loong64
 
-    local electerm_version
-    electerm_version=$(get_version)
+    local sarmaterm_version
+    sarmaterm_version=$(get_version)
 
     # Upload tar.gz
-    upload_to_github "$OUTPUT_DIR/electerm-${electerm_version}-linux-loong64-legacy.tar.gz"
+    upload_to_github "$OUTPUT_DIR/sarmaterm-${sarmaterm_version}-linux-loong64-legacy.tar.gz"
 
     # Build and upload debs
     build_deb "linux-loong64-legacy.deb" "loong64"
-    upload_to_github "$OUTPUT_DIR/electerm-${electerm_version}-linux-loong64-legacy.deb"
+    upload_to_github "$OUTPUT_DIR/sarmaterm-${sarmaterm_version}-linux-loong64-legacy.deb"
 
     build_deb "linux-loongarch64-legacy.deb" "loongarch64"
-    upload_to_github "$OUTPUT_DIR/electerm-${electerm_version}-linux-loongarch64-legacy.deb"
+    upload_to_github "$OUTPUT_DIR/sarmaterm-${sarmaterm_version}-linux-loongarch64-legacy.deb"
 
     log_info "=========================================="
     log_info "Build complete!"
-    log_info "  $OUTPUT_DIR/electerm-${electerm_version}-linux-loong64-legacy.tar.gz"
-    log_info "  $OUTPUT_DIR/electerm-${electerm_version}-linux-loong64-legacy.deb"
-    log_info "  $OUTPUT_DIR/electerm-${electerm_version}-linux-loongarch64-legacy.deb"
+    log_info "  $OUTPUT_DIR/sarmaterm-${sarmaterm_version}-linux-loong64-legacy.tar.gz"
+    log_info "  $OUTPUT_DIR/sarmaterm-${sarmaterm_version}-linux-loong64-legacy.deb"
+    log_info "  $OUTPUT_DIR/sarmaterm-${sarmaterm_version}-linux-loongarch64-legacy.deb"
     log_info "=========================================="
 }
 

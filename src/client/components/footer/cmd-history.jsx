@@ -1,4 +1,4 @@
-/**
+﻿/**
  * cmd history trigger button with popover
  */
 
@@ -12,7 +12,7 @@ import { getItemJSON, setItemJSON } from '../../common/safe-local-storage'
 import './cmd-history.styl'
 
 const e = window.translate
-const SORT_BY_FREQ_KEY = 'electerm-cmd-history-sort-by-frequency'
+const SORT_BY_FREQ_KEY = 'sarmaterm-cmd-history-sort-by-frequency'
 
 export default auto(function CmdHistory (props) {
   const [keyword, setKeyword] = useState('')

@@ -1,5 +1,5 @@
-import { osResolve } from './resolve'
+﻿import { osResolve } from './resolve'
 
 export default function () {
-  return window.et.sessionLogPath || osResolve(window.store.appPath, 'electerm', 'session_logs')
+  return window.et.sessionLogPath || osResolve(window.store.appPath, 'sarmaterm', 'session_logs')
 }

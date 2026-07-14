@@ -1,10 +1,10 @@
-const assert = require('node:assert/strict')
+﻿const assert = require('node:assert/strict')
 const { describe, test } = require('node:test')
 const crypto = require('crypto')
 const fs = require('fs')
 const os = require('os')
 const { join } = require('path')
-const { generateKeyPairSync } = require('@electerm/ssh2/lib/keygen.js')
+const { generateKeyPairSync } = require('@sarmaterm/ssh2/lib/keygen.js')
 
 const {
   appendKnownHost,
@@ -33,7 +33,7 @@ describe('ssh known_hosts verification', () => {
   })
 
   test('treats same-type key changes as mismatches', async () => {
-    const tempDir = await fs.promises.mkdtemp(join(os.tmpdir(), 'electerm-known-hosts-'))
+    const tempDir = await fs.promises.mkdtemp(join(os.tmpdir(), 'sarmaterm-known-hosts-'))
     try {
       const knownHostsPath = join(tempDir, 'known_hosts')
       const originalKey = createHostKey('original')
@@ -57,7 +57,7 @@ describe('ssh known_hosts verification', () => {
   })
 
   test('writes and re-reads a non-default port entry', async () => {
-    const tempDir = await fs.promises.mkdtemp(join(os.tmpdir(), 'electerm-known-hosts-'))
+    const tempDir = await fs.promises.mkdtemp(join(os.tmpdir(), 'sarmaterm-known-hosts-'))
     try {
       const knownHostsPath = join(tempDir, 'known_hosts')
       const hostKey = createHostKey('port-2222')
@@ -84,7 +84,7 @@ describe('ssh known_hosts verification', () => {
   })
 
   test('removeKnownHost removes matching entry', async () => {
-    const tempDir = await fs.promises.mkdtemp(join(os.tmpdir(), 'electerm-known-hosts-'))
+    const tempDir = await fs.promises.mkdtemp(join(os.tmpdir(), 'sarmaterm-known-hosts-'))
     try {
       const knownHostsPath = join(tempDir, 'known_hosts')
       const key1 = createHostKey('host1')
@@ -127,7 +127,7 @@ describe('ssh known_hosts verification', () => {
   })
 
   test('replaceKnownHost updates a changed key', async () => {
-    const tempDir = await fs.promises.mkdtemp(join(os.tmpdir(), 'electerm-known-hosts-'))
+    const tempDir = await fs.promises.mkdtemp(join(os.tmpdir(), 'sarmaterm-known-hosts-'))
     try {
       const knownHostsPath = join(tempDir, 'known_hosts')
       const originalKey = createHostKey('original')

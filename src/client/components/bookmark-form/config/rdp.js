@@ -1,4 +1,4 @@
-import { formItemLayout } from '../../../common/form-layout.js'
+﻿import { formItemLayout } from '../../../common/form-layout.js'
 import { terminalRdpType } from '../../../common/constants.js'
 import { createBaseInitValues, getAuthTypeDefault } from '../common/init-values.js'
 import { isEmpty } from 'lodash-es'
@@ -25,7 +25,7 @@ const rdpConfig = {
         {
           type: 'wiki',
           name: 'rdp-limitation-warning',
-          link: 'https://github.com/electerm/electerm/wiki/RDP-limitation'
+          link: 'https://github.com/sarmaterm/sarmaterm/wiki/RDP-limitation'
         },
         commonFields.category,
         commonFields.colorTitle,

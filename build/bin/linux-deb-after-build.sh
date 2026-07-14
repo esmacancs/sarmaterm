@@ -1,3 +1,3 @@
-#!/bin/bash
-chown root:root /opt/electerm/chrome-sandbox
-chmod 4755 /opt/electerm/chrome-sandbox
+﻿#!/bin/bash
+chown root:root /opt/sarmaterm/chrome-sandbox
+chmod 4755 /opt/sarmaterm/chrome-sandbox

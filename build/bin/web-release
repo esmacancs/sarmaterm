@@ -4,7 +4,7 @@ cd ../..
 git co master
 git pull
 git pull
-git delete-branch electerm-react
-git create-branch electerm-react
-git push origin electerm-react -u
+git delete-branch sarmaterm-react
+git create-branch sarmaterm-react
+git push origin sarmaterm-react -u
 git co -

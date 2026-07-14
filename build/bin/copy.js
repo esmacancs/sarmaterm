@@ -1,12 +1,12 @@
-const { resolve } = require('path')
+﻿const { resolve } = require('path')
 const { cp } = require('shelljs')
 const from = resolve(
   __dirname,
-  '../../node_modules/@electerm/electerm-resource/tray-icons/*'
+  '../../node_modules/@sarmaterm/sarmaterm-resource/tray-icons/*'
 )
 const from0 = resolve(
   __dirname,
-  '../../node_modules/electerm-icons/icons'
+  '../../node_modules/sarmaterm-icons/icons'
 )
 const to1 = resolve(
   __dirname,

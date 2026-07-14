@@ -1,45 +1,45 @@
-<h1 align="center" style="padding-top: 60px;padding-bottom: 40px;">
-    <a href="https://electerm.org">
-        <img src="https://github.com/electerm/electerm-resource/raw/master/static/images/electerm.png", alt="" />
+﻿<h1 align="center" style="padding-top: 60px;padding-bottom: 40px;">
+    <a href="https://sarmaterm.github.io">
+        <img src="https://github.com/sarmaterm/sarmaterm-resource/raw/master/static/images/sarmaterm.png", alt="" />
     </a>
 </h1>
 
-[![GitHub version](https://badgers.space/github/release/electerm/electerm?corner_radius=m)](https://github.com/electerm/electerm/releases)
-[![Build Status](https://github.com/electerm/electerm/actions/workflows/mac-test-1.yml/badge.svg)](https://github.com/electerm/electerm/actions)
-[![license](https://img.shields.io/github/license/electerm/electerm)](https://github.com/electerm/electerm/blob/master/LICENSE)
-[![Get it from the Snap Store](https://img.shields.io/badge/Snap-Store-green)](https://snapcraft.io/electerm)
+[![GitHub version](https://badgers.space/github/release/sarmaterm/sarmaterm?corner_radius=m)](https://github.com/sarmaterm/sarmaterm/releases)
+[![Build Status](https://github.com/sarmaterm/sarmaterm/actions/workflows/mac-test-1.yml/badge.svg)](https://github.com/sarmaterm/sarmaterm/actions)
+[![license](https://img.shields.io/github/license/sarmaterm/sarmaterm)](https://github.com/sarmaterm/sarmaterm/blob/master/LICENSE)
+[![Get it from the Snap Store](https://img.shields.io/badge/Snap-Store-green)](https://snapcraft.io/sarmaterm)
 [![Get it from the Microsoft Store](https://img.shields.io/badge/Microsoft-Store-blue)](https://www.microsoft.com/store/apps/9NCN7272GTFF)
-[![GitHub Sponsors](https://img.shields.io/github/sponsors/electerm?label=Sponsors)](https://github.com/sponsors/electerm)
-[![star](https://atomgit.com/electerm/electerm/star/badge.svg)](https://atomgit.com/electerm/electerm)
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/sarmaterm?label=Sponsors)](https://github.com/sponsors/sarmaterm)
+[![star](https://atomgit.com/sarmaterm/sarmaterm/star/badge.svg)](https://atomgit.com/sarmaterm/sarmaterm)
 
 [![English](https://img.shields.io/badge/English-EN-blue)](README.md) [![中文](https://img.shields.io/badge/中文-Chinese-blue)](README_cn.md)
 
 Open-sourced terminal/ssh/sftp/telnet/serialport/RDP/VNC/Spice/ftp client(linux, mac, win).
 
-- [electerm.org](https://electerm.org): Homepage, downloads, videos, etc
-- [electerm-web](https://github.com/electerm/electerm-web): Web app version running in browser(including mobile device)
-- [electerm-web-docker](https://github.com/electerm/electerm-web-docker): Docker image for electerm-web
-- [electerm online](https://cloud.electerm.org): Public free online electerm app
-- [electerm demo](https://demo.electerm.org): Online demo of electerm
-- [electerm deb repo](https://repos.electerm.org/deb): Debian repo of electerm
-- [electerm rpm repo](https://repos.electerm.org/rpm): RPM repo of electerm
+- [sarmaterm.github.io](https://sarmaterm.github.io): Homepage, downloads, videos, etc
+- [sarmaterm-web](https://github.com/sarmaterm/sarmaterm-web): Web app version running in browser(including mobile device)
+- [sarmaterm-web-docker](https://github.com/sarmaterm/sarmaterm-web-docker): Docker image for sarmaterm-web
+- [sarmaterm online](https://cloud.sarmaterm.github.io): Public free online sarmaterm app
+- [sarmaterm demo](https://demo.sarmaterm.github.io): Online demo of sarmaterm
+- [sarmaterm deb repo](https://repos.sarmaterm.github.io/deb): Debian repo of sarmaterm
+- [sarmaterm rpm repo](https://repos.sarmaterm.github.io/rpm): RPM repo of sarmaterm
 
 ## Atlas Cloud
 
 <div align="center">
-  <a href="https://www.atlascloud.ai/?utm_source=github&utm_medium=link&utm_campaign=electerm">
-    <img src="https://github.com/electerm/electerm-resource/blob/master/static/images/atlas-cloud.png?raw=true" alt="Atlas Cloud" width="200" />
+  <a href="https://www.atlascloud.ai/?utm_source=github&utm_medium=link&utm_campaign=sarmaterm">
+    <img src="https://github.com/sarmaterm/sarmaterm-resource/blob/master/static/images/atlas-cloud.png?raw=true" alt="Atlas Cloud" width="200" />
   </a>
 </div>
 
-[Atlas Cloud](https://www.atlascloud.ai/?utm_source=github&utm_medium=link&utm_campaign=electerm) provides OpenAI-compatible AI APIs and model access for AI-powered workflows in electerm.
+[Atlas Cloud](https://www.atlascloud.ai/?utm_source=github&utm_medium=link&utm_campaign=sarmaterm) provides OpenAI-compatible AI APIs and model access for AI-powered workflows in sarmaterm.
 
 [![DigitalOcean Referral Badge](https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%202.svg)](https://www.digitalocean.com/?refcode=c10bcb28b846&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
 
-[![Vercel OSS Program](https://github.com/electerm/electerm-resource/blob/master/static/images/vercel-oss-2005.png?raw=true)](https://oss-directory.vercel.app)
+[![Vercel OSS Program](https://github.com/sarmaterm/sarmaterm-resource/blob/master/static/images/vercel-oss-2005.png?raw=true)](https://oss-directory.vercel.app)
 
 <div align="center">
-  <img src="https://github.com/electerm/electerm-resource/raw/master/static/images/electerm.gif", alt="" />
+  <img src="https://github.com/sarmaterm/sarmaterm-resource/raw/master/static/images/sarmaterm.gif", alt="" />
 </div>
 
 ## Features
@@ -48,7 +48,7 @@ Open-sourced terminal/ssh/sftp/telnet/serialport/RDP/VNC/Spice/ftp client(linux,
 - Support Window 7+(X64/ARM64), Mac OS 10.15+(x64/arm64), Linux(x64/arm64/Loong64), even old Linux with glibc 2.17+ like UOS/Kylin/Ubuntu 18.04 etc
 - Global hotkey to toggle window visibility (similar to guake, default is `ctrl + 2`)
 - Multi platform(linux, mac, win)
-- 🇺🇸 🇨🇳 🇧🇷 🇷🇺 🇪🇸 🇫🇷 🇹🇷 🇭🇰 🇯🇵 🇸🇦 🇩🇪 🇰🇷 🇮🇩 🇵🇱 Multi-language support([electerm-locales](https://github.com/electerm/electerm-locales), contributions/fixes welcome)
+- 🇺🇸 🇨🇳 🇧🇷 🇷🇺 🇪🇸 🇫🇷 🇹🇷 🇭🇰 🇯🇵 🇸🇦 🇩🇪 🇰🇷 🇮🇩 🇵🇱 Multi-language support([sarmaterm-locales](https://github.com/sarmaterm/sarmaterm-locales), contributions/fixes welcome)
 - Double click to directly edit (small) remote files.
 - Auth with publicKey + password.
 - Support Zmodem(rz, sz).
@@ -59,73 +59,73 @@ Open-sourced terminal/ssh/sftp/telnet/serialport/RDP/VNC/Spice/ftp client(linux,
 - Global/session proxy.
 - Quick commands
 - UI/terminal theme
-- Sync bookmarks/themes/quick commands to github/gitee secret gist/webdav/custom server/electerm cloud
+- Sync bookmarks/themes/quick commands to github/gitee secret gist/webdav/custom server/sarmaterm cloud
 - Quick input to one or all terminals.
 - AI assistant integration (supporting [DeepSeek](https://www.deepseek.com), OpenAI, and any other AI APIs) to help with command suggestions, script writing, and explaining selected terminal content, create bookmarks
-- MCP (Model Context Protocol) widget for AI assistants and external tools integration - see [MCP Widget Usage Guide](https://github.com/electerm/electerm/wiki/MCP-Widget-Usage-Guide)
-- Deep link support: Open connections with URLs like `telnet://192.168.2.31:34554` or `ssh://user@host:22` - see [Deep link support wiki](https://github.com/electerm/electerm/wiki/Deep-link-support)
-- Command line usage: check [wiki](https://github.com/electerm/electerm/wiki/Command-line-usage)
+- MCP (Model Context Protocol) widget for AI assistants and external tools integration - see [MCP Widget Usage Guide](https://github.com/sarmaterm/sarmaterm/wiki/MCP-Widget-Usage-Guide)
+- Deep link support: Open connections with URLs like `telnet://192.168.2.31:34554` or `ssh://user@host:22` - see [Deep link support wiki](https://github.com/sarmaterm/sarmaterm/wiki/Deep-link-support)
+- Command line usage: check [wiki](https://github.com/sarmaterm/sarmaterm/wiki/Command-line-usage)
 
 ## Install
 
-- For Mac user: `brew install --cask electerm`
-- With snap: `sudo snap install electerm --classic`
+- For Mac user: `brew install --cask sarmaterm`
+- With snap: `sudo snap install sarmaterm --classic`
 - For some Linux distribution, you can find it from OS default App store(Ubuntu, Deepin, Mint...).
 - For some linux OS, the `rpm`, `deb`, or `snap` release may not work, you can try the `tar.gz` or `.appImage` release.
 - For Windows users, you can install it from [windows store](https://www.microsoft.com/store/apps/9NCN7272GTFF), command-line installer [winget](https://github.com/microsoft/winget-cli) and [scoop](https://github.com/lukesampson/scoop) is also recommended:
 
 ```powershell
 # winget https://github.com/microsoft/winget-cli
-winget install electerm.electerm
+winget install sarmaterm.sarmaterm
 
 # scoop https://github.com/lukesampson/scoop
 scoop bucket add dorado https://github.com/chawyehsu/dorado
-scoop install dorado/electerm
+scoop install dorado/sarmaterm
 ```
 
 - Install from Debian repository (for Debian/Ubuntu-based systems) with `apt` command
 
-Check [https://repos.electerm.org/deb](https://repos.electerm.org/deb)
+Check [https://repos.sarmaterm.github.io/deb](https://repos.sarmaterm.github.io/deb)
 
 - Install from npm
 
 ```bash
-npm i -g electerm
+npm i -g sarmaterm
 
 ```
 
 ## Upgrade
 
-- Auto upgrade: When a new version is released, you will get an upgrade notification after you start electerm again. You can then click the upgrade button to upgrade.
+- Auto upgrade: When a new version is released, you will get an upgrade notification after you start sarmaterm again. You can then click the upgrade button to upgrade.
 - Download: Just download the latest edition, reinstall.
-- Npm: If you install from npm, just run `npm i -g electerm` again.
+- Npm: If you install from npm, just run `npm i -g sarmaterm` again.
 - If use Snap or some other distribution system, these systems may provide upgrades.
 
 ## Known issues
 
-[https://github.com/electerm/electerm/wiki/Know-issues](https://github.com/electerm/electerm/wiki/Know-issues)
+[https://github.com/sarmaterm/sarmaterm/wiki/Know-issues](https://github.com/sarmaterm/sarmaterm/wiki/Know-issues)
 
 ## Troubleshoot
 
-[https://github.com/electerm/electerm/wiki/Troubleshoot](https://github.com/electerm/electerm/wiki/Troubleshoot)
+[https://github.com/sarmaterm/sarmaterm/wiki/Troubleshoot](https://github.com/sarmaterm/sarmaterm/wiki/Troubleshoot)
 
 ## Discussion
 
 [![Discord](https://img.shields.io/badge/Discord-Join-blue?logo=discord)](https://discord.gg/855W7g8EVd)
 
-[Discussion board](https://github.com/electerm/electerm/discussions)
+[Discussion board](https://github.com/sarmaterm/sarmaterm/discussions)
 
-![electerm-wechat-group-qr.jpg](https://electerm.org/electerm-wechat-group-qr.jpg)
+![sarmaterm-wechat-group-qr.jpg](https://sarmaterm.github.io/sarmaterm-wechat-group-qr.jpg)
 
 ## Support
 
-Would love to hear from you, please tell me what you think, [submit an issue](https://github.com/electerm/electerm/issues), [Start a new discussion](https://github.com/electerm/electerm/discussions/new), [create/fix language files](https://github.com/electerm/electerm-locales) or create pull requests, all welcome.
+Would love to hear from you, please tell me what you think, [submit an issue](https://github.com/sarmaterm/sarmaterm/issues), [Start a new discussion](https://github.com/sarmaterm/sarmaterm/discussions/new), [create/fix language files](https://github.com/sarmaterm/sarmaterm-locales) or create pull requests, all welcome.
 
 ## Sponsor this project
 
 github sponsor
 
-[https://github.com/sponsors/electerm](https://github.com/sponsors/electerm)
+[https://github.com/sponsors/sarmaterm](https://github.com/sponsors/sarmaterm)
 
 kofi
 
@@ -133,11 +133,11 @@ kofi
 
 wechat donate
 
-[![wechat donate](https://electerm.org/electerm-wechat-donate.png)](https://github.com/electerm)
+[![wechat donate](https://sarmaterm.github.io/sarmaterm-wechat-donate.png)](https://github.com/sarmaterm)
 
 TRON TRN20
 
-[![TRN20 donate](https://github.com/electerm/electerm-resource/blob/master/static/images/trn20.png?raw=true)]
+[![TRN20 donate](https://github.com/sarmaterm/sarmaterm-resource/blob/master/static/images/trn20.png?raw=true)]
 
 Address: TXk3pQNmQu1vihH76RaEFnK9wg13x4LLCZ
 
@@ -148,8 +148,8 @@ Address: TXk3pQNmQu1vihH76RaEFnK9wg13x4LLCZ
 # needs nodejs/npm, suggest using nvm to install nodejs/npm
 # with nodejs 24.x
 
-git clone git@github.com:electerm/electerm.git
-cd electerm
+git clone git@github.com:sarmaterm/sarmaterm.git
+cd sarmaterm
 npm config set legacy-peer-deps true
 npm i
 
@@ -198,11 +198,11 @@ npm run pb
 
 ## Video guide
 
-- [https://electerm.org/videos](https://electerm.org/videos)
+- [https://sarmaterm.github.io/videos](https://sarmaterm.github.io/videos)
 
 ## Change log
 
-Visit [Releases](https://github.com/electerm/electerm/releases).
+Visit [Releases](https://github.com/sarmaterm/sarmaterm/releases).
 
 ## Contact author
 
@@ -216,13 +216,13 @@ MIT
 ## Star History
 
 <p>
- <a href="https://www.star-history.com/electerm/electerm"><img src="https://api.star-history.com/badge?repo=electerm/electerm" alt="Star History Rank" /></a>
+ <a href="https://www.star-history.com/sarmaterm/sarmaterm"><img src="https://api.star-history.com/badge?repo=sarmaterm/sarmaterm" alt="Star History Rank" /></a>
 </p>
 
-<a href="https://www.star-history.com/?repos=electerm%2Felecterm&type=date&legend=top-left">
+<a href="https://www.star-history.com/?repos=sarmaterm%2Fsarmaterm&type=date&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=electerm/electerm&type=date&legend=top-left&sealed_token=DvPlttPaLtq6RPIWRANYX08-8ZJyrJalhombrkDcg1IwWOMPMIplgi85q0FiwrbhE3lRIi_yxvOWdell731CGQvzlfJMt2Sa6VfCvQ80BwEtQ6RpPchEiw" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=electerm/electerm&type=date&legend=top-left&sealed_token=DvPlttPaLtq6RPIWRANYX08-8ZJyrJalhombrkDcg1IwWOMPMIplgi85q0FiwrbhE3lRIi_yxvOWdell731CGQvzlfJMt2Sa6VfCvQ80BwEtQ6RpPchEiw" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=electerm/electerm&type=date&legend=top-left&sealed_token=DvPlttPaLtq6RPIWRANYX08-8ZJyrJalhombrkDcg1IwWOMPMIplgi85q0FiwrbhE3lRIi_yxvOWdell731CGQvzlfJMt2Sa6VfCvQ80BwEtQ6RpPchEiw" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=sarmaterm/sarmaterm&type=date&legend=top-left&sealed_token=DvPlttPaLtq6RPIWRANYX08-8ZJyrJalhombrkDcg1IwWOMPMIplgi85q0FiwrbhE3lRIi_yxvOWdell731CGQvzlfJMt2Sa6VfCvQ80BwEtQ6RpPchEiw" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=sarmaterm/sarmaterm&type=date&legend=top-left&sealed_token=DvPlttPaLtq6RPIWRANYX08-8ZJyrJalhombrkDcg1IwWOMPMIplgi85q0FiwrbhE3lRIi_yxvOWdell731CGQvzlfJMt2Sa6VfCvQ80BwEtQ6RpPchEiw" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=sarmaterm/sarmaterm&type=date&legend=top-left&sealed_token=DvPlttPaLtq6RPIWRANYX08-8ZJyrJalhombrkDcg1IwWOMPMIplgi85q0FiwrbhE3lRIi_yxvOWdell731CGQvzlfJMt2Sa6VfCvQ80BwEtQ6RpPchEiw" />
  </picture>
 </a>

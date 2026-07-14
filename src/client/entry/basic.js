@@ -1,4 +1,4 @@
-/**
+﻿/**
  * init app data then write main script to html body
  */
 import '../css/basic.styl'
@@ -35,7 +35,7 @@ async function load () {
   }
   function loadScript () {
     const rcs = document.createElement('script')
-    const url = !isDev ? `js/electerm-${version}.js` : 'js/electerm.js'
+    const url = !isDev ? `js/sarmaterm-${version}.js` : 'js/sarmaterm.js'
     rcs.src = url
     rcs.type = 'module'
     rcs.onload = () => {

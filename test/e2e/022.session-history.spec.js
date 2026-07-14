@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Session (connection) history test
  *
  * Verifies:
@@ -155,13 +155,13 @@ describe('session-history', function () {
     const switchSel = '.sidebar-panel-history .history-header .ant-switch'
     const sortEnabled1 = await client.evaluate(() => {
       // Read localStorage key used by history.jsx
-      const v = window.localStorage.getItem('electerm-history-sort-by-frequency')
+      const v = window.localStorage.getItem('sarmaterm-history-sort-by-frequency')
       return v === 'true'
     })
     await client.locator(switchSel).click({ force: true })
     await delay(500)
     const sortEnabled2 = await client.evaluate(() => {
-      const v = window.localStorage.getItem('electerm-history-sort-by-frequency')
+      const v = window.localStorage.getItem('sarmaterm-history-sort-by-frequency')
       return v === 'true'
     })
     log(`022: sort-by-freq toggled: ${sortEnabled1} → ${sortEnabled2}`)

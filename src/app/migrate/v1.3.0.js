@@ -1,4 +1,4 @@
-/**
+﻿/**
  * upgrade database to v1.3.0
  * migrate old file based db to nedb
  */
@@ -6,8 +6,8 @@
 const { resolve } = require('path')
 const { dbAction, tables } = require('./nedb-instance')
 const { appPath } = require('../common/app-props')
-const userConfigPath = resolve(appPath, 'electerm-user-config.json')
-const savePath = resolve(appPath, 'electerm-localstorage.json')
+const userConfigPath = resolve(appPath, 'sarmaterm-user-config.json')
+const savePath = resolve(appPath, 'sarmaterm-localstorage.json')
 const { existsSync, unlinkSync, writeFileSync } = require('fs')
 const log = require('../common/log')
 const _ = require('../lib/lodash.js')

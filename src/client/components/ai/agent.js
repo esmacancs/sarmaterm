@@ -1,4 +1,4 @@
-import { agentTools, executeToolCall } from './agent-tools'
+﻿import { agentTools, executeToolCall } from './agent-tools'
 
 const MAX_ITERATIONS = 150
 
@@ -7,7 +7,7 @@ function buildAgentSystemPrompt (config) {
   const baseRole = config.roleAI || 'You are a helpful assistant.'
   return `${baseRole}
 
-You are operating inside electerm, a terminal/SSH client. You have access to tools that let you:
+You are operating inside sarmaterm, a terminal/SSH client. You have access to tools that let you:
 - Run commands in terminal tabs and read their output
 - Open new terminal tabs (local or SSH)
 - Manage bookmarks (create, list, open connections)

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * terminal/sftp/serial class
  */
 
@@ -377,7 +377,7 @@ class TerminalSshBase extends TerminalBase {
       sock,
       ...hopping
     }
-    const { Client } = require('@electerm/ssh2')
+    const { Client } = require('@sarmaterm/ssh2')
     this.nextConn = new Client()
     // If we have an agent and no explicit privateKey/password, try agent first
     // by skipping reading private keys from jump server
@@ -763,7 +763,7 @@ class TerminalSshBase extends TerminalBase {
 
   async sshConnect () {
     const { initOptions } = this
-    const { Client } = require('@electerm/ssh2')
+    const { Client } = require('@sarmaterm/ssh2')
     this.conn = new Client()
     this.connectOptions = this.connectOptions || this.buildConnectOptions()
     const {

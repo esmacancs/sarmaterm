@@ -1,4 +1,4 @@
-import BookmarkTransport from '../tree-list/bookmark-transport'
+﻿import BookmarkTransport from '../tree-list/bookmark-transport'
 import download from '../../common/download'
 import time from '../../common/time'
 import copy from 'json-deep-copy'
@@ -40,6 +40,6 @@ export default class QmTransport extends BookmarkTransport {
     const arr = store[this.name]
     const txt = JSON.stringify(arr, null, 2)
     const stamp = time(undefined, 'YYYY-MM-DD-HH-mm-ss')
-    download('electerm-' + this.name + '-' + stamp + '.json', txt)
+    download('sarmaterm-' + this.name + '-' + stamp + '.json', txt)
   }
 }

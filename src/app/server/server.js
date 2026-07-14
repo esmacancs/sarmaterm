@@ -1,4 +1,4 @@
-const express = require('express')
+﻿const express = require('express')
 const globalState = require('./global-state')
 const app = express()
 const log = require('../common/log')
@@ -27,9 +27,9 @@ if (!isDev) {
 initWs(app)
 
 const runServer = function () {
-  const { electermPort, electermHost } = process.env
-  app.listen(electermPort, electermHost, () => {
-    log.info('server', 'runs on', electermHost, electermPort)
+  const { sarmatermPort, sarmatermHost } = process.env
+  app.listen(sarmatermPort, sarmatermHost, () => {
+    log.info('server', 'runs on', sarmatermHost, sarmatermPort)
     process.send({ serverInited: true })
   })
 }

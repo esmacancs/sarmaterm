@@ -1,4 +1,4 @@
-import { PureComponent, createRef } from 'react'
+﻿import { PureComponent, createRef } from 'react'
 import { createTerm } from '../terminal/terminal-apis'
 import deepCopy from 'json-deep-copy'
 import clone from '../../common/to-simple-obj'
@@ -67,19 +67,19 @@ export default class SpiceSession extends PureComponent {
   }
 
   buildWsUrl = (port, type = 'spice', extra = '') => {
-    const { host, tokenElecterm } = this.props.config
+    const { host, tokenSarmaterm } = this.props.config
     const { id } = this.props.tab
     if (window.et.buildWsUrl) {
       return window.et.buildWsUrl(
         host,
         port,
-        tokenElecterm,
+        tokenSarmaterm,
         id,
         type,
         extra
       )
     }
-    return `ws://${host}:${port}/${type}/${id}?token=${tokenElecterm}${extra}`
+    return `ws://${host}:${port}/${type}/${id}?token=${tokenSarmaterm}${extra}`
   }
 
   calcCanvasSize = () => {

@@ -1,9 +1,9 @@
-name: electerm-react-publish
+﻿name: sarmaterm-react-publish
 on:
   release:
     types: [published]
   push:
-    branches: [ electerm-react ]
+    branches: [ sarmaterm-react ]
 jobs:
   release-npm:
     runs-on: ubuntu-24.04
@@ -23,4 +23,4 @@ jobs:
       - name: build
         env:
           token: ${{secrets.NPM_TOKEN}}
-        run: node build/bin/publish-electerm-react.js
+        run: node build/bin/publish-sarmaterm-react.js

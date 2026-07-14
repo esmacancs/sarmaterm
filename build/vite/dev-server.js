@@ -1,4 +1,4 @@
-import logger from 'morgan'
+﻿import logger from 'morgan'
 import { viewPath, env, staticPaths, pack, isProd, cwd } from './common.js'
 import express from 'express'
 import { createServer as createViteServer } from 'vite'
@@ -13,12 +13,12 @@ const devPort = env.DEV_PORT || 5570
 const host = env.DEV_HOST || '127.0.0.1'
 const h = `http://${host}:${devPort}`
 const defaultAIPreset = {
-  baseURLAI: 'https://ai.electerm.org/api/ai',
+  baseURLAI: 'https://ai.sarmaterm.github.io/api/ai',
   apiPathAI: '/chat/completions',
   modelAI: 'mistral-small-latest',
   authHeaderNameAI: 'Authorization: Bearer',
-  id: 'ai.electerm.org',
-  nameAI: 'ai.electerm.org(default free)'
+  id: 'ai.sarmaterm.github.io',
+  nameAI: 'ai.sarmaterm.github.io(default free)'
 }
 
 const base = {
@@ -41,7 +41,7 @@ function redirect (req, res) {
     name
   } = req.params
   const mapper = {
-    electerm: '/src/client/entry/electerm.jsx',
+    sarmaterm: '/src/client/entry/sarmaterm.jsx',
     worker: '/src/client/entry/worker.js'
   }
   res.redirect(mapper[name])

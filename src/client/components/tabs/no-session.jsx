@@ -1,4 +1,4 @@
-import { Button } from 'antd'
+﻿import { Button } from 'antd'
 import { RobotOutlined } from '@ant-design/icons'
 import LogoElem from '../common/logo-elem.jsx'
 import HistoryPanel from '../sidebar/history'
@@ -32,7 +32,7 @@ export default function NoSessionPanel ({ height, onNewTab, onNewSsh, batch }) {
       )
     : null
   return (
-    <div className='no-sessions electerm-logo-bg' {...props}>
+    <div className='no-sessions sarmaterm-logo-bg' {...props}>
       <div className='pd1b'>
         {newTabDom}
         <Button

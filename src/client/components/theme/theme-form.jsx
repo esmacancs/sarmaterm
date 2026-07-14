@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+﻿import { useRef, useState } from 'react'
 import { Button, Input, Form, Space } from 'antd'
 import message from '../common/message'
 import {
@@ -139,7 +139,7 @@ export default function ThemeForm (props) {
 
   function renderSrc (type) {
     if (type === 'iterm') {
-      const url = `https://github.com/mbadolato/iTerm2-Color-Schemes/blob/master/electerm/${encodeURIComponent(themeName)}.txt`
+      const url = `https://github.com/mbadolato/iTerm2-Color-Schemes/blob/master/sarmaterm/${encodeURIComponent(themeName)}.txt`
       return (
         <FormItem>
           <span className='mg1r'>src:</span>

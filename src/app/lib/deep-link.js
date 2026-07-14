@@ -1,5 +1,5 @@
-/**
- * Deep link support for electerm
+﻿/**
+ * Deep link support for sarmaterm
  * Handles protocol URLs like ssh://, telnet://, rdp://, vnc://, etc.
  */
 
@@ -11,8 +11,8 @@ const {
 const globalState = require('./glob-state')
 const { parseQuickConnect, SUPPORTED_PROTOCOLS } = require('../common/parse-quick-connect')
 /**
- * Register electerm as a handler for supported protocols
- * Note: This makes electerm available as a handler but doesn't force it as default.
+ * Register sarmaterm as a handler for supported protocols
+ * Note: This makes sarmaterm available as a handler but doesn't force it as default.
  * Users can still choose their preferred app in system settings.
  *
  * @param {boolean} force - If true, register even if not packaged (for testing)
@@ -25,11 +25,11 @@ function registerDeepLink (force = false) {
   // Only register in packaged app or when explicitly requested
   const shouldRegister = app.isPackaged ||
                         force ||
-                        process.env.ELECTERM_REGISTER_PROTOCOLS === '1'
+                        process.env.SARMATERM_REGISTER_PROTOCOLS === '1'
 
   if (!shouldRegister) {
     log.info('Skipping protocol registration in development mode')
-    log.info('Set ELECTERM_REGISTER_PROTOCOLS=1 or pass force=true to enable')
+    log.info('Set SARMATERM_REGISTER_PROTOCOLS=1 or pass force=true to enable')
     return { registered: false, reason: 'development-mode' }
   }
 
@@ -71,7 +71,7 @@ function checkProtocolRegistration () {
 }
 
 /**
- * Unregister electerm as handler for protocols
+ * Unregister sarmaterm as handler for protocols
  * @param {Array<string>} protocols - Optional array of specific protocols to unregister
  * @returns {object} - Status of unregistration
  */
@@ -151,7 +151,7 @@ function setupDeepLinkHandlers () {
 
     // Look for protocol URLs in command line arguments
     const protocolUrl = commandLine.find(arg =>
-      /^(ssh|telnet|rdp|vnc|serial|spice|ftp|electerm):\/\//i.test(arg)
+      /^(ssh|telnet|rdp|vnc|serial|spice|ftp|sarmaterm):\/\//i.test(arg)
     )
 
     if (protocolUrl) {
@@ -161,10 +161,10 @@ function setupDeepLinkHandlers () {
 
   // Handle protocol URLs passed as command line arguments at startup (all platforms)
   // Note: macOS also fires 'open-url' event when using `open` command or clicking links,
-  // but when running `electerm ssh://...` directly in terminal, it comes through argv
+  // but when running `sarmaterm ssh://...` directly in terminal, it comes through argv
   if (process.argv.length >= 2) {
     const protocolUrl = process.argv.find(arg =>
-      /^(ssh|telnet|rdp|vnc|serial|spice|ftp|electerm):\/\//i.test(arg)
+      /^(ssh|telnet|rdp|vnc|serial|spice|ftp|sarmaterm):\/\//i.test(arg)
     )
 
     if (protocolUrl) {

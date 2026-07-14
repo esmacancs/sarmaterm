@@ -1,4 +1,4 @@
-const { test, describe, before } = require('node:test')
+﻿const { test, describe, before } = require('node:test')
 const assert = require('assert/strict')
 const axios = require('axios')
 
@@ -43,7 +43,7 @@ async function initSession () {
       protocolVersion: '2024-11-05',
       capabilities: {},
       clientInfo: {
-        name: 'electerm-test-client',
+        name: 'sarmaterm-test-client',
         version: '1.0.0'
       }
     }
@@ -93,7 +93,7 @@ async function callTool (sessionId, id, toolName, args) {
 
 // Helper: check if renderer is available
 async function checkRenderer (sid) {
-  const jsonData = await callTool(sid, 999, 'list_electerm_tabs', {})
+  const jsonData = await callTool(sid, 999, 'list_sarmaterm_tabs', {})
   return !jsonData.error
 }
 
@@ -139,22 +139,22 @@ describe('mcp-sftp-transfer-trzsz', function () {
     const toolNames = jsonData.result.tools.map(t => t.name)
 
     const expectedTools = [
-      'electerm_sftp_list',
-      'electerm_sftp_stat',
-      'electerm_sftp_read_file',
-      'electerm_sftp_del_file_or_folder',
-      'electerm_sftp_upload',
-      'electerm_sftp_download',
-      'electerm_zmodem_upload',
-      'electerm_zmodem_download',
-      'electerm_sftp_transfer_list',
-      'electerm_sftp_transfer_history',
-      'get_electerm_terminal_status',
-      'cancel_electerm_terminal_command',
-      'run_electerm_background_command',
-      'get_electerm_background_task_status',
-      'get_electerm_background_task_log',
-      'cancel_electerm_background_task'
+      'sarmaterm_sftp_list',
+      'sarmaterm_sftp_stat',
+      'sarmaterm_sftp_read_file',
+      'sarmaterm_sftp_del_file_or_folder',
+      'sarmaterm_sftp_upload',
+      'sarmaterm_sftp_download',
+      'sarmaterm_zmodem_upload',
+      'sarmaterm_zmodem_download',
+      'sarmaterm_sftp_transfer_list',
+      'sarmaterm_sftp_transfer_history',
+      'get_sarmaterm_terminal_status',
+      'cancel_sarmaterm_terminal_command',
+      'run_sarmaterm_background_command',
+      'get_sarmaterm_background_task_status',
+      'get_sarmaterm_background_task_log',
+      'cancel_sarmaterm_background_task'
     ]
 
     for (const toolName of expectedTools) {
@@ -165,21 +165,21 @@ describe('mcp-sftp-transfer-trzsz', function () {
   // ==================== Validation error tests (no renderer needed) ====================
 
   test('sftp_list: should error if remotePath is missing', { timeout: 100000 }, async function () {
-    const jsonData = await callTool(sessionId, 101, 'electerm_sftp_list', {})
+    const jsonData = await callTool(sessionId, 101, 'sarmaterm_sftp_list', {})
 
     assert.ok(jsonData.error || (jsonData.result && jsonData.result.isError),
       'Expected error when remotePath is missing')
   })
 
   test('sftp_del: should error if remotePath is missing', { timeout: 100000 }, async function () {
-    const jsonData = await callTool(sessionId, 131, 'electerm_sftp_del_file_or_folder', {})
+    const jsonData = await callTool(sessionId, 131, 'sarmaterm_sftp_del_file_or_folder', {})
 
     assert.ok(jsonData.error || (jsonData.result && jsonData.result.isError),
       'Expected error when remotePath is missing')
   })
 
   test('sftp_upload: should error if localPath is missing', { timeout: 100000 }, async function () {
-    const jsonData = await callTool(sessionId, 201, 'electerm_sftp_upload', {
+    const jsonData = await callTool(sessionId, 201, 'sarmaterm_sftp_upload', {
       remotePath: '/tmp/test.txt'
     })
 
@@ -188,7 +188,7 @@ describe('mcp-sftp-transfer-trzsz', function () {
   })
 
   test('sftp_download: should error if remotePath is missing', { timeout: 100000 }, async function () {
-    const jsonData = await callTool(sessionId, 211, 'electerm_sftp_download', {
+    const jsonData = await callTool(sessionId, 211, 'sarmaterm_sftp_download', {
       localPath: '/tmp/test.txt'
     })
 
@@ -197,7 +197,7 @@ describe('mcp-sftp-transfer-trzsz', function () {
   })
 
   test('sftp_download: should error if saveFolder is missing', { timeout: 100000 }, async function () {
-    const jsonData = await callTool(sessionId, 312, 'electerm_zmodem_download', {
+    const jsonData = await callTool(sessionId, 312, 'sarmaterm_zmodem_download', {
       remoteFiles: ['/tmp/test.txt']
     })
 
@@ -205,15 +205,15 @@ describe('mcp-sftp-transfer-trzsz', function () {
       'Expected error when saveFolder is missing')
   })
 
-  test('electerm_zmodem_upload: should error if files is missing', { timeout: 100000 }, async function () {
-    const jsonData = await callTool(sessionId, 301, 'electerm_zmodem_upload', {})
+  test('sarmaterm_zmodem_upload: should error if files is missing', { timeout: 100000 }, async function () {
+    const jsonData = await callTool(sessionId, 301, 'sarmaterm_zmodem_upload', {})
 
     assert.ok(jsonData.error || (jsonData.result && jsonData.result.isError),
       'Expected error when files is missing')
   })
 
-  test('electerm_zmodem_upload: should error if files array is empty', { timeout: 100000 }, async function () {
-    const jsonData = await callTool(sessionId, 302, 'electerm_zmodem_upload', {
+  test('sarmaterm_zmodem_upload: should error if files array is empty', { timeout: 100000 }, async function () {
+    const jsonData = await callTool(sessionId, 302, 'sarmaterm_zmodem_upload', {
       files: []
     })
 
@@ -221,8 +221,8 @@ describe('mcp-sftp-transfer-trzsz', function () {
       'Expected error when files array is empty')
   })
 
-  test('electerm_zmodem_download: should error if remoteFiles is missing', { timeout: 100000 }, async function () {
-    const jsonData = await callTool(sessionId, 311, 'electerm_zmodem_download', {
+  test('sarmaterm_zmodem_download: should error if remoteFiles is missing', { timeout: 100000 }, async function () {
+    const jsonData = await callTool(sessionId, 311, 'sarmaterm_zmodem_download', {
       saveFolder: '/tmp'
     })
 
@@ -235,7 +235,7 @@ describe('mcp-sftp-transfer-trzsz', function () {
   test('sftp_list: should list remote directory', { timeout: 100000 }, async function () {
     if (!hasRenderer) return test.skip('No renderer available')
 
-    const jsonData = await callTool(sessionId, 100, 'electerm_sftp_list', {
+    const jsonData = await callTool(sessionId, 100, 'sarmaterm_sftp_list', {
       remotePath: '/tmp'
     })
 
@@ -254,7 +254,7 @@ describe('mcp-sftp-transfer-trzsz', function () {
   test('sftp_stat: should get stat of remote file or directory', { timeout: 100000 }, async function () {
     if (!hasRenderer) return test.skip('No renderer available')
 
-    const jsonData = await callTool(sessionId, 110, 'electerm_sftp_stat', {
+    const jsonData = await callTool(sessionId, 110, 'sarmaterm_sftp_stat', {
       remotePath: '/tmp'
     })
 
@@ -271,7 +271,7 @@ describe('mcp-sftp-transfer-trzsz', function () {
   test('sftp_read_file: should read content of a remote file', { timeout: 100000 }, async function () {
     if (!hasRenderer) return test.skip('No renderer available')
 
-    const jsonData = await callTool(sessionId, 120, 'electerm_sftp_read_file', {
+    const jsonData = await callTool(sessionId, 120, 'sarmaterm_sftp_read_file', {
       remotePath: '/etc/hostname'
     })
 
@@ -288,7 +288,7 @@ describe('mcp-sftp-transfer-trzsz', function () {
   test('sftp_del: should delete a remote file', { timeout: 100000 }, async function () {
     if (!hasRenderer) return test.skip('No renderer available')
 
-    const jsonData = await callTool(sessionId, 130, 'electerm_sftp_del_file_or_folder', {
+    const jsonData = await callTool(sessionId, 130, 'sarmaterm_sftp_del_file_or_folder', {
       remotePath: `/tmp/mcp2_test_delete_${uniqueId}.txt`
     })
 
@@ -318,7 +318,7 @@ describe('mcp-sftp-transfer-trzsz', function () {
     const bookmarkTitle = `MCP2_SFTP_Test_${wfId}`
 
     // Step 1: Create SSH bookmark
-    const addData = await callTool(sessionId, 140, 'add_electerm_bookmark_ssh', {
+    const addData = await callTool(sessionId, 140, 'add_sarmaterm_bookmark_ssh', {
       title: bookmarkTitle,
       host: TEST_HOST,
       port: parseInt(TEST_PORT, 10),
@@ -332,14 +332,14 @@ describe('mcp-sftp-transfer-trzsz', function () {
 
     try {
       // Step 2: Open the bookmark
-      const openData = await callTool(sessionId, 141, 'open_electerm_bookmark', { id: bookmarkId })
+      const openData = await callTool(sessionId, 141, 'open_sarmaterm_bookmark', { id: bookmarkId })
       assert.ok(openData.result, 'open_bookmark should succeed')
 
       // Wait for tab to initialize and SFTP panel to be ready
       await new Promise(resolve => setTimeout(resolve, 8000))
 
       // Step 3: List /tmp directory
-      const listData = await callTool(sessionId, 142, 'electerm_sftp_list', { remotePath: '/tmp' })
+      const listData = await callTool(sessionId, 142, 'sarmaterm_sftp_list', { remotePath: '/tmp' })
       if (listData.result?.isError) {
         // SFTP panel may not be initialized in test environment
         assert.ok(listData.result.content[0].text, 'error message should be present')
@@ -350,7 +350,7 @@ describe('mcp-sftp-transfer-trzsz', function () {
       }
 
       // Step 4: Stat /tmp
-      const statData = await callTool(sessionId, 143, 'electerm_sftp_stat', { remotePath: '/tmp' })
+      const statData = await callTool(sessionId, 143, 'sarmaterm_sftp_stat', { remotePath: '/tmp' })
       if (statData.result?.isError) {
         assert.ok(statData.result.content[0].text, 'error message should be present')
       } else {
@@ -360,7 +360,7 @@ describe('mcp-sftp-transfer-trzsz', function () {
       }
 
       // Step 5: Read /etc/hostname
-      const readData = await callTool(sessionId, 144, 'electerm_sftp_read_file', { remotePath: '/etc/hostname' })
+      const readData = await callTool(sessionId, 144, 'sarmaterm_sftp_read_file', { remotePath: '/etc/hostname' })
       if (readData.result?.isError) {
         assert.ok(readData.result.content[0].text, 'error message should be present')
       } else {
@@ -370,7 +370,7 @@ describe('mcp-sftp-transfer-trzsz', function () {
       }
     } finally {
       // Step 6: Clean up - delete test bookmark
-      await callTool(sessionId, 145, 'delete_electerm_bookmark', { id: bookmarkId })
+      await callTool(sessionId, 145, 'delete_sarmaterm_bookmark', { id: bookmarkId })
     }
   })
 
@@ -385,7 +385,7 @@ describe('mcp-sftp-transfer-trzsz', function () {
       fs.writeFileSync(uploadFile, 'test upload content for MCP test')
     }
 
-    const jsonData = await callTool(sessionId, 200, 'electerm_sftp_upload', {
+    const jsonData = await callTool(sessionId, 200, 'sarmaterm_sftp_upload', {
       localPath: uploadFile,
       remotePath: uploadFile
     })
@@ -405,7 +405,7 @@ describe('mcp-sftp-transfer-trzsz', function () {
   test('sftp_download: should start download transfer', { timeout: 100000 }, async function () {
     if (!hasRenderer) return test.skip('No renderer available')
 
-    const jsonData = await callTool(sessionId, 210, 'electerm_sftp_download', {
+    const jsonData = await callTool(sessionId, 210, 'sarmaterm_sftp_download', {
       remotePath: '/etc/hostname',
       localPath: `/tmp/mcp2-downloaded-hostname-${uniqueId}.txt`
     })
@@ -423,7 +423,7 @@ describe('mcp-sftp-transfer-trzsz', function () {
   test('sftp_download: should support conflictPolicy parameter', { timeout: 100000 }, async function () {
     if (!hasRenderer) return test.skip('No renderer available')
 
-    const jsonData = await callTool(sessionId, 212, 'electerm_sftp_download', {
+    const jsonData = await callTool(sessionId, 212, 'sarmaterm_sftp_download', {
       remotePath: '/etc/hostname',
       localPath: `/tmp/mcp2-downloaded-hostname-ow-${uniqueId}.txt`,
       conflictPolicy: 'overwrite'
@@ -439,10 +439,10 @@ describe('mcp-sftp-transfer-trzsz', function () {
 
   // ==================== Zmodem Upload (trzsz/rzsz) ====================
 
-  test('electerm_zmodem_upload: should initiate trz upload (trzsz, default)', { timeout: 100000 }, async function () {
+  test('sarmaterm_zmodem_upload: should initiate trz upload (trzsz, default)', { timeout: 100000 }, async function () {
     if (!hasRenderer) return test.skip('No renderer available')
 
-    const jsonData = await callTool(sessionId, 300, 'electerm_zmodem_upload', {
+    const jsonData = await callTool(sessionId, 300, 'sarmaterm_zmodem_upload', {
       files: [`/tmp/mcp2-trzsz-upload-${uniqueId}.txt`]
     })
 
@@ -458,10 +458,10 @@ describe('mcp-sftp-transfer-trzsz', function () {
     }
   })
 
-  test('electerm_zmodem_upload: should initiate rz upload (rzsz protocol)', { timeout: 100000 }, async function () {
+  test('sarmaterm_zmodem_upload: should initiate rz upload (rzsz protocol)', { timeout: 100000 }, async function () {
     if (!hasRenderer) return test.skip('No renderer available')
 
-    const jsonData = await callTool(sessionId, 303, 'electerm_zmodem_upload', {
+    const jsonData = await callTool(sessionId, 303, 'sarmaterm_zmodem_upload', {
       files: [`/tmp/mcp2-rzsz-upload-${uniqueId}.txt`],
       protocol: 'rzsz'
     })
@@ -478,10 +478,10 @@ describe('mcp-sftp-transfer-trzsz', function () {
 
   // ==================== Zmodem Download (trzsz/rzsz) ====================
 
-  test('electerm_zmodem_download: should initiate tsz download (trzsz, default)', { timeout: 100000 }, async function () {
+  test('sarmaterm_zmodem_download: should initiate tsz download (trzsz, default)', { timeout: 100000 }, async function () {
     if (!hasRenderer) return test.skip('No renderer available')
 
-    const jsonData = await callTool(sessionId, 310, 'electerm_zmodem_download', {
+    const jsonData = await callTool(sessionId, 310, 'sarmaterm_zmodem_download', {
       remoteFiles: [`/tmp/mcp2-trzsz-download-${uniqueId}.txt`],
       saveFolder: '/tmp'
     })
@@ -499,10 +499,10 @@ describe('mcp-sftp-transfer-trzsz', function () {
     }
   })
 
-  test('electerm_zmodem_download: should initiate sz download (rzsz protocol)', { timeout: 100000 }, async function () {
+  test('sarmaterm_zmodem_download: should initiate sz download (rzsz protocol)', { timeout: 100000 }, async function () {
     if (!hasRenderer) return test.skip('No renderer available')
 
-    const jsonData = await callTool(sessionId, 313, 'electerm_zmodem_download', {
+    const jsonData = await callTool(sessionId, 313, 'sarmaterm_zmodem_download', {
       remoteFiles: [`/tmp/mcp2-rzsz-download-${uniqueId}.txt`],
       saveFolder: '/tmp',
       protocol: 'rzsz'
@@ -523,7 +523,7 @@ describe('mcp-sftp-transfer-trzsz', function () {
   test('sftp_transfer_list: should return current transfer list', { timeout: 100000 }, async function () {
     if (!hasRenderer) return test.skip('No renderer available')
 
-    const jsonData = await callTool(sessionId, 400, 'electerm_sftp_transfer_list', {})
+    const jsonData = await callTool(sessionId, 400, 'sarmaterm_sftp_transfer_list', {})
 
     if (jsonData.error || jsonData.result?.isError) {
       assert.ok(jsonData.error?.code !== undefined || jsonData.result?.isError, 'Error must have a code or isError flag')
@@ -544,7 +544,7 @@ describe('mcp-sftp-transfer-trzsz', function () {
   test('sftp_transfer_history: should return transfer history', { timeout: 100000 }, async function () {
     if (!hasRenderer) return test.skip('No renderer available')
 
-    const jsonData = await callTool(sessionId, 410, 'electerm_sftp_transfer_history', {})
+    const jsonData = await callTool(sessionId, 410, 'sarmaterm_sftp_transfer_history', {})
 
     if (jsonData.error || jsonData.result?.isError) {
       assert.ok(jsonData.error?.code !== undefined || jsonData.result?.isError, 'Error must have a code or isError flag')

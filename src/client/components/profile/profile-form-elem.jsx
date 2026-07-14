@@ -1,4 +1,4 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 import {
   Form,
   Switch,
@@ -56,7 +56,7 @@ export default function ProfileFormElem (props) {
     form,
     store: props.store
   }
-  const profileDefaultWikiLink = 'https://github.com/electerm/electerm/wiki/Default-Profile'
+  const profileDefaultWikiLink = 'https://github.com/sarmaterm/sarmaterm/wiki/Default-Profile'
   const defaultLabel = (
     <span>
       {e('default')} <HelpIcon link={profileDefaultWikiLink} />

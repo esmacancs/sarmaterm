@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+﻿import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 // import htmlPurge from 'vite-plugin-purgecss'
 import { cwd, version } from './common.js'
@@ -7,7 +7,7 @@ import def from './def.js'
 
 function buildInput () {
   return {
-    electerm: resolve(cwd, '../../src/client/entry/electerm.jsx'),
+    sarmaterm: resolve(cwd, '../../src/client/entry/sarmaterm.jsx'),
     basic: resolve(cwd, '../../src/client/entry/basic.js'),
     worker: resolve(cwd, '../../src/client/entry/worker.js')
   }

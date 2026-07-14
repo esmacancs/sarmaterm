@@ -1,4 +1,4 @@
-import { PureComponent } from 'react'
+﻿import { PureComponent } from 'react'
 import { CloseOutlined, MinusSquareOutlined, UpCircleOutlined } from '@ant-design/icons'
 import { Button, Select, Space } from 'antd'
 import { getLatestReleaseInfo, getLatestReleaseVersion } from '../../common/update-check'
@@ -129,7 +129,7 @@ export default class Upgrade extends PureComponent {
           ...newTerm(undefined, true),
           runScripts: [
             {
-              script: 'npm install -g electerm',
+              script: 'npm install -g sarmaterm',
               delay: 500
             }
           ]

@@ -1,4 +1,4 @@
-import {
+﻿import {
   GithubOutlined,
   GlobalOutlined,
   HighlightOutlined,
@@ -140,7 +140,7 @@ export default auto(function InfoModal (props) {
     sponsorLink,
     knownIssuesLink
   } = packInfo
-  const electermOnline = 'https://cloud.electerm.org'
+  const sarmatermOnline = 'https://cloud.sarmaterm.github.io'
   const link = releaseLink.replace('/releases', '')
   const { versions } = window.pre
   const deps = {
@@ -216,13 +216,13 @@ export default auto(function InfoModal (props) {
             </Link>
           </p>
           <p className='mg1b'>
-            <CloudOutlined /> <b className='mg1r'>electerm Online ➾</b>
-            <Link to={electermOnline} className='mg1l'>
-              {electermOnline}
+            <CloudOutlined /> <b className='mg1r'>sarmaterm Online ➾</b>
+            <Link to={sarmatermOnline} className='mg1l'>
+              {sarmatermOnline}
             </Link>
           </p>
           <p className='mg1b'>
-            <HeartOutlined /> <b className='mg1r'>{e('sponsorElecterm')} ➾</b>
+            <HeartOutlined /> <b className='mg1r'>{e('sponsorSarmaterm')} ➾</b>
             <Link to={sponsorLink} className='mg1l'>
               {sponsorLink}
             </Link>

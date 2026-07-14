@@ -1,4 +1,4 @@
-/**
+﻿/**
  * SSH agent integration tests.
  *
  * These tests confirm that SSH agent authentication continues to work
@@ -21,7 +21,7 @@
  *     forever when connecting to a new host.
  *
  * All tests mock the electron environment and run exclusively with Node.js
- * built-ins + the packages already bundled with electerm.
+ * built-ins + the packages already bundled with sarmaterm.
  */
 
 process.env.NODE_ENV = 'development'
@@ -33,7 +33,7 @@ const os = require('node:os')
 const path = require('node:path')
 const { once } = require('node:events')
 const { spawnSync } = require('node:child_process')
-const { Server, utils } = require('@electerm/ssh2')
+const { Server, utils } = require('@sarmaterm/ssh2')
 const { session, test: sshTest } = require('../../src/app/server/session-ssh')
 
 // ─── constants ────────────────────────────────────────────────────────────────
@@ -42,7 +42,7 @@ const USERNAME = 'agent-tester'
 
 // A fresh server host key for every test run.
 const HOST_KEY = utils.generateKeyPairSync('ed25519', {
-  comment: 'electerm-agent-test-host'
+  comment: 'sarmaterm-agent-test-host'
 })
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
@@ -76,7 +76,7 @@ function generateKey ({ dir, name, type = 'ed25519', passphrase = '', bits }) {
   const keyPath = path.join(dir, name)
   const args = ['-q', '-t', type]
   if (bits) args.push('-b', String(bits))
-  args.push('-N', passphrase, '-f', keyPath, '-C', `electerm-${name}`)
+  args.push('-N', passphrase, '-f', keyPath, '-C', `sarmaterm-${name}`)
   runCommand('ssh-keygen', args)
   return {
     keyPath,
@@ -157,7 +157,7 @@ async function startServer (allowedPublicKey, { debug = false } = {}) {
         sess.on('pty', (accept) => accept())
         sess.on('shell', (accept) => {
           const stream = accept()
-          stream.write('electerm-agent-test ready\n')
+          stream.write('sarmaterm-agent-test ready\n')
         })
       })
     })
@@ -231,7 +231,7 @@ describe('SSH agent auth', () => {
   let savedEnv
 
   beforeEach(() => {
-    tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'electerm-agent-test-'))
+    tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sarmaterm-agent-test-'))
 
     savedEnv = {
       HOME: process.env.HOME,

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Test: when password is provided, password auth should be tried first
  * before publickey/agent, even if ~/.ssh has keys available.
  */
@@ -12,14 +12,14 @@ const os = require('node:os')
 const path = require('node:path')
 const { once } = require('node:events')
 const { spawnSync } = require('node:child_process')
-const { Server, utils } = require('@electerm/ssh2')
+const { Server, utils } = require('@sarmaterm/ssh2')
 const { session } = require('../../src/app/server/session-ssh')
 
 const USERNAME = 'tester'
-const PASSWORD = 'electerm-test-password'
+const PASSWORD = 'sarmaterm-test-password'
 
 const HOST_KEY = utils.generateKeyPairSync('ed25519', {
-  comment: 'electerm-test-host'
+  comment: 'sarmaterm-test-host'
 })
 
 function parseKey (key, passphrase) {
@@ -41,7 +41,7 @@ function matchesPublicKey (ctx, publicKey) {
 }
 
 function makeTmpDir () {
-  return fs.mkdtempSync(path.join(os.tmpdir(), 'electerm-ssh-test-'))
+  return fs.mkdtempSync(path.join(os.tmpdir(), 'sarmaterm-ssh-test-'))
 }
 
 function setEnvVar (name, value) {
@@ -80,7 +80,7 @@ function generateClientKey ({ dir, name, type, passphrase, bits }) {
     '-f',
     keyPath,
     '-C',
-    `electerm-${name}`
+    `sarmaterm-${name}`
   )
 
   runCommand('ssh-keygen', args)
@@ -135,7 +135,7 @@ async function startTrackingServer (publicKey) {
         sshSession.on('pty', (accept) => accept())
         sshSession.on('shell', (accept) => {
           const stream = accept()
-          stream.write('electerm ready\n')
+          stream.write('sarmaterm ready\n')
         })
       })
     })
@@ -396,7 +396,7 @@ describe('session-ssh password-first auth', () => {
           sshSession.on('pty', (accept) => accept())
           sshSession.on('shell', (accept) => {
             const stream = accept()
-            stream.write('electerm ready\n')
+            stream.write('sarmaterm ready\n')
           })
         })
       })

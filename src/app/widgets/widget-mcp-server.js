@@ -1,6 +1,6 @@
-/**
+﻿/**
  * MCP Server Widget
- * Exposes electerm store APIs via Model Context Protocol
+ * Exposes sarmaterm store APIs via Model Context Protocol
  * Runs in main process and uses IPC to communicate with frontend
  * Uses a simple local MCP implementation
  */
@@ -21,7 +21,7 @@ const {
 
 const widgetInfo = {
   name: 'MCP Server',
-  description: 'Expose electerm APIs via Model Context Protocol (MCP) for AI assistants and external tools.',
+  description: 'Expose sarmaterm APIs via Model Context Protocol (MCP) for AI assistants and external tools.',
   version: '1.0.0',
   author: 'ZHAO Xudong',
   type: 'instance',
@@ -106,7 +106,7 @@ function getDefaultConfig () {
   }, {})
 }
 
-class ElectermMCPServer {
+class SarmatermMCPServer {
   constructor (config) {
     this.config = config
     // API key is optional - skip auth if not provided
@@ -141,7 +141,7 @@ class ElectermMCPServer {
   // Returns { allowed: true } or { allowed: false, reason: string }
   validateCommand (command) {
     // 1. Always-on built-in blacklist
-    for (const pattern of ElectermMCPServer.BUILTIN_BLACKLIST) {
+    for (const pattern of SarmatermMCPServer.BUILTIN_BLACKLIST) {
       if (pattern.test(command)) {
         return { allowed: false, reason: `Command blocked by built-in safety rule: ${pattern}` }
       }
@@ -222,9 +222,9 @@ class ElectermMCPServer {
     // ==================== Tab/Terminal APIs (always enabled) ====================
 
     server.registerTool(
-      'list_electerm_tabs',
+      'list_sarmaterm_tabs',
       {
-        description: 'List all open electerm terminal tabs',
+        description: 'List all open sarmaterm terminal tabs',
         inputSchema: z.object({})
       },
       async () => {
@@ -234,9 +234,9 @@ class ElectermMCPServer {
     )
 
     server.registerTool(
-      'get_electerm_active_tab',
+      'get_sarmaterm_active_tab',
       {
-        description: 'Get the currently active electerm tab',
+        description: 'Get the currently active sarmaterm tab',
         inputSchema: z.object({})
       },
       async () => {
@@ -246,9 +246,9 @@ class ElectermMCPServer {
     )
 
     server.registerTool(
-      'switch_electerm_tab',
+      'switch_sarmaterm_tab',
       {
-        description: 'Switch to a specific electerm tab',
+        description: 'Switch to a specific sarmaterm tab',
         inputSchema: {
           tabId: z.string().describe('Tab ID to switch to')
         }
@@ -260,9 +260,9 @@ class ElectermMCPServer {
     )
 
     server.registerTool(
-      'close_electerm_tab',
+      'close_sarmaterm_tab',
       {
-        description: 'Close a specific electerm tab',
+        description: 'Close a specific sarmaterm tab',
         inputSchema: {
           tabId: z.string().describe('Tab ID to close')
         }
@@ -274,9 +274,9 @@ class ElectermMCPServer {
     )
 
     server.registerTool(
-      'reload_electerm_tab',
+      'reload_sarmaterm_tab',
       {
-        description: 'Reload/reconnect an electerm tab',
+        description: 'Reload/reconnect an sarmaterm tab',
         inputSchema: {
           tabId: z.string().optional().describe('Tab ID to reload (default: active tab)')
         }
@@ -289,9 +289,9 @@ class ElectermMCPServer {
     )
 
     server.registerTool(
-      'duplicate_electerm_tab',
+      'duplicate_sarmaterm_tab',
       {
-        description: 'Duplicate an electerm tab',
+        description: 'Duplicate an sarmaterm tab',
         inputSchema: {
           tabId: z.string().describe('Tab ID to duplicate')
         }
@@ -303,9 +303,9 @@ class ElectermMCPServer {
     )
 
     server.registerTool(
-      'open_electerm_local_terminal',
+      'open_sarmaterm_local_terminal',
       {
-        description: 'Open a new electerm local terminal tab',
+        description: 'Open a new sarmaterm local terminal tab',
         inputSchema: z.object({})
       },
       async () => {
@@ -315,9 +315,9 @@ class ElectermMCPServer {
     )
 
     server.registerTool(
-      'send_electerm_terminal_command',
+      'send_sarmaterm_terminal_command',
       {
-        description: 'Send a command to the active electerm terminal',
+        description: 'Send a command to the active sarmaterm terminal',
         inputSchema: {
           command: z.string().describe('Command to send'),
           tabId: z.string().optional().describe('Optional: specific tab ID'),
@@ -338,9 +338,9 @@ class ElectermMCPServer {
     )
 
     server.registerTool(
-      'get_electerm_terminal_selection',
+      'get_sarmaterm_terminal_selection',
       {
-        description: 'Get the current text selection in electerm terminal',
+        description: 'Get the current text selection in sarmaterm terminal',
         inputSchema: {
           tabId: z.string().optional().describe('Optional: specific tab ID')
         }
@@ -353,9 +353,9 @@ class ElectermMCPServer {
     )
 
     server.registerTool(
-      'get_electerm_terminal_output',
+      'get_sarmaterm_terminal_output',
       {
-        description: 'Get recent electerm terminal output/buffer content',
+        description: 'Get recent sarmaterm terminal output/buffer content',
         inputSchema: {
           tabId: z.string().optional().describe('Optional: specific tab ID'),
           lines: z.number().optional().describe('Number of lines to return (default: 50)')
@@ -370,10 +370,10 @@ class ElectermMCPServer {
     )
 
     server.registerTool(
-      'wait_for_electerm_terminal_idle',
+      'wait_for_sarmaterm_terminal_idle',
       {
         description: 'Wait until the active terminal stops producing output, then return its content. ' +
-          'Use this after send_electerm_terminal_command to know when the command has finished. ' +
+          'Use this after send_sarmaterm_terminal_command to know when the command has finished. ' +
           'The terminal is considered idle when no data has arrived for ~4 seconds. ' +
           'Returns output and elapsed time; timedOut=true if the command was still running at the timeout.',
         inputSchema: {
@@ -397,7 +397,7 @@ class ElectermMCPServer {
     )
 
     server.registerTool(
-      'get_electerm_terminal_status',
+      'get_sarmaterm_terminal_status',
       {
         description: 'Get the current status of a terminal tab. Returns whether it is actively receiving data (running), idle (no data for 4+ seconds), or has a password prompt. Also returns the last 20 lines of terminal output. This is a lightweight, non-blocking check ideal for monitoring long-running commands.',
         inputSchema: {
@@ -413,7 +413,7 @@ class ElectermMCPServer {
     )
 
     server.registerTool(
-      'cancel_electerm_terminal_command',
+      'cancel_sarmaterm_terminal_command',
       {
         description: 'Cancel the currently running command in a terminal by sending Ctrl+C. Use this to interrupt a long-running or stuck command.',
         inputSchema: {
@@ -431,9 +431,9 @@ class ElectermMCPServer {
     // ==================== Background Task APIs ====================
 
     server.registerTool(
-      'run_electerm_background_command',
+      'run_sarmaterm_background_command',
       {
-        description: 'Run a command in the background using nohup. The command runs independently of the terminal session — the terminal is freed immediately. Returns a taskId for monitoring. Use get_electerm_background_task_status and get_electerm_background_task_log to check progress. Works best with SSH sessions where monitoring uses a separate exec channel.',
+        description: 'Run a command in the background using nohup. The command runs independently of the terminal session — the terminal is freed immediately. Returns a taskId for monitoring. Use get_sarmaterm_background_task_status and get_sarmaterm_background_task_log to check progress. Works best with SSH sessions where monitoring uses a separate exec channel.',
         inputSchema: {
           command: z.string().describe('The shell command to run in the background'),
           tabId: z.string().optional().describe('Tab ID to run on (default: active tab)')
@@ -448,11 +448,11 @@ class ElectermMCPServer {
     )
 
     server.registerTool(
-      'get_electerm_background_task_status',
+      'get_sarmaterm_background_task_status',
       {
         description: 'Check the status of a background task. Returns whether it is still running, has completed (with exit code), or is unknown. For SSH sessions, this uses a separate exec channel and does not interfere with the terminal.',
         inputSchema: {
-          taskId: z.string().describe('Task ID returned by run_electerm_background_command')
+          taskId: z.string().describe('Task ID returned by run_sarmaterm_background_command')
         }
       },
       async (args) => {
@@ -464,11 +464,11 @@ class ElectermMCPServer {
     )
 
     server.registerTool(
-      'get_electerm_background_task_log',
+      'get_sarmaterm_background_task_log',
       {
         description: 'Read the output log of a background task. Returns the last N lines of output. Useful for monitoring progress of long-running commands like builds, deployments, or installations.',
         inputSchema: {
-          taskId: z.string().describe('Task ID returned by run_electerm_background_command'),
+          taskId: z.string().describe('Task ID returned by run_sarmaterm_background_command'),
           lines: z.number().optional().describe('Number of recent log lines to return (default: 100)')
         }
       },
@@ -481,11 +481,11 @@ class ElectermMCPServer {
     )
 
     server.registerTool(
-      'cancel_electerm_background_task',
+      'cancel_sarmaterm_background_task',
       {
         description: 'Cancel a running background task by killing its process. The task status will be set to cancelled.',
         inputSchema: {
-          taskId: z.string().describe('Task ID returned by run_electerm_background_command')
+          taskId: z.string().describe('Task ID returned by run_sarmaterm_background_command')
         }
       },
       async (args) => {
@@ -499,7 +499,7 @@ class ElectermMCPServer {
     // ==================== Direct Tab Open APIs (always enabled) ====================
 
     server.registerTool(
-      'open_electerm_tab_ssh',
+      'open_sarmaterm_tab_ssh',
       {
         description: 'Open a new SSH terminal tab directly with connection parameters (no bookmark created)',
         inputSchema: sshBookmarkSchema
@@ -514,7 +514,7 @@ class ElectermMCPServer {
     )
 
     server.registerTool(
-      'open_electerm_tab_telnet',
+      'open_sarmaterm_tab_telnet',
       {
         description: 'Open a new Telnet terminal tab directly with connection parameters (no bookmark created)',
         inputSchema: telnetBookmarkSchema
@@ -529,7 +529,7 @@ class ElectermMCPServer {
     )
 
     server.registerTool(
-      'open_electerm_tab_serial',
+      'open_sarmaterm_tab_serial',
       {
         description: 'Open a new Serial terminal tab directly with connection parameters (no bookmark created)',
         inputSchema: serialBookmarkSchema
@@ -544,7 +544,7 @@ class ElectermMCPServer {
     )
 
     server.registerTool(
-      'open_electerm_tab_local',
+      'open_sarmaterm_tab_local',
       {
         description: 'Open a new Local terminal tab directly with connection parameters (no bookmark created)',
         inputSchema: localBookmarkSchema
@@ -561,9 +561,9 @@ class ElectermMCPServer {
     // ==================== Bookmark APIs ====================
     if (this.config.enableBookmarks) {
       server.registerTool(
-        'list_electerm_bookmarks',
+        'list_sarmaterm_bookmarks',
         {
-          description: 'List all electerm SSH/terminal bookmarks',
+          description: 'List all sarmaterm SSH/terminal bookmarks',
           inputSchema: {}
         },
         async (args) => {
@@ -578,9 +578,9 @@ class ElectermMCPServer {
       )
 
       server.registerTool(
-        'get_electerm_bookmark',
+        'get_sarmaterm_bookmark',
         {
-          description: 'Get a specific electerm bookmark by ID',
+          description: 'Get a specific sarmaterm bookmark by ID',
           inputSchema: {
             id: z.string().describe('Bookmark ID')
           }
@@ -592,9 +592,9 @@ class ElectermMCPServer {
       )
 
       server.registerTool(
-        'add_electerm_bookmark_ssh',
+        'add_sarmaterm_bookmark_ssh',
         {
-          description: 'Add a new SSH bookmark to electerm',
+          description: 'Add a new SSH bookmark to sarmaterm',
           inputSchema: sshBookmarkSchema
         },
         async (args) => {
@@ -607,9 +607,9 @@ class ElectermMCPServer {
       )
 
       server.registerTool(
-        'add_electerm_bookmark_telnet',
+        'add_sarmaterm_bookmark_telnet',
         {
-          description: 'Add a new Telnet bookmark to electerm',
+          description: 'Add a new Telnet bookmark to sarmaterm',
           inputSchema: telnetBookmarkSchema
         },
         async (args) => {
@@ -622,9 +622,9 @@ class ElectermMCPServer {
       )
 
       server.registerTool(
-        'add_electerm_bookmark_serial',
+        'add_sarmaterm_bookmark_serial',
         {
-          description: 'Add a new Serial bookmark to electerm',
+          description: 'Add a new Serial bookmark to sarmaterm',
           inputSchema: serialBookmarkSchema
         },
         async (args) => {
@@ -637,9 +637,9 @@ class ElectermMCPServer {
       )
 
       server.registerTool(
-        'add_electerm_bookmark_local',
+        'add_sarmaterm_bookmark_local',
         {
-          description: 'Add a new Local terminal bookmark to electerm',
+          description: 'Add a new Local terminal bookmark to sarmaterm',
           inputSchema: localBookmarkSchema
         },
         async (args) => {
@@ -652,9 +652,9 @@ class ElectermMCPServer {
       )
 
       server.registerTool(
-        'edit_electerm_bookmark',
+        'edit_sarmaterm_bookmark',
         {
-          description: 'Edit an existing electerm bookmark',
+          description: 'Edit an existing sarmaterm bookmark',
           inputSchema: {
             id: z.string().describe('Bookmark ID to edit'),
             updates: z.record(z.any()).describe('Fields to update')
@@ -667,9 +667,9 @@ class ElectermMCPServer {
       )
 
       server.registerTool(
-        'delete_electerm_bookmark',
+        'delete_sarmaterm_bookmark',
         {
-          description: 'Delete an electerm bookmark',
+          description: 'Delete an sarmaterm bookmark',
           inputSchema: {
             id: z.string().describe('Bookmark ID to delete')
           }
@@ -681,9 +681,9 @@ class ElectermMCPServer {
       )
 
       server.registerTool(
-        'open_electerm_bookmark',
+        'open_sarmaterm_bookmark',
         {
-          description: 'Open an electerm bookmark in a new tab',
+          description: 'Open an sarmaterm bookmark in a new tab',
           inputSchema: {
             id: z.string().describe('Bookmark ID to open')
           }
@@ -698,9 +698,9 @@ class ElectermMCPServer {
     // ==================== Bookmark Group APIs ====================
     if (this.config.enableBookmarkGroups) {
       server.registerTool(
-        'list_electerm_bookmark_groups',
+        'list_sarmaterm_bookmark_groups',
         {
-          description: 'List all electerm bookmark groups/folders',
+          description: 'List all sarmaterm bookmark groups/folders',
           inputSchema: z.object({})
         },
         async () => {
@@ -710,9 +710,9 @@ class ElectermMCPServer {
       )
 
       server.registerTool(
-        'add_electerm_bookmark_group',
+        'add_sarmaterm_bookmark_group',
         {
-          description: 'Add a new electerm bookmark group',
+          description: 'Add a new sarmaterm bookmark group',
           inputSchema: {
             title: z.string().describe('Group title'),
             parentId: z.string().optional().describe('Optional parent group ID')
@@ -728,7 +728,7 @@ class ElectermMCPServer {
     // ==================== SFTP APIs ====================
     if (this.config.enableSftp) {
       server.registerTool(
-        'electerm_sftp_list',
+        'sarmaterm_sftp_list',
         {
           description: 'List files and folders in a remote directory on the SSH-connected tab',
           inputSchema: {
@@ -743,7 +743,7 @@ class ElectermMCPServer {
       )
 
       server.registerTool(
-        'electerm_sftp_stat',
+        'sarmaterm_sftp_stat',
         {
           description: 'Get file or directory stat/info on the remote SSH server',
           inputSchema: {
@@ -758,7 +758,7 @@ class ElectermMCPServer {
       )
 
       server.registerTool(
-        'electerm_sftp_read_file',
+        'sarmaterm_sftp_read_file',
         {
           description: 'Read the content of a remote file on the SSH server',
           inputSchema: {
@@ -773,7 +773,7 @@ class ElectermMCPServer {
       )
 
       server.registerTool(
-        'electerm_sftp_del_file_or_folder',
+        'sarmaterm_sftp_del_file_or_folder',
         {
           description: 'Delete a file or folder on the remote SSH server',
           inputSchema: {
@@ -788,7 +788,7 @@ class ElectermMCPServer {
       )
 
       server.registerTool(
-        'electerm_sftp_upload',
+        'sarmaterm_sftp_upload',
         {
           description: 'Upload a local file or folder to the remote SSH server using the SFTP transfer panel',
           inputSchema: {
@@ -805,7 +805,7 @@ class ElectermMCPServer {
       )
 
       server.registerTool(
-        'electerm_sftp_download',
+        'sarmaterm_sftp_download',
         {
           description: 'Download a remote file or folder from the SSH server to a local path using the SFTP transfer panel',
           inputSchema: {
@@ -822,7 +822,7 @@ class ElectermMCPServer {
       )
 
       server.registerTool(
-        'electerm_zmodem_upload',
+        'sarmaterm_zmodem_upload',
         {
           description: 'Upload local files to the remote SSH server using trzsz (trz) or rzsz (rz). The SSH tab must have the chosen protocol installed.',
           inputSchema: {
@@ -838,7 +838,7 @@ class ElectermMCPServer {
       )
 
       server.registerTool(
-        'electerm_zmodem_download',
+        'sarmaterm_zmodem_download',
         {
           description: 'Download remote files from the SSH server using trzsz (tsz) or rzsz (sz). The SSH tab must have the chosen protocol installed.',
           inputSchema: {
@@ -855,7 +855,7 @@ class ElectermMCPServer {
       )
 
       server.registerTool(
-        'electerm_sftp_transfer_list',
+        'sarmaterm_sftp_transfer_list',
         {
           description: 'Get the list of all currently active/pending SFTP file transfers',
           inputSchema: z.object({})
@@ -867,7 +867,7 @@ class ElectermMCPServer {
       )
 
       server.registerTool(
-        'electerm_sftp_transfer_history',
+        'sarmaterm_sftp_transfer_history',
         {
           description: 'Get the history of completed/failed SFTP file transfers',
           inputSchema: z.object({})
@@ -882,9 +882,9 @@ class ElectermMCPServer {
     // ==================== Settings APIs ====================
     if (this.config.enableSettings) {
       server.registerTool(
-        'get_electerm_settings',
+        'get_sarmaterm_settings',
         {
-          description: 'Get current electerm application settings',
+          description: 'Get current sarmaterm application settings',
           inputSchema: undefined
         },
         async () => {
@@ -917,7 +917,7 @@ class ElectermMCPServer {
 
     // Create MCP server
     this.mcpServer = new McpServer({
-      name: 'electerm-mcp-server',
+      name: 'sarmaterm-mcp-server',
       version: widgetInfo.version
     })
 
@@ -1114,7 +1114,7 @@ class ElectermMCPServer {
 
 function widgetRun (instanceConfig) {
   const config = { ...getDefaultConfig(), ...instanceConfig }
-  const mcpServer = new ElectermMCPServer(config)
+  const mcpServer = new SarmatermMCPServer(config)
 
   return {
     instanceId: mcpServer.instanceId,
@@ -1126,5 +1126,5 @@ function widgetRun (instanceConfig) {
 module.exports = {
   widgetInfo,
   widgetRun,
-  _ElectermMCPServer: ElectermMCPServer
+  _SarmatermMCPServer: SarmatermMCPServer
 }

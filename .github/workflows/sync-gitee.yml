@@ -1,4 +1,4 @@
-name: Sync Master to Gitee
+﻿name: Sync Master to Gitee
 
 on:
   release:
@@ -26,7 +26,7 @@ jobs:
         run: |
           git config --global user.name "ZHAO Xudong"
           git config --global user.email "zxdong@gmail.com"
-          git remote add gitee git@gitee.com:github-zxdong262/electerm.git
+          git remote add gitee git@gitee.com:github-zxdong262/sarmaterm.git
 
       - name: Push to Gitee
         run: git push -f gitee HEAD:master
@@ -34,7 +34,7 @@ jobs:
       - name: Update version.html in gh-pages
         run: |
           # Get version from package.json using standard grep and sed
-          VERSION=$(curl -s https://raw.githubusercontent.com/electerm/electerm/master/package.json | grep '"version":' | sed 's/.*"version": "\([^"]*\).*/\1/')
+          VERSION=$(curl -s https://raw.githubusercontent.com/sarmaterm/sarmaterm/master/package.json | grep '"version":' | sed 's/.*"version": "\([^"]*\).*/\1/')
           
           # Checkout gh-pages branch
           git fetch origin gh-pages:gh-pages

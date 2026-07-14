@@ -1,4 +1,4 @@
-/**
+﻿/**
  * run time contants
  */
 
@@ -18,20 +18,20 @@ const iconPath = resolve(
   __dirname,
   (
     isDev
-      ? '../../../node_modules/@electerm/electerm-resource/res/imgs/electerm-round-128x128.png'
-      : '../assets/images/electerm-round-128x128.png'
+      ? '../../../node_modules/@sarmaterm/sarmaterm-resource/res/imgs/sarmaterm-round-128x128.png'
+      : '../assets/images/sarmaterm-round-128x128.png'
   )
 )
 const trayIconPath = resolve(
   __dirname,
   (
     isDev
-      ? '../../../node_modules/@electerm/electerm-resource/tray-icons/electerm-tray.png'
-      : '../assets/images/electerm-tray.png'
+      ? '../../../node_modules/@sarmaterm/sarmaterm-resource/tray-icons/sarmaterm-tray.png'
+      : '../assets/images/sarmaterm-tray.png'
   )
 )
 const extIconPath = isDev
-  ? '/node_modules/electerm-icons/icons/'
+  ? '/node_modules/sarmaterm-icons/icons/'
   : 'icons/'
 
 const defaultUserName = require('./default-user-name')

@@ -1,4 +1,4 @@
-import {
+﻿import {
   Button,
   Switch,
   Form,
@@ -105,7 +105,7 @@ export default function QuickCommandForm (props) {
   const templatesStr = templates.map(t => {
     return `{{${t}}}`
   }).join(', ')
-  const wiki = 'https://github.com/electerm/electerm/wiki/quick-command-templates'
+  const wiki = 'https://github.com/sarmaterm/sarmaterm/wiki/quick-command-templates'
   return (
     <>
       <Form

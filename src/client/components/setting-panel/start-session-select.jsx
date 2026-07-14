@@ -1,4 +1,4 @@
-import { TreeSelect, Tabs, Select, Empty } from 'antd'
+﻿import { TreeSelect, Tabs, Select, Empty } from 'antd'
 import { useState } from 'react'
 import copy from 'json-deep-copy'
 import { createTitleWithTag } from '../../common/create-title'
@@ -181,7 +181,7 @@ export default function StartSessionSelect (props) {
       label: (
         <span>
           <AppstoreOutlined /> {e('workspaces')}
-          <HelpIcon link='https://github.com/electerm/electerm/wiki/Workspace-Feature' />
+          <HelpIcon link='https://github.com/sarmaterm/sarmaterm/wiki/Workspace-Feature' />
         </span>
       )
     }

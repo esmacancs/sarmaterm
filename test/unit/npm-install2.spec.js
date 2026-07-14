@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Tests for npm/install.js and npm/utils.js
  * Tests platform detection, download patterns, extraction, and CLI launcher flow
  */
@@ -13,8 +13,8 @@ const {
   isLinuxLegacy,
   sanitizeVersion,
   sanitizeFilename,
-  getElectermExePath,
-  isElectermExtracted,
+  getSarmatermExePath,
+  isSarmatermExtracted,
   _packageRoot,
   _extractDir
 } = require('../../npm/install')
@@ -120,11 +120,11 @@ function getDownloadPattern (platform, architecture, options = {}) {
 
   if (platform === 'win32') {
     if (win7) {
-      return { pattern: /electerm-\d+\.\d+\.\d+-win7\.tar\.gz$/, type: 'win7' }
+      return { pattern: /sarmaterm-\d+\.\d+\.\d+-win7\.tar\.gz$/, type: 'win7' }
     } else if (architecture === 'arm64') {
-      return { pattern: /electerm-\d+\.\d+\.\d+-win-arm64\.tar\.gz$/, type: 'win-arm64' }
+      return { pattern: /sarmaterm-\d+\.\d+\.\d+-win-arm64\.tar\.gz$/, type: 'win-arm64' }
     } else {
-      return { pattern: /electerm-\d+\.\d+\.\d+-win-x64\.tar\.gz$/, type: 'win-x64' }
+      return { pattern: /sarmaterm-\d+\.\d+\.\d+-win-x64\.tar\.gz$/, type: 'win-x64' }
     }
   } else if (platform === 'darwin') {
     if (mac10) {
@@ -238,8 +238,8 @@ test('sanitizeVersion: throws on invalid version', () => {
 })
 
 test('sanitizeFilename: passes valid filenames', () => {
-  expect(sanitizeFilename('electerm-3.2.0-linux-x64.tar.gz')).toBe('electerm-3.2.0-linux-x64.tar.gz')
-  expect(sanitizeFilename('electerm-3.2.0-mac-x64.dmg')).toBe('electerm-3.2.0-mac-x64.dmg')
+  expect(sanitizeFilename('sarmaterm-3.2.0-linux-x64.tar.gz')).toBe('sarmaterm-3.2.0-linux-x64.tar.gz')
+  expect(sanitizeFilename('sarmaterm-3.2.0-mac-x64.dmg')).toBe('sarmaterm-3.2.0-mac-x64.dmg')
 })
 
 test('sanitizeFilename: trims whitespace', () => {
@@ -260,104 +260,104 @@ console.log('\n=== Download Pattern Tests ===\n')
 
 const v = '3.2.0'
 const releaseFiles = [
-  `electerm-${v}-linux-arm64.tar.gz`,
-  `electerm-${v}-linux-arm64-legacy.tar.gz`,
-  `electerm-${v}-linux-armv7l.tar.gz`,
-  `electerm-${v}-linux-armv7l-legacy.tar.gz`,
-  `electerm-${v}-linux-loong64.tar.gz`,
-  `electerm-${v}-linux-loong64-legacy.tar.gz`,
-  `electerm-${v}-linux-x64.tar.gz`,
-  `electerm-${v}-linux-x64-legacy.tar.gz`,
-  `electerm-${v}-mac-arm64.dmg`,
-  `electerm-${v}-mac-x64.dmg`,
-  `electerm-${v}-mac10-x64.dmg`,
-  `electerm-${v}-win-arm64.tar.gz`,
-  `electerm-${v}-win-x64.tar.gz`,
-  `electerm-${v}-win7.tar.gz`
+  `sarmaterm-${v}-linux-arm64.tar.gz`,
+  `sarmaterm-${v}-linux-arm64-legacy.tar.gz`,
+  `sarmaterm-${v}-linux-armv7l.tar.gz`,
+  `sarmaterm-${v}-linux-armv7l-legacy.tar.gz`,
+  `sarmaterm-${v}-linux-loong64.tar.gz`,
+  `sarmaterm-${v}-linux-loong64-legacy.tar.gz`,
+  `sarmaterm-${v}-linux-x64.tar.gz`,
+  `sarmaterm-${v}-linux-x64-legacy.tar.gz`,
+  `sarmaterm-${v}-mac-arm64.dmg`,
+  `sarmaterm-${v}-mac-x64.dmg`,
+  `sarmaterm-${v}-mac10-x64.dmg`,
+  `sarmaterm-${v}-win-arm64.tar.gz`,
+  `sarmaterm-${v}-win-x64.tar.gz`,
+  `sarmaterm-${v}-win7.tar.gz`
 ]
 
 test('pattern: win-x64 matches exactly one file', () => {
   const { pattern } = getDownloadPattern('win32', 'x64', {})
   const matches = releaseFiles.filter(f => pattern.test(f))
-  expect(matches).toEqual([`electerm-${v}-win-x64.tar.gz`])
+  expect(matches).toEqual([`sarmaterm-${v}-win-x64.tar.gz`])
 })
 
 test('pattern: win-arm64 matches exactly one file', () => {
   const { pattern } = getDownloadPattern('win32', 'arm64', {})
   const matches = releaseFiles.filter(f => pattern.test(f))
-  expect(matches).toEqual([`electerm-${v}-win-arm64.tar.gz`])
+  expect(matches).toEqual([`sarmaterm-${v}-win-arm64.tar.gz`])
 })
 
 test('pattern: win7 matches exactly one file', () => {
   const { pattern } = getDownloadPattern('win32', 'x64', { win7: true })
   const matches = releaseFiles.filter(f => pattern.test(f))
-  expect(matches).toEqual([`electerm-${v}-win7.tar.gz`])
+  expect(matches).toEqual([`sarmaterm-${v}-win7.tar.gz`])
 })
 
 test('pattern: mac-x64 matches exactly one file', () => {
   const { pattern } = getDownloadPattern('darwin', 'x64', {})
   const matches = releaseFiles.filter(f => pattern.test(f))
-  expect(matches).toEqual([`electerm-${v}-mac-x64.dmg`])
+  expect(matches).toEqual([`sarmaterm-${v}-mac-x64.dmg`])
 })
 
 test('pattern: mac-arm64 matches exactly one file', () => {
   const { pattern } = getDownloadPattern('darwin', 'arm64', {})
   const matches = releaseFiles.filter(f => pattern.test(f))
-  expect(matches).toEqual([`electerm-${v}-mac-arm64.dmg`])
+  expect(matches).toEqual([`sarmaterm-${v}-mac-arm64.dmg`])
 })
 
 test('pattern: mac10-x64 matches exactly one file', () => {
   const { pattern } = getDownloadPattern('darwin', 'x64', { mac10: true })
   const matches = releaseFiles.filter(f => pattern.test(f))
-  expect(matches).toEqual([`electerm-${v}-mac10-x64.dmg`])
+  expect(matches).toEqual([`sarmaterm-${v}-mac10-x64.dmg`])
 })
 
 test('pattern: linux-x64 matches exactly one file', () => {
   const { pattern } = getDownloadPattern('linux', 'x64', {})
   const matches = releaseFiles.filter(f => pattern.test(f))
-  expect(matches).toEqual([`electerm-${v}-linux-x64.tar.gz`])
+  expect(matches).toEqual([`sarmaterm-${v}-linux-x64.tar.gz`])
 })
 
 test('pattern: linux-x64-legacy matches exactly one file', () => {
   const { pattern } = getDownloadPattern('linux', 'x64', { linuxLegacy: true })
   const matches = releaseFiles.filter(f => pattern.test(f))
-  expect(matches).toEqual([`electerm-${v}-linux-x64-legacy.tar.gz`])
+  expect(matches).toEqual([`sarmaterm-${v}-linux-x64-legacy.tar.gz`])
 })
 
 test('pattern: linux-arm64 matches exactly one file', () => {
   const { pattern } = getDownloadPattern('linux', 'arm64', {})
   const matches = releaseFiles.filter(f => pattern.test(f))
-  expect(matches).toEqual([`electerm-${v}-linux-arm64.tar.gz`])
+  expect(matches).toEqual([`sarmaterm-${v}-linux-arm64.tar.gz`])
 })
 
 test('pattern: linux-arm64-legacy matches exactly one file', () => {
   const { pattern } = getDownloadPattern('linux', 'arm64', { linuxLegacy: true })
   const matches = releaseFiles.filter(f => pattern.test(f))
-  expect(matches).toEqual([`electerm-${v}-linux-arm64-legacy.tar.gz`])
+  expect(matches).toEqual([`sarmaterm-${v}-linux-arm64-legacy.tar.gz`])
 })
 
 test('pattern: linux-armv7l matches exactly one file', () => {
   const { pattern } = getDownloadPattern('linux', 'arm', {})
   const matches = releaseFiles.filter(f => pattern.test(f))
-  expect(matches).toEqual([`electerm-${v}-linux-armv7l.tar.gz`])
+  expect(matches).toEqual([`sarmaterm-${v}-linux-armv7l.tar.gz`])
 })
 
 test('pattern: linux-armv7l-legacy matches exactly one file', () => {
   const { pattern } = getDownloadPattern('linux', 'arm', { linuxLegacy: true })
   const matches = releaseFiles.filter(f => pattern.test(f))
-  expect(matches).toEqual([`electerm-${v}-linux-armv7l-legacy.tar.gz`])
+  expect(matches).toEqual([`sarmaterm-${v}-linux-armv7l-legacy.tar.gz`])
 })
 
 test('pattern: linux-loong64 matches exactly one file', () => {
   const { pattern } = getDownloadPattern('linux', 'loong64', {})
   const matches = releaseFiles.filter(f => pattern.test(f))
-  expect(matches).toEqual([`electerm-${v}-linux-loong64.tar.gz`])
+  expect(matches).toEqual([`sarmaterm-${v}-linux-loong64.tar.gz`])
 })
 
 test('pattern: linux-loong64-legacy matches exactly one file', () => {
   const { pattern } = getDownloadPattern('linux', 'loong64', { linuxLegacy: true })
   const matches = releaseFiles.filter(f => pattern.test(f))
-  expect(matches).toEqual([`electerm-${v}-linux-loong64-legacy.tar.gz`])
+  expect(matches).toEqual([`sarmaterm-${v}-linux-loong64-legacy.tar.gz`])
 })
 
 test('pattern: unsupported platform returns null pattern', () => {
@@ -372,22 +372,22 @@ test('pattern: unsupported platform returns null pattern', () => {
 
 console.log('\n=== Extracted Binary Path Tests ===\n')
 
-test('getElectermExePath: returns correct path for current platform', () => {
-  const exePath = getElectermExePath()
+test('getSarmatermExePath: returns correct path for current platform', () => {
+  const exePath = getSarmatermExePath()
   if (plat === 'win32') {
-    expect(exePath).toBe(path.join(_extractDir, 'electerm.exe'))
+    expect(exePath).toBe(path.join(_extractDir, 'sarmaterm.exe'))
   } else {
-    expect(exePath).toBe(path.join(_extractDir, 'electerm'))
+    expect(exePath).toBe(path.join(_extractDir, 'sarmaterm'))
   }
 })
 
-test('getElectermExePath: extractDir is inside packageRoot', () => {
+test('getSarmatermExePath: extractDir is inside packageRoot', () => {
   expect(_extractDir).toContain(_packageRoot)
-  expect(_extractDir).toBe(path.join(_packageRoot, 'electerm'))
+  expect(_extractDir).toBe(path.join(_packageRoot, 'sarmaterm'))
 })
 
-test('isElectermExtracted: returns boolean', () => {
-  const result = isElectermExtracted()
+test('isSarmatermExtracted: returns boolean', () => {
+  const result = isSarmatermExtracted()
   expect(typeof result).toBe('boolean')
 })
 
@@ -410,24 +410,24 @@ test('applyProxy: does not proxy non-GitHub URLs', () => {
 
 test('applyProxy: proxies GitHub URLs when GITHUB_PROXY is set', () => {
   // Test the logic directly since module caches GITHUB_PROXY at load time
-  const proxy = 'https://electerm-mirror.html5beta.com'
-  const url = 'https://github.com/electerm/electerm/releases/download/v1.0.0/test.tar.gz'
+  const proxy = 'https://sarmaterm-mirror.html5beta.com'
+  const url = 'https://github.com/sarmaterm/sarmaterm/releases/download/v1.0.0/test.tar.gz'
 
   // Simulate the applyProxy logic
   const cleanProxy = proxy.replace(/\/+$/, '')
   const result = `${cleanProxy}/${url}`
 
-  expect(result).toBe('https://electerm-mirror.html5beta.com/https://github.com/electerm/electerm/releases/download/v1.0.0/test.tar.gz')
+  expect(result).toBe('https://sarmaterm-mirror.html5beta.com/https://github.com/sarmaterm/sarmaterm/releases/download/v1.0.0/test.tar.gz')
 })
 
 test('applyProxy: handles proxy URL with trailing slash', () => {
-  const proxy = 'https://electerm-mirror.html5beta.com/'
+  const proxy = 'https://sarmaterm-mirror.html5beta.com/'
   const url = 'https://github.com/test/file.tar.gz'
 
   const cleanProxy = proxy.replace(/\/+$/, '')
   const result = `${cleanProxy}/${url}`
 
-  expect(result).toBe('https://electerm-mirror.html5beta.com/https://github.com/test/file.tar.gz')
+  expect(result).toBe('https://sarmaterm-mirror.html5beta.com/https://github.com/test/file.tar.gz')
 })
 
 test('formatBytes: formats bytes correctly', () => {
@@ -449,8 +449,8 @@ test('formatBytes: handles partial units', () => {
 console.log('\n=== Utils Tar Extract Tests ===\n')
 
 test('extractTarGz: extracts a tar.gz file', async () => {
-  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'electerm-test-tar-'))
-  const extDir = fs.mkdtempSync(path.join(os.tmpdir(), 'electerm-test-extract-'))
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sarmaterm-test-tar-'))
+  const extDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sarmaterm-test-extract-'))
 
   try {
     const testFile = path.join(tmpDir, 'test.txt')
@@ -471,8 +471,8 @@ test('extractTarGz: extracts a tar.gz file', async () => {
 })
 
 test('extractTarGz: strips top-level directory with strip:1', async () => {
-  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'electerm-test-strip-'))
-  const extDir = fs.mkdtempSync(path.join(os.tmpdir(), 'electerm-test-strip-extract-'))
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sarmaterm-test-strip-'))
+  const extDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sarmaterm-test-strip-extract-'))
 
   try {
     const appDir = path.join(tmpDir, 'myapp')
@@ -504,36 +504,36 @@ test('node launcher: correct path navigation', () => {
   expect(expectedPackageRoot).toBe(_packageRoot)
 })
 
-test('node launcher: checks for electerm binary existence', () => {
-  const expectedBinaryPath = path.join(_packageRoot, 'electerm', 'electerm')
-  expect(expectedBinaryPath).toBe(getElectermExePath())
+test('node launcher: checks for sarmaterm binary existence', () => {
+  const expectedBinaryPath = path.join(_packageRoot, 'sarmaterm', 'sarmaterm')
+  expect(expectedBinaryPath).toBe(getSarmatermExePath())
 })
 
 test('install flow: extractDir is correct', () => {
-  expect(_extractDir).toBe(path.join(_packageRoot, 'electerm'))
+  expect(_extractDir).toBe(path.join(_packageRoot, 'sarmaterm'))
 })
 
 test('install flow: no infinite recursion', () => {
-  // install.js does NOT call exec('electerm')
+  // install.js does NOT call exec('sarmaterm')
   // It only downloads and extracts
   // The node launcher then spawns the extracted binary directly
   const installExports = require('../../npm/install')
-  expect(typeof installExports.isElectermExtracted).toBe('function')
-  expect(typeof installExports.getElectermExePath).toBe('function')
+  expect(typeof installExports.isSarmatermExtracted).toBe('function')
+  expect(typeof installExports.getSarmatermExePath).toBe('function')
 })
 
 test('node launcher: launches binary after install', () => {
   // The Node.js launcher flow:
-  // 1. Check if ./electerm/electerm exists
+  // 1. Check if ./sarmaterm/sarmaterm exists
   // 2. If not: spawn node ./npm/install.js (downloads & extracts)
-  // 3. Spawn ./electerm/electerm (launches binary)
+  // 3. Spawn ./sarmaterm/sarmaterm (launches binary)
   //
   // This prevents infinite recursion because:
-  // - install.js never calls 'electerm' command
+  // - install.js never calls 'sarmaterm' command
   // - Node.js launcher uses spawn/execFile to run the binary directly
   // - npm creates a proper .cmd wrapper on Windows via #!/usr/bin/env node
 
-  const bashScriptPath = path.join(_packageRoot, 'npm', 'electerm')
+  const bashScriptPath = path.join(_packageRoot, 'npm', 'sarmaterm')
   expect(fs.existsSync(bashScriptPath)).toBe(true)
 })
 
@@ -589,7 +589,7 @@ testAsync('httpGet: throws on 404', async () => {
 })
 
 testAsync('download: downloads a file', async () => {
-  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'electerm-test-dl-'))
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'sarmaterm-test-dl-'))
   try {
     const result = await download(
       'https://httpbin.org/robots.txt',

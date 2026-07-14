@@ -1,4 +1,4 @@
-/**
+﻿/**
  * check latest release for update warn
  */
 
@@ -70,10 +70,10 @@ export async function getLatestReleaseVersion (n) {
 }
 
 export async function getLatestReleaseInfo () {
-  let url = `${baseUpdateCheckUrls[0]}/data/electerm-github-release.json`
+  let url = `${baseUpdateCheckUrls[0]}/data/sarmaterm-github-release.json`
   let res = await getInfo(url)
   if (!res?.release?.body) {
-    url = `${baseUpdateCheckUrls[1]}/data/electerm-github-release.json`
+    url = `${baseUpdateCheckUrls[1]}/data/sarmaterm-github-release.json`
     res = await getInfo(url)
   }
   return res && res.release

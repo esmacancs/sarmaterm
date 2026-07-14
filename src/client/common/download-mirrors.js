@@ -1,6 +1,6 @@
-export default [
+﻿export default [
   {
     name: 'homepage',
-    url: 'https://electerm.org'
+    url: 'https://sarmaterm.github.io'
   }
 ]

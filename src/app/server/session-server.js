@@ -1,4 +1,4 @@
-const express = require('express')
+﻿const express = require('express')
 const { Sftp } = require('./session-sftp')
 const { Ftp } = require('./session-ftp')
 const {
@@ -33,8 +33,8 @@ const { trzszManager } = require('./trzsz')
 const { xmodemManager } = require('./xmodem')
 
 const {
-  tokenElecterm,
-  electermHost,
+  tokenSarmaterm,
+  sarmatermHost,
   wsPort,
   type
 } = process.env
@@ -47,7 +47,7 @@ function markConnected () {
 
 function verify (req) {
   const { token: to } = req.query
-  if (to !== tokenElecterm) {
+  if (to !== tokenSarmaterm) {
     throw new Error('not valid request')
   }
 }
@@ -495,8 +495,8 @@ process.on('message', async (message) => {
 
 const runServer = function () {
   return new Promise((resolve) => {
-    app.listen(wsPort, electermHost, () => {
-      log.info('session server', 'runs on', electermHost, wsPort)
+    app.listen(wsPort, sarmatermHost, () => {
+      log.info('session server', 'runs on', sarmatermHost, wsPort)
       resolve()
     })
   })

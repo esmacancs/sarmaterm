@@ -1,4 +1,4 @@
-// Function to generate the error HTML string
+﻿// Function to generate the error HTML string
 function generateErrorHtml (port) {
   return `
     <!DOCTYPE html>
@@ -58,7 +58,7 @@ function generateErrorHtml (port) {
         <p>更改设置后重启应用程序。如果问题仍然存在，请联系作者：zxdong@gmail.com。</p>
         <p>
           <img
-            src='https://electerm.org/electerm-wechat-group-qr.jpg'
+            src='https://sarmaterm.github.io/sarmaterm-wechat-group-qr.jpg'
           />
         </p>
       </div>

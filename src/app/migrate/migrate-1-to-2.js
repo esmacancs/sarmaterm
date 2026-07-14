@@ -1,4 +1,4 @@
-/**
+﻿/**
  * migrate from NeDB (v1) to SQLite (v2)
  */
 
@@ -8,7 +8,7 @@ const { appPath, defaultUserName } = require('../common/app-props')
 const log = require('../common/log')
 
 const reso = (name) => {
-  return resolve(appPath, 'electerm', 'users', defaultUserName, `electerm.${name}.nedb`)
+  return resolve(appPath, 'sarmaterm', 'users', defaultUserName, `sarmaterm.${name}.nedb`)
 }
 
 const tables = [

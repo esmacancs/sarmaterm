@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+﻿import { useState, useRef, useEffect } from 'react'
 import { Button, Space, Input } from 'antd'
 import { ArrowRightOutlined, ThunderboltOutlined } from '@ant-design/icons'
 import message from '../common/message'
@@ -97,7 +97,7 @@ export default function QuickConnect ({ batch, inputOnly }) {
       </Space.Compact>
     )
   }
-  const wiki = 'https://github.com/electerm/electerm/wiki/quick-connect'
+  const wiki = 'https://github.com/sarmaterm/sarmaterm/wiki/quick-connect'
 
   // If inputOnly is true, don't show the button, just render input directly
   if (inputOnly) {

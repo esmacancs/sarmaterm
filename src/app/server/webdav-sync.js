@@ -1,4 +1,4 @@
-/**
+﻿/**
  * handle sync with WebDAV server
  */
 
@@ -133,17 +133,17 @@ async function test (serverUrl, username, password, proxy, skipVerify) {
 }
 
 /**
- * Upload electerm data to WebDAV server
+ * Upload sarmaterm data to WebDAV server
  */
 async function upload (serverUrl, username, password, data, proxy, skipVerify) {
   const client = createClient(serverUrl, username, password, proxy, skipVerify)
-  const basePath = '/electerm'
+  const basePath = '/sarmaterm'
 
   try {
     log.info(`[WebDAV] upload: starting to ${serverUrl}${basePath}`)
     log.info(`[WebDAV] upload: data keys = [${Object.keys(data).join(', ')}]`)
 
-    // Ensure electerm directory exists
+    // Ensure sarmaterm directory exists
     await ensureDir(client, basePath)
 
     // Upload each file
@@ -165,11 +165,11 @@ async function upload (serverUrl, username, password, data, proxy, skipVerify) {
 }
 
 /**
- * Download electerm data from WebDAV server
+ * Download sarmaterm data from WebDAV server
  */
 async function download (serverUrl, username, password, proxy, skipVerify) {
   const client = createClient(serverUrl, username, password, proxy, skipVerify)
-  const basePath = '/electerm'
+  const basePath = '/sarmaterm'
 
   try {
     log.info(`[WebDAV] download: starting from ${serverUrl}${basePath}`)
@@ -188,7 +188,7 @@ async function download (serverUrl, username, password, proxy, skipVerify) {
       'addressBookmarks.json',
       'workspaces.json',
       'userConfig.json',
-      'electerm-status.json',
+      'sarmaterm-status.json',
       'settings.order.json',
       'bookmarks.order.json',
       'bookmarkGroups.order.json',

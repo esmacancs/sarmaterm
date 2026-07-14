@@ -1,4 +1,4 @@
-import { PureComponent, createRef } from 'react'
+﻿import { PureComponent, createRef } from 'react'
 import { createTerm } from '../terminal/terminal-apis'
 import deepCopy from 'json-deep-copy'
 import clone from '../../common/to-simple-obj'
@@ -106,19 +106,19 @@ export default class RdpSession extends PureComponent {
   }
 
   buildWsUrl = (port, type = 'rdp', extra = '') => {
-    const { host, tokenElecterm } = this.props.config
+    const { host, tokenSarmaterm } = this.props.config
     const { id } = this.props.tab
     if (window.et.buildWsUrl) {
       return window.et.buildWsUrl(
         host,
         port,
-        tokenElecterm,
+        tokenSarmaterm,
         id,
         type,
         extra
       )
     }
-    return `ws://${host}:${port}/${type}/${id}?token=${tokenElecterm}${extra}`
+    return `ws://${host}:${port}/${type}/${id}?token=${tokenSarmaterm}${extra}`
   }
 
   remoteInit = async () => {
@@ -687,7 +687,7 @@ export default class RdpSession extends PureComponent {
             />
           </Tooltip>
           <HelpIcon
-            link='https://github.com/electerm/electerm/wiki/RDP-File-Transfer'
+            link='https://github.com/sarmaterm/sarmaterm/wiki/RDP-File-Transfer'
             className='mg2r mg1l'
           />
         </div>

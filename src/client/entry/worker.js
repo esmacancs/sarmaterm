@@ -1,4 +1,4 @@
-/**
+﻿/**
  * web worker
  */
 
@@ -11,8 +11,8 @@ function createWs (
   config
 ) {
   // init gloabl ws
-  const { host, port, tokenElecterm } = config
-  const wsUrl = `ws://${host}:${port}/${type}/${id}?&sftpId=${sftpId}&token=${tokenElecterm}`
+  const { host, port, tokenSarmaterm } = config
+  const wsUrl = `ws://${host}:${port}/${type}/${id}?&sftpId=${sftpId}&token=${tokenSarmaterm}`
   const ws = new WebSocket(wsUrl)
   ws.s = msg => {
     try {

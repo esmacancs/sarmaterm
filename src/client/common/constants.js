@@ -1,9 +1,9 @@
-/**
+﻿/**
  * constants
  */
-import logoPath1Ref from '@electerm/electerm-resource/res/imgs/electerm-round-128x128.png'
-import logoPath2Ref from '@electerm/electerm-resource/res/imgs/electerm.png'
-import logoPath3Ref from '@electerm/electerm-resource/res/imgs/electerm-watermark.png'
+import logoPath1Ref from '@sarmaterm/sarmaterm-resource/res/imgs/sarmaterm-round-128x128.png'
+import logoPath2Ref from '@sarmaterm/sarmaterm-resource/res/imgs/sarmaterm.png'
+import logoPath3Ref from '@sarmaterm/sarmaterm-resource/res/imgs/sarmaterm-watermark.png'
 export const packInfo = typeof window.et.packInfo === 'undefined' ? window.pre.packInfo : window.et.packInfo
 const buildConst = (props) => {
   return props.reduce((prev, key) => {
@@ -199,7 +199,7 @@ export const maxBatchInput = 30
 export const windowControlWidth = 94
 export const baseUpdateCheckUrls = [
   packInfo.homepage,
-  'https://gitee.com/github-zxdong262/electerm/raw/gh-pages'
+  'https://gitee.com/github-zxdong262/sarmaterm/raw/gh-pages'
 ]
 export const syncTypes = buildConst([
   'github',
@@ -209,11 +209,11 @@ export const syncTypes = buildConst([
   'webdav'
 ])
 export const syncTokenCreateUrls = {
-  gitee: 'https://gitee.com/github-zxdong262/electerm/wikis/Create%20personal%20access%20token?sort_id=3028409',
-  github: 'https://github.com/electerm/electerm/wiki/Create-personal-access-token',
-  custom: 'https://github.com/electerm/electerm/wiki/Custom-sync-server',
-  cloud: 'https://sync.electerm.org',
-  webdav: 'https://github.com/electerm/electerm/wiki/WebDAV-sync'
+  gitee: 'https://gitee.com/github-zxdong262/sarmaterm/wikis/Create%20personal%20access%20token?sort_id=3028409',
+  github: 'https://github.com/sarmaterm/sarmaterm/wiki/Create-personal-access-token',
+  custom: 'https://github.com/sarmaterm/sarmaterm/wiki/Custom-sync-server',
+  cloud: 'https://sync.sarmaterm.github.io',
+  webdav: 'https://github.com/sarmaterm/sarmaterm/wiki/WebDAV-sync'
 }
 export const settingSyncId = 'setting-sync'
 export const settingTerminalId = 'setting-terminal'
@@ -250,11 +250,11 @@ export const checkedKeysLsKey = 'checked-keys'
 export const quickCommandLabelsLsKey = 'quick-command-label'
 export const localAddrBookmarkLsKey = 'local-addr-bookmark-keys'
 export const dismissDelKeyTipLsKey = 'dismiss-del-key-tip'
-export const sshTunnelHelpLink = 'https://github.com/electerm/electerm/wiki/How-to-use-ssh-tunnel'
-export const proxyHelpLink = 'https://github.com/electerm/electerm/wiki/proxy-format'
-export const regexHelpLink = 'https://github.com/electerm/electerm/wiki/Terminal-keywords-highlight-regular-expression-exmaples'
-export const connectionHoppingWikiLink = 'https://github.com/electerm/electerm/wiki/Connection-Hopping-Behavior-Change-in-electerm-since-v1.50.65'
-export const aiConfigWikiLink = 'https://github.com/electerm/electerm/wiki/AI-model-config-guide'
+export const sshTunnelHelpLink = 'https://github.com/sarmaterm/sarmaterm/wiki/How-to-use-ssh-tunnel'
+export const proxyHelpLink = 'https://github.com/sarmaterm/sarmaterm/wiki/proxy-format'
+export const regexHelpLink = 'https://github.com/sarmaterm/sarmaterm/wiki/Terminal-keywords-highlight-regular-expression-exmaples'
+export const connectionHoppingWikiLink = 'https://github.com/sarmaterm/sarmaterm/wiki/Connection-Hopping-Behavior-Change-in-sarmaterm-since-v1.50.65'
+export const aiConfigWikiLink = 'https://github.com/sarmaterm/sarmaterm/wiki/AI-model-config-guide'
 export const aiChatModeLsKey = 'ai-chat-mode'
 export const modals = {
   hide: 0,

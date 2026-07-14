@@ -1,4 +1,4 @@
-/**
+﻿/**
  * setting sync panel，
  */
 
@@ -66,7 +66,7 @@ export default function SyncForm (props) {
     if (res.apiUrl) {
       up[syncType + 'ApiUrl'] = res.apiUrl
     } else if (syncType === syncTypes.cloud) {
-      up[syncType + 'ApiUrl'] = 'https://sync.electerm.org/api/sync'
+      up[syncType + 'ApiUrl'] = 'https://sync.sarmaterm.github.io/api/sync'
       // up[syncType + 'ApiUrl'] = 'http://127.0.0.1:5678/api/sync'
     }
     if (res.proxy) {
@@ -169,7 +169,7 @@ export default function SyncForm (props) {
           title={
             <span>
               Gitee data sync is not recommended. For more information, please refer to the
-              <Link to='https://github.com/electerm/electerm/wiki/gitee-data-sync-warning' className='mg1l'>
+              <Link to='https://github.com/sarmaterm/sarmaterm/wiki/gitee-data-sync-warning' className='mg1l'>
                 wiki
               </Link>
               .
@@ -187,8 +187,8 @@ export default function SyncForm (props) {
     if (syncType === syncTypes.cloud) {
       return (
         <p>
-          <Link to='https://sync.electerm.org'>
-            https://sync.electerm.org[Beta]
+          <Link to='https://sync.sarmaterm.github.io'>
+            https://sync.sarmaterm.github.io[Beta]
           </Link>
         </p>
       )

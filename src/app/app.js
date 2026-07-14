@@ -1,4 +1,4 @@
-/**
+﻿/**
  * app entry
  */
 const log = require('./common/log')
@@ -7,7 +7,7 @@ const globalState = require('./lib/glob-state')
 
 globalState.set('initTime', Date.now())
 
-log.debug('electerm start')
+log.debug('sarmaterm start')
 
 const app = createApp()
 globalState.set('app', app)

@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import { FrownOutlined, ReloadOutlined, CopyOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import {
@@ -17,32 +17,32 @@ const os = isMac ? 'mac' : isWin ? 'windows' : 'linux'
 const isVersion2OrAbove = compare(version, '2.0.0') >= 0
 
 const userDataPath = {
-  mac: '~/Library/Application\\ Support/electerm/users/default_user',
-  linux: '~/.config/electerm/users/default_user',
-  windows: 'C:\\Users\\your-user-name\\AppData\\Roaming\\electerm\\users\\default_user'
+  mac: '~/Library/Application\\ Support/sarmaterm/users/default_user',
+  linux: '~/.config/sarmaterm/users/default_user',
+  windows: 'C:\\Users\\your-user-name\\AppData\\Roaming\\sarmaterm\\users\\default_user'
 }
 
 const troubleshootContent = {
   runInCommandLine: {
-    mac: '/Applications/electerm.app/Contents/MacOS/electerm',
-    linux: 'path/to/electerm',
-    windows: 'path\\to\\electerm.exe'
+    mac: '/Applications/sarmaterm.app/Contents/MacOS/sarmaterm',
+    linux: 'path/to/sarmaterm',
+    windows: 'path\\to\\sarmaterm.exe'
   },
   clearConfig: {
     mac: isVersion2OrAbove
-      ? `rm -rf ${userDataPath.mac}/electerm_data.db`
-      : `rm -rf ${userDataPath.mac}/electerm.data.nedb`,
+      ? `rm -rf ${userDataPath.mac}/sarmaterm_data.db`
+      : `rm -rf ${userDataPath.mac}/sarmaterm.data.nedb`,
     linux: isVersion2OrAbove
-      ? `rm -rf ${userDataPath.linux}/electerm_data.db`
-      : `rm -rf ${userDataPath.linux}/electerm.data.nedb`,
+      ? `rm -rf ${userDataPath.linux}/sarmaterm_data.db`
+      : `rm -rf ${userDataPath.linux}/sarmaterm.data.nedb`,
     windows: isVersion2OrAbove
-      ? `Delete ${userDataPath.windows}\\electerm_data.db`
-      : `Delete ${userDataPath.windows}\\electerm.data.nedb`
+      ? `Delete ${userDataPath.windows}\\sarmaterm_data.db`
+      : `Delete ${userDataPath.windows}\\sarmaterm.data.nedb`
   },
   backupData: {
-    mac: `cp -r ${userDataPath.mac} ~/Desktop/electerm_backup_${Date.now()}`,
-    linux: `cp -r ${userDataPath.linux} ~/Desktop/electerm_backup_${Date.now()}`,
-    windows: `xcopy "${userDataPath.windows}\\*" "%USERPROFILE%\\Desktop\\electerm_backup_${Date.now()}" /E /I`
+    mac: `cp -r ${userDataPath.mac} ~/Desktop/sarmaterm_backup_${Date.now()}`,
+    linux: `cp -r ${userDataPath.linux} ~/Desktop/sarmaterm_backup_${Date.now()}`,
+    windows: `xcopy "${userDataPath.windows}\\*" "%USERPROFILE%\\Desktop\\sarmaterm_backup_${Date.now()}" /E /I`
   }
 }
 
@@ -83,7 +83,7 @@ export default class ErrorBoundary extends React.PureComponent {
     return (
       <div className='pd1y wordbreak'>
         <h2>{e('troubleShoot')}</h2>
-        <p>Electerm Version: {packInfo.version}, OS: {os}</p>
+        <p>Sarmaterm Version: {packInfo.version}, OS: {os}</p>
         {
           Object.keys(troubleshootContent).map((k, i) => {
             const v = troubleshootContent[k]
@@ -119,7 +119,7 @@ export default class ErrorBoundary extends React.PureComponent {
         </div>
         <div className='pd3y'>
           <img
-            src='https://electerm.org/electerm-wechat-group-qr.jpg'
+            src='https://sarmaterm.github.io/sarmaterm-wechat-group-qr.jpg'
             className='mwm-100'
             width={200}
           />

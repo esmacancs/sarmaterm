@@ -1,4 +1,4 @@
-const test = require('node:test')
+﻿const test = require('node:test')
 const assert = require('node:assert/strict')
 
 const childProcess = require('child_process')
@@ -58,11 +58,11 @@ test('openFileWithEditor passes malicious filenames as a literal Windows argumen
   assert.deepEqual(spawnCall.args.slice(0, 2), ['-NoLogo', '-Command'])
   assert.match(spawnCall.args[2], /& \$editor @editorArgs/)
   assert.equal(
-    Buffer.from(spawnCall.options.env.ELECTERM_EDITOR_COMMAND_B64, 'base64').toString('utf8'),
+    Buffer.from(spawnCall.options.env.SARMATERM_EDITOR_COMMAND_B64, 'base64').toString('utf8'),
     'notepad.exe'
   )
   assert.deepEqual(
-    JSON.parse(Buffer.from(spawnCall.options.env.ELECTERM_EDITOR_ARGS_B64, 'base64').toString('utf8')),
+    JSON.parse(Buffer.from(spawnCall.options.env.SARMATERM_EDITOR_ARGS_B64, 'base64').toString('utf8')),
     ['C:\\Temp\\poc";Start-Process calc;#.txt']
   )
   assert.equal(spawnCall.options.windowsHide, true)

@@ -1,4 +1,4 @@
-import { Component, createRef } from 'react'
+﻿import { Component, createRef } from 'react'
 import { isEqual, pick, debounce, throttle } from 'lodash-es'
 import clone from '../../common/to-simple-obj.js'
 import resolve from '../../common/resolve.js'
@@ -383,7 +383,7 @@ class Term extends Component {
   warnSftpFollowUnsupported = () => {
     message.warning(
       <span>
-        Fish shell/windows shell is not supported for SFTP follow SSH path feature. See: <ExternalLink to='https://github.com/electerm/electerm/wiki/Warning-about-sftp-follow-ssh-path-function'>wiki</ExternalLink>
+        Fish shell/windows shell is not supported for SFTP follow SSH path feature. See: <ExternalLink to='https://github.com/sarmaterm/sarmaterm/wiki/Warning-about-sftp-follow-ssh-path-function'>wiki</ExternalLink>
       </span>
       , 7)
   }
@@ -1446,17 +1446,17 @@ class Term extends Component {
   }
 
   buildWsUrl = (port) => {
-    const { host, tokenElecterm } = this.props.config
+    const { host, tokenSarmaterm } = this.props.config
     const { id } = this.props.tab
     if (window.et.buildWsUrl) {
       return window.et.buildWsUrl(
         host,
         port,
-        tokenElecterm,
+        tokenSarmaterm,
         id
       )
     }
-    return `ws://${host}:${port}/terminals/${id}?token=${tokenElecterm}`
+    return `ws://${host}:${port}/terminals/${id}?token=${tokenSarmaterm}`
   }
 
   remoteInit = async (term = this.term) => {

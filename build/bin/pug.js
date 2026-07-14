@@ -1,4 +1,4 @@
-// build html
+﻿// build html
 /**
  * build common files with react module in it
  */
@@ -18,12 +18,12 @@ const targetFilePath = resolve(
 )
 const pugContent = fs.readFileSync(entryPug, 'utf-8')
 const defaultAIPreset = {
-  baseURLAI: 'https://ai.electerm.org/api/ai',
+  baseURLAI: 'https://ai.sarmaterm.github.io/api/ai',
   apiPathAI: '/chat/completions',
   modelAI: 'mistral-small-latest',
   authHeaderNameAI: 'Authorization: Bearer',
-  id: 'ai.electerm.org',
-  nameAI: 'ai.electerm.org(default free)'
+  id: 'ai.sarmaterm.github.io',
+  nameAI: 'ai.sarmaterm.github.io(default free)'
 }
 
 const data = {

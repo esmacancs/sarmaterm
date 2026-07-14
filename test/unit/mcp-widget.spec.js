@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Unit tests for src/app/widgets/widget-mcp-server.js
  *
  * Electron and glob-state are mocked so no real Electron process is needed.
@@ -56,7 +56,7 @@ Module._load = function (request, parent, isMain) {
 const {
   widgetInfo,
   widgetRun,
-  _ElectermMCPServer: ElectermMCPServer
+  _SarmatermMCPServer: SarmatermMCPServer
 } = require('../../src/app/widgets/widget-mcp-server')
 
 Module._load = originalLoad // restore normal require
@@ -137,7 +137,7 @@ describe('widgetInfo', () => {
 // 2. validateCommand – built-in blacklist (always active)
 // ─────────────────────────────────────────────────────────────────────────────
 describe('validateCommand – built-in blacklist', () => {
-  const inst = new ElectermMCPServer({ commandBlacklist: '', commandWhitelist: '' })
+  const inst = new SarmatermMCPServer({ commandBlacklist: '', commandWhitelist: '' })
 
   const dangerous = [
     ['rm -rf /', 'rm -rf root'],
@@ -185,14 +185,14 @@ describe('validateCommand – built-in blacklist', () => {
 // ─────────────────────────────────────────────────────────────────────────────
 describe('validateCommand – user blacklist', () => {
   test('blocks command matching a user pattern', () => {
-    const inst = new ElectermMCPServer({ commandBlacklist: '^git push', commandWhitelist: '' })
+    const inst = new SarmatermMCPServer({ commandBlacklist: '^git push', commandWhitelist: '' })
     assert.equal(inst.validateCommand('git push origin main').allowed, false)
     assert.ok(inst.validateCommand('git push origin main').reason.includes('blacklist'))
     assert.equal(inst.validateCommand('git pull').allowed, true)
   })
 
   test('handles multiple newline-separated patterns', () => {
-    const inst = new ElectermMCPServer({
+    const inst = new SarmatermMCPServer({
       commandBlacklist: '^git push\n^npm publish',
       commandWhitelist: ''
     })
@@ -202,13 +202,13 @@ describe('validateCommand – user blacklist', () => {
   })
 
   test('ignores blank lines in the pattern list', () => {
-    const inst = new ElectermMCPServer({ commandBlacklist: '\n\n^git push\n\n', commandWhitelist: '' })
+    const inst = new SarmatermMCPServer({ commandBlacklist: '\n\n^git push\n\n', commandWhitelist: '' })
     assert.equal(inst.validateCommand('git push').allowed, false)
     assert.equal(inst.validateCommand('git pull').allowed, true)
   })
 
   test('silently ignores invalid regex patterns', () => {
-    const inst = new ElectermMCPServer({ commandBlacklist: '[invalid(regex', commandWhitelist: '' })
+    const inst = new SarmatermMCPServer({ commandBlacklist: '[invalid(regex', commandWhitelist: '' })
     assert.doesNotThrow(() => inst.validateCommand('anything'))
   })
 })
@@ -218,7 +218,7 @@ describe('validateCommand – user blacklist', () => {
 // ─────────────────────────────────────────────────────────────────────────────
 describe('validateCommand – user whitelist', () => {
   test('only allows commands matching a whitelist pattern', () => {
-    const inst = new ElectermMCPServer({
+    const inst = new SarmatermMCPServer({
       commandBlacklist: '',
       commandWhitelist: '^(ls|git status|echo)'
     })
@@ -230,27 +230,27 @@ describe('validateCommand – user whitelist', () => {
   })
 
   test('whitelist is inactive when empty', () => {
-    const inst = new ElectermMCPServer({ commandBlacklist: '', commandWhitelist: '' })
+    const inst = new SarmatermMCPServer({ commandBlacklist: '', commandWhitelist: '' })
     assert.equal(inst.validateCommand('npm install').allowed, true)
     assert.equal(inst.validateCommand('any-command').allowed, true)
   })
 
   test('whitelist=.* still blocked by built-in blacklist', () => {
     // Whitelist that matches everything must not override the built-in rules
-    const inst = new ElectermMCPServer({ commandBlacklist: '', commandWhitelist: '.*' })
+    const inst = new SarmatermMCPServer({ commandBlacklist: '', commandWhitelist: '.*' })
     assert.equal(inst.validateCommand('rm -rf /').allowed, false)
     assert.equal(inst.validateCommand('ls').allowed, true)
   })
 
   test('silently ignores invalid regex in whitelist', () => {
-    const inst = new ElectermMCPServer({ commandBlacklist: '', commandWhitelist: '[broken(' })
+    const inst = new SarmatermMCPServer({ commandBlacklist: '', commandWhitelist: '[broken(' })
     assert.doesNotThrow(() => inst.validateCommand('ls'))
     // Command should be blocked because no valid pattern matched
     assert.equal(inst.validateCommand('ls').allowed, false)
   })
 
   test('whitelist + user blacklist: blacklist wins', () => {
-    const inst = new ElectermMCPServer({
+    const inst = new SarmatermMCPServer({
       commandBlacklist: '^forbidden',
       commandWhitelist: '^forbidden' // also whitelisted
     })
@@ -294,7 +294,7 @@ describe('server lifecycle', () => {
     assert.ok(res.headers['mcp-session-id'], 'session ID header must be present')
     assert.match(res.headers['mcp-session-id'], /^[\w-]+$/)
     assert.equal(res.data.result.protocolVersion, '2024-11-05')
-    assert.equal(res.data.result.serverInfo.name, 'electerm-mcp-server')
+    assert.equal(res.data.result.serverInfo.name, 'sarmaterm-mcp-server')
   })
 
   test('tools/list includes all expected terminal tools', async () => {
@@ -305,16 +305,16 @@ describe('server lifecycle', () => {
     assert.ok(Array.isArray(tools) && tools.length > 0, 'should return tools array')
     const names = tools.map(t => t.name)
     for (const expected of [
-      'list_electerm_tabs',
-      'get_electerm_active_tab',
-      'send_electerm_terminal_command',
-      'wait_for_electerm_terminal_idle',
-      'get_electerm_terminal_status',
-      'cancel_electerm_terminal_command',
-      'run_electerm_background_command',
-      'get_electerm_background_task_status',
-      'get_electerm_background_task_log',
-      'cancel_electerm_background_task'
+      'list_sarmaterm_tabs',
+      'get_sarmaterm_active_tab',
+      'send_sarmaterm_terminal_command',
+      'wait_for_sarmaterm_terminal_idle',
+      'get_sarmaterm_terminal_status',
+      'cancel_sarmaterm_terminal_command',
+      'run_sarmaterm_background_command',
+      'get_sarmaterm_background_task_status',
+      'get_sarmaterm_background_task_log',
+      'cancel_sarmaterm_background_task'
     ]) {
       assert.ok(names.includes(expected), `Missing tool: ${expected}`)
     }
@@ -326,10 +326,10 @@ describe('server lifecycle', () => {
     assert.equal(res.status, 200)
     const names = res.data.result.tools.map(t => t.name)
     for (const expected of [
-      'open_electerm_tab_ssh',
-      'open_electerm_tab_telnet',
-      'open_electerm_tab_serial',
-      'open_electerm_tab_local'
+      'open_sarmaterm_tab_ssh',
+      'open_sarmaterm_tab_telnet',
+      'open_sarmaterm_tab_serial',
+      'open_sarmaterm_tab_local'
     ]) {
       assert.ok(names.includes(expected), `Missing tool: ${expected}`)
     }
@@ -371,7 +371,7 @@ describe('blacklist enforcement via HTTP', () => {
 
   test('user-blacklisted command is rejected before reaching renderer', async () => {
     const sid = await initSession(PORT)
-    const res = await callTool(PORT, sid, 'send_electerm_terminal_command', { command: 'forbidden-cmd do-things' })
+    const res = await callTool(PORT, sid, 'send_sarmaterm_terminal_command', { command: 'forbidden-cmd do-things' })
     const text = res.data.result.content[0].text
     assert.ok(text.includes('blacklist'), `Expected "blacklist" in error text, got: ${text}`)
     assert.equal(res.data.result.isError, true)
@@ -379,7 +379,7 @@ describe('blacklist enforcement via HTTP', () => {
 
   test('built-in blacklist rejects rm -rf /', async () => {
     const sid = await initSession(PORT)
-    const res = await callTool(PORT, sid, 'send_electerm_terminal_command', { command: 'rm -rf /' })
+    const res = await callTool(PORT, sid, 'send_sarmaterm_terminal_command', { command: 'rm -rf /' })
     const text = res.data.result.content[0].text
     assert.ok(
       text.includes('blocked') || text.includes('safety') || text.includes('built-in'),
@@ -390,29 +390,29 @@ describe('blacklist enforcement via HTTP', () => {
 
   test('safe command reaches renderer mock and returns mocked result', async () => {
     const sid = await initSession(PORT)
-    const res = await callTool(PORT, sid, 'send_electerm_terminal_command', { command: 'echo hello' })
+    const res = await callTool(PORT, sid, 'send_sarmaterm_terminal_command', { command: 'echo hello' })
     const text = res.data.result.content[0].text
     // The mock renderer returns { mocked: true }
     assert.ok(text.includes('mocked'), `Expected mocked renderer response, got: ${text}`)
   })
 
-  test('list_electerm_tabs reaches renderer mock', async () => {
+  test('list_sarmaterm_tabs reaches renderer mock', async () => {
     const sid = await initSession(PORT)
-    const res = await callTool(PORT, sid, 'list_electerm_tabs', {})
+    const res = await callTool(PORT, sid, 'list_sarmaterm_tabs', {})
     const text = res.data.result.content[0].text
     assert.ok(text.includes('mocked'), `Expected mocked renderer response, got: ${text}`)
   })
 
-  test('open_electerm_tab_ssh reaches renderer mock', async () => {
+  test('open_sarmaterm_tab_ssh reaches renderer mock', async () => {
     const sid = await initSession(PORT)
-    const res = await callTool(PORT, sid, 'open_electerm_tab_ssh', { host: '127.0.0.1' })
+    const res = await callTool(PORT, sid, 'open_sarmaterm_tab_ssh', { host: '127.0.0.1' })
     const text = res.data.result.content[0].text
     assert.ok(text.includes('mocked'), `Expected mocked renderer response, got: ${text}`)
   })
 
-  test('open_electerm_tab_local reaches renderer mock', async () => {
+  test('open_sarmaterm_tab_local reaches renderer mock', async () => {
     const sid = await initSession(PORT)
-    const res = await callTool(PORT, sid, 'open_electerm_tab_local', {})
+    const res = await callTool(PORT, sid, 'open_sarmaterm_tab_local', {})
     const text = res.data.result.content[0].text
     assert.ok(text.includes('mocked'), `Expected mocked renderer response, got: ${text}`)
   })
@@ -440,7 +440,7 @@ describe('whitelist enforcement via HTTP', () => {
 
   test('command not in whitelist is rejected', async () => {
     const sid = await initSession(PORT)
-    const res = await callTool(PORT, sid, 'send_electerm_terminal_command', { command: 'npm install' })
+    const res = await callTool(PORT, sid, 'send_sarmaterm_terminal_command', { command: 'npm install' })
     const text = res.data.result.content[0].text
     assert.ok(text.includes('whitelist'), `Expected "whitelist" in error text, got: ${text}`)
     assert.equal(res.data.result.isError, true)
@@ -448,7 +448,7 @@ describe('whitelist enforcement via HTTP', () => {
 
   test('command in whitelist is allowed', async () => {
     const sid = await initSession(PORT)
-    const res = await callTool(PORT, sid, 'send_electerm_terminal_command', { command: 'echo hello' })
+    const res = await callTool(PORT, sid, 'send_sarmaterm_terminal_command', { command: 'echo hello' })
     const text = res.data.result.content[0].text
     assert.ok(text.includes('mocked'), `Expected mocked renderer response, got: ${text}`)
   })
@@ -470,30 +470,30 @@ describe('terminal status & cancel tools', () => {
     if (instance) await instance.stop()
   })
 
-  test('get_electerm_terminal_status reaches renderer mock', async () => {
+  test('get_sarmaterm_terminal_status reaches renderer mock', async () => {
     const sid = await initSession(PORT)
-    const res = await callTool(PORT, sid, 'get_electerm_terminal_status', {})
+    const res = await callTool(PORT, sid, 'get_sarmaterm_terminal_status', {})
     const text = res.data.result.content[0].text
     assert.ok(text.includes('mocked'), `Expected mocked renderer response, got: ${text}`)
   })
 
-  test('get_electerm_terminal_status with tabId reaches renderer mock', async () => {
+  test('get_sarmaterm_terminal_status with tabId reaches renderer mock', async () => {
     const sid = await initSession(PORT)
-    const res = await callTool(PORT, sid, 'get_electerm_terminal_status', { tabId: 'some-tab-id' })
+    const res = await callTool(PORT, sid, 'get_sarmaterm_terminal_status', { tabId: 'some-tab-id' })
     const text = res.data.result.content[0].text
     assert.ok(text.includes('mocked'), `Expected mocked renderer response, got: ${text}`)
   })
 
-  test('cancel_electerm_terminal_command reaches renderer mock', async () => {
+  test('cancel_sarmaterm_terminal_command reaches renderer mock', async () => {
     const sid = await initSession(PORT)
-    const res = await callTool(PORT, sid, 'cancel_electerm_terminal_command', {})
+    const res = await callTool(PORT, sid, 'cancel_sarmaterm_terminal_command', {})
     const text = res.data.result.content[0].text
     assert.ok(text.includes('mocked'), `Expected mocked renderer response, got: ${text}`)
   })
 
-  test('cancel_electerm_terminal_command with tabId reaches renderer mock', async () => {
+  test('cancel_sarmaterm_terminal_command with tabId reaches renderer mock', async () => {
     const sid = await initSession(PORT)
-    const res = await callTool(PORT, sid, 'cancel_electerm_terminal_command', { tabId: 'some-tab-id' })
+    const res = await callTool(PORT, sid, 'cancel_sarmaterm_terminal_command', { tabId: 'some-tab-id' })
     const text = res.data.result.content[0].text
     assert.ok(text.includes('mocked'), `Expected mocked renderer response, got: ${text}`)
   })
@@ -515,18 +515,18 @@ describe('background task tools', () => {
     if (instance) await instance.stop()
   })
 
-  test('run_electerm_background_command reaches renderer mock', async () => {
+  test('run_sarmaterm_background_command reaches renderer mock', async () => {
     const sid = await initSession(PORT)
-    const res = await callTool(PORT, sid, 'run_electerm_background_command', {
+    const res = await callTool(PORT, sid, 'run_sarmaterm_background_command', {
       command: 'echo hello'
     })
     const text = res.data.result.content[0].text
     assert.ok(text.includes('mocked'), `Expected mocked renderer response, got: ${text}`)
   })
 
-  test('run_electerm_background_command with tabId reaches renderer mock', async () => {
+  test('run_sarmaterm_background_command with tabId reaches renderer mock', async () => {
     const sid = await initSession(PORT)
-    const res = await callTool(PORT, sid, 'run_electerm_background_command', {
+    const res = await callTool(PORT, sid, 'run_sarmaterm_background_command', {
       command: 'sleep 60',
       tabId: 'some-tab-id'
     })
@@ -534,27 +534,27 @@ describe('background task tools', () => {
     assert.ok(text.includes('mocked'), `Expected mocked renderer response, got: ${text}`)
   })
 
-  test('get_electerm_background_task_status reaches renderer mock', async () => {
+  test('get_sarmaterm_background_task_status reaches renderer mock', async () => {
     const sid = await initSession(PORT)
-    const res = await callTool(PORT, sid, 'get_electerm_background_task_status', {
+    const res = await callTool(PORT, sid, 'get_sarmaterm_background_task_status', {
       taskId: 'bg-12345-1'
     })
     const text = res.data.result.content[0].text
     assert.ok(text.includes('mocked'), `Expected mocked renderer response, got: ${text}`)
   })
 
-  test('get_electerm_background_task_log reaches renderer mock', async () => {
+  test('get_sarmaterm_background_task_log reaches renderer mock', async () => {
     const sid = await initSession(PORT)
-    const res = await callTool(PORT, sid, 'get_electerm_background_task_log', {
+    const res = await callTool(PORT, sid, 'get_sarmaterm_background_task_log', {
       taskId: 'bg-12345-1'
     })
     const text = res.data.result.content[0].text
     assert.ok(text.includes('mocked'), `Expected mocked renderer response, got: ${text}`)
   })
 
-  test('get_electerm_background_task_log with lines reaches renderer mock', async () => {
+  test('get_sarmaterm_background_task_log with lines reaches renderer mock', async () => {
     const sid = await initSession(PORT)
-    const res = await callTool(PORT, sid, 'get_electerm_background_task_log', {
+    const res = await callTool(PORT, sid, 'get_sarmaterm_background_task_log', {
       taskId: 'bg-12345-1',
       lines: 50
     })
@@ -562,9 +562,9 @@ describe('background task tools', () => {
     assert.ok(text.includes('mocked'), `Expected mocked renderer response, got: ${text}`)
   })
 
-  test('cancel_electerm_background_task reaches renderer mock', async () => {
+  test('cancel_sarmaterm_background_task reaches renderer mock', async () => {
     const sid = await initSession(PORT)
-    const res = await callTool(PORT, sid, 'cancel_electerm_background_task', {
+    const res = await callTool(PORT, sid, 'cancel_sarmaterm_background_task', {
       taskId: 'bg-12345-1'
     })
     const text = res.data.result.content[0].text
@@ -577,10 +577,10 @@ describe('background task tools', () => {
     assert.equal(res.status, 200)
     const names = res.data.result.tools.map(t => t.name)
     for (const expected of [
-      'run_electerm_background_command',
-      'get_electerm_background_task_status',
-      'get_electerm_background_task_log',
-      'cancel_electerm_background_task'
+      'run_sarmaterm_background_command',
+      'get_sarmaterm_background_task_status',
+      'get_sarmaterm_background_task_log',
+      'cancel_sarmaterm_background_task'
     ]) {
       assert.ok(names.includes(expected), `Missing tool: ${expected}`)
     }
@@ -609,7 +609,7 @@ describe('background task command validation', () => {
 
   test('run_background_command with blacklisted command is rejected', async () => {
     const sid = await initSession(PORT)
-    const res = await callTool(PORT, sid, 'run_electerm_background_command', {
+    const res = await callTool(PORT, sid, 'run_sarmaterm_background_command', {
       command: 'forbidden-bg-task'
     })
     // run_background_command wraps the command with nohup before sending to the terminal,
@@ -620,7 +620,7 @@ describe('background task command validation', () => {
 
   test('run_background_command with safe command reaches renderer', async () => {
     const sid = await initSession(PORT)
-    const res = await callTool(PORT, sid, 'run_electerm_background_command', {
+    const res = await callTool(PORT, sid, 'run_sarmaterm_background_command', {
       command: 'echo safe-task'
     })
     const text = res.data.result.content[0].text

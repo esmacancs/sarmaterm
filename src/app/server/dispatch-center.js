@@ -1,4 +1,4 @@
-/**
+﻿/**
  * communication between webview and app
  * run functions in seprate process, avoid using electron.remote directly
  */
@@ -21,11 +21,11 @@ const {
 const globalState = require('./global-state')
 const wsDec = require('./ws-dec')
 
-const { tokenElecterm } = process.env
+const { tokenSarmaterm } = process.env
 
 function verify (req) {
   const { token: to } = req.query
-  if (to !== tokenElecterm) {
+  if (to !== tokenSarmaterm) {
     throw new Error('not valid request')
   }
   if (process.env.requireAuth === 'yes' && !globalState.authed) {

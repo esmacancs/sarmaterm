@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Unit tests for npm/install.js
  * Tests that correct download patterns are selected for different OS/arch combinations
  */
@@ -14,7 +14,7 @@ const {
   getDownloadPattern
 } = require('../../npm/install')
 
-// Cache for version - fetched once from electerm website
+// Cache for version - fetched once from sarmaterm website
 let cachedVersion = null
 
 async function getVersion () {
@@ -22,7 +22,7 @@ async function getVersion () {
     return cachedVersion
   }
   cachedVersion = await new Promise((resolve, reject) => {
-    https.get('https://electerm.org/version.html', (res) => {
+    https.get('https://sarmaterm.github.io/version.html', (res) => {
       let data = ''
       res.on('data', chunk => { data += chunk })
       res.on('end', () => resolve(data.trim().replace('v', '')))
@@ -132,22 +132,22 @@ describe('npm/install.js', () => {
       it('should return win-x64 pattern for Windows x64', () => {
         const result = getDownloadPattern('win32', 'x64', {})
         expect(result.type).toBe('win-x64')
-        expect(result.pattern.test('electerm-2.3.151-win-x64.tar.gz')).toBe(true)
-        expect(result.pattern.test('electerm-2.3.151-win-arm64.tar.gz')).toBe(false)
+        expect(result.pattern.test('sarmaterm-2.3.151-win-x64.tar.gz')).toBe(true)
+        expect(result.pattern.test('sarmaterm-2.3.151-win-arm64.tar.gz')).toBe(false)
       })
 
       it('should return win-arm64 pattern for Windows arm64', () => {
         const result = getDownloadPattern('win32', 'arm64', {})
         expect(result.type).toBe('win-arm64')
-        expect(result.pattern.test('electerm-2.3.151-win-arm64.tar.gz')).toBe(true)
-        expect(result.pattern.test('electerm-2.3.151-win-x64.tar.gz')).toBe(false)
+        expect(result.pattern.test('sarmaterm-2.3.151-win-arm64.tar.gz')).toBe(true)
+        expect(result.pattern.test('sarmaterm-2.3.151-win-x64.tar.gz')).toBe(false)
       })
 
       it('should return win7 pattern for Windows 7', () => {
         const result = getDownloadPattern('win32', 'x64', { win7: true })
         expect(result.type).toBe('win7')
-        expect(result.pattern.test('electerm-2.3.151-win7.tar.gz')).toBe(true)
-        expect(result.pattern.test('electerm-2.3.151-win-x64.tar.gz')).toBe(false)
+        expect(result.pattern.test('sarmaterm-2.3.151-win7.tar.gz')).toBe(true)
+        expect(result.pattern.test('sarmaterm-2.3.151-win-x64.tar.gz')).toBe(false)
       })
 
       it('should prefer win7 over arm64 when win7 flag is set', () => {
@@ -160,22 +160,22 @@ describe('npm/install.js', () => {
       it('should return mac-x64 pattern for macOS x64', () => {
         const result = getDownloadPattern('darwin', 'x64', {})
         expect(result.type).toBe('mac-x64')
-        expect(result.pattern.test('electerm-2.3.151-mac-x64.dmg')).toBe(true)
-        expect(result.pattern.test('electerm-2.3.151-mac-arm64.dmg')).toBe(false)
+        expect(result.pattern.test('sarmaterm-2.3.151-mac-x64.dmg')).toBe(true)
+        expect(result.pattern.test('sarmaterm-2.3.151-mac-arm64.dmg')).toBe(false)
       })
 
       it('should return mac-arm64 pattern for macOS arm64 (Apple Silicon)', () => {
         const result = getDownloadPattern('darwin', 'arm64', {})
         expect(result.type).toBe('mac-arm64')
-        expect(result.pattern.test('electerm-2.3.151-mac-arm64.dmg')).toBe(true)
-        expect(result.pattern.test('electerm-2.3.151-mac-x64.dmg')).toBe(false)
+        expect(result.pattern.test('sarmaterm-2.3.151-mac-arm64.dmg')).toBe(true)
+        expect(result.pattern.test('sarmaterm-2.3.151-mac-x64.dmg')).toBe(false)
       })
 
       it('should return mac10-x64 pattern for macOS 10.x', () => {
         const result = getDownloadPattern('darwin', 'x64', { mac10: true })
         expect(result.type).toBe('mac10-x64')
-        expect(result.pattern.test('electerm-2.3.151-mac10-x64.dmg')).toBe(true)
-        expect(result.pattern.test('electerm-2.3.151-mac-x64.dmg')).toBe(false)
+        expect(result.pattern.test('sarmaterm-2.3.151-mac10-x64.dmg')).toBe(true)
+        expect(result.pattern.test('sarmaterm-2.3.151-mac-x64.dmg')).toBe(false)
       })
 
       it('should prefer mac10 over arm64 when mac10 flag is set', () => {
@@ -188,43 +188,43 @@ describe('npm/install.js', () => {
       it('should return linux-x64 pattern for Linux x64', () => {
         const result = getDownloadPattern('linux', 'x64', {})
         expect(result.type).toBe('linux-x64')
-        expect(result.pattern.test('electerm-2.3.151-linux-x64.tar.gz')).toBe(true)
-        expect(result.pattern.test('electerm-2.3.151-linux-x64-legacy.tar.gz')).toBe(false)
+        expect(result.pattern.test('sarmaterm-2.3.151-linux-x64.tar.gz')).toBe(true)
+        expect(result.pattern.test('sarmaterm-2.3.151-linux-x64-legacy.tar.gz')).toBe(false)
       })
 
       it('should return linux-arm64 pattern for Linux arm64', () => {
         const result = getDownloadPattern('linux', 'arm64', {})
         expect(result.type).toBe('linux-arm64')
-        expect(result.pattern.test('electerm-2.3.151-linux-arm64.tar.gz')).toBe(true)
-        expect(result.pattern.test('electerm-2.3.151-linux-arm64-legacy.tar.gz')).toBe(false)
+        expect(result.pattern.test('sarmaterm-2.3.151-linux-arm64.tar.gz')).toBe(true)
+        expect(result.pattern.test('sarmaterm-2.3.151-linux-arm64-legacy.tar.gz')).toBe(false)
       })
 
       it('should return linux-armv7l pattern for Linux arm', () => {
         const result = getDownloadPattern('linux', 'arm', {})
         expect(result.type).toBe('linux-armv7l')
-        expect(result.pattern.test('electerm-2.3.151-linux-armv7l.tar.gz')).toBe(true)
-        expect(result.pattern.test('electerm-2.3.151-linux-armv7l-legacy.tar.gz')).toBe(false)
+        expect(result.pattern.test('sarmaterm-2.3.151-linux-armv7l.tar.gz')).toBe(true)
+        expect(result.pattern.test('sarmaterm-2.3.151-linux-armv7l-legacy.tar.gz')).toBe(false)
       })
 
       it('should return linux-x64-legacy pattern for Linux x64 with old glibc', () => {
         const result = getDownloadPattern('linux', 'x64', { linuxLegacy: true })
         expect(result.type).toBe('linux-x64-legacy')
-        expect(result.pattern.test('electerm-2.3.151-linux-x64-legacy.tar.gz')).toBe(true)
-        expect(result.pattern.test('electerm-2.3.151-linux-x64.tar.gz')).toBe(false)
+        expect(result.pattern.test('sarmaterm-2.3.151-linux-x64-legacy.tar.gz')).toBe(true)
+        expect(result.pattern.test('sarmaterm-2.3.151-linux-x64.tar.gz')).toBe(false)
       })
 
       it('should return linux-arm64-legacy pattern for Linux arm64 with old glibc', () => {
         const result = getDownloadPattern('linux', 'arm64', { linuxLegacy: true })
         expect(result.type).toBe('linux-arm64-legacy')
-        expect(result.pattern.test('electerm-2.3.151-linux-arm64-legacy.tar.gz')).toBe(true)
-        expect(result.pattern.test('electerm-2.3.151-linux-arm64.tar.gz')).toBe(false)
+        expect(result.pattern.test('sarmaterm-2.3.151-linux-arm64-legacy.tar.gz')).toBe(true)
+        expect(result.pattern.test('sarmaterm-2.3.151-linux-arm64.tar.gz')).toBe(false)
       })
 
       it('should return linux-armv7l-legacy pattern for Linux arm with old glibc', () => {
         const result = getDownloadPattern('linux', 'arm', { linuxLegacy: true })
         expect(result.type).toBe('linux-armv7l-legacy')
-        expect(result.pattern.test('electerm-2.3.151-linux-armv7l-legacy.tar.gz')).toBe(true)
-        expect(result.pattern.test('electerm-2.3.151-linux-armv7l.tar.gz')).toBe(false)
+        expect(result.pattern.test('sarmaterm-2.3.151-linux-armv7l-legacy.tar.gz')).toBe(true)
+        expect(result.pattern.test('sarmaterm-2.3.151-linux-armv7l.tar.gz')).toBe(false)
       })
     })
 
@@ -249,120 +249,120 @@ describe('npm/install.js', () => {
     beforeAll(() => {
       const v = cachedVersion
       releaseFiles = [
-        `electerm-${v}-linux-aarch64-legacy.rpm`,
-        `electerm-${v}-linux-aarch64.rpm`,
-        `electerm-${v}-linux-amd64-legacy.deb`,
-        `electerm-${v}-linux-amd64.deb`,
-        `electerm-${v}-linux-amd64.snap`,
-        `electerm-${v}-linux-arm64-legacy.AppImage`,
-        `electerm-${v}-linux-arm64-legacy.deb`,
-        `electerm-${v}-linux-arm64-legacy.tar.gz`,
-        `electerm-${v}-linux-arm64.AppImage`,
-        `electerm-${v}-linux-arm64.deb`,
-        `electerm-${v}-linux-arm64.tar.gz`,
-        `electerm-${v}-linux-armv7l-legacy.AppImage`,
-        `electerm-${v}-linux-armv7l-legacy.deb`,
-        `electerm-${v}-linux-armv7l-legacy.rpm`,
-        `electerm-${v}-linux-armv7l-legacy.tar.gz`,
-        `electerm-${v}-linux-armv7l.AppImage`,
-        `electerm-${v}-linux-armv7l.deb`,
-        `electerm-${v}-linux-armv7l.rpm`,
-        `electerm-${v}-linux-armv7l.tar.gz`,
-        `electerm-${v}-linux-x64-legacy.tar.gz`,
-        `electerm-${v}-linux-x64.tar.gz`,
-        `electerm-${v}-linux-x86_64-legacy.AppImage`,
-        `electerm-${v}-linux-x86_64-legacy.rpm`,
-        `electerm-${v}-linux-x86_64.AppImage`,
-        `electerm-${v}-linux-x86_64.rpm`,
-        `electerm-${v}-mac-arm64.dmg`,
-        `electerm-${v}-mac-arm64.dmg.blockmap`,
-        `electerm-${v}-mac-x64.dmg`,
-        `electerm-${v}-mac-x64.dmg.blockmap`,
-        `electerm-${v}-mac10-x64.dmg`,
-        `electerm-${v}-mac10-x64.dmg.blockmap`,
-        `electerm-${v}-win-arm64-installer.exe`,
-        `electerm-${v}-win-arm64-installer.exe.blockmap`,
-        `electerm-${v}-win-arm64.tar.gz`,
-        `electerm-${v}-win-x64-installer.exe`,
-        `electerm-${v}-win-x64-installer.exe.blockmap`,
-        `electerm-${v}-win-x64-loose.tar.gz`,
-        `electerm-${v}-win-x64-portable.tar.gz`,
-        `electerm-${v}-win-x64.appx`,
-        `electerm-${v}-win-x64.tar.gz`,
-        `electerm-${v}-win7.tar.gz`
+        `sarmaterm-${v}-linux-aarch64-legacy.rpm`,
+        `sarmaterm-${v}-linux-aarch64.rpm`,
+        `sarmaterm-${v}-linux-amd64-legacy.deb`,
+        `sarmaterm-${v}-linux-amd64.deb`,
+        `sarmaterm-${v}-linux-amd64.snap`,
+        `sarmaterm-${v}-linux-arm64-legacy.AppImage`,
+        `sarmaterm-${v}-linux-arm64-legacy.deb`,
+        `sarmaterm-${v}-linux-arm64-legacy.tar.gz`,
+        `sarmaterm-${v}-linux-arm64.AppImage`,
+        `sarmaterm-${v}-linux-arm64.deb`,
+        `sarmaterm-${v}-linux-arm64.tar.gz`,
+        `sarmaterm-${v}-linux-armv7l-legacy.AppImage`,
+        `sarmaterm-${v}-linux-armv7l-legacy.deb`,
+        `sarmaterm-${v}-linux-armv7l-legacy.rpm`,
+        `sarmaterm-${v}-linux-armv7l-legacy.tar.gz`,
+        `sarmaterm-${v}-linux-armv7l.AppImage`,
+        `sarmaterm-${v}-linux-armv7l.deb`,
+        `sarmaterm-${v}-linux-armv7l.rpm`,
+        `sarmaterm-${v}-linux-armv7l.tar.gz`,
+        `sarmaterm-${v}-linux-x64-legacy.tar.gz`,
+        `sarmaterm-${v}-linux-x64.tar.gz`,
+        `sarmaterm-${v}-linux-x86_64-legacy.AppImage`,
+        `sarmaterm-${v}-linux-x86_64-legacy.rpm`,
+        `sarmaterm-${v}-linux-x86_64.AppImage`,
+        `sarmaterm-${v}-linux-x86_64.rpm`,
+        `sarmaterm-${v}-mac-arm64.dmg`,
+        `sarmaterm-${v}-mac-arm64.dmg.blockmap`,
+        `sarmaterm-${v}-mac-x64.dmg`,
+        `sarmaterm-${v}-mac-x64.dmg.blockmap`,
+        `sarmaterm-${v}-mac10-x64.dmg`,
+        `sarmaterm-${v}-mac10-x64.dmg.blockmap`,
+        `sarmaterm-${v}-win-arm64-installer.exe`,
+        `sarmaterm-${v}-win-arm64-installer.exe.blockmap`,
+        `sarmaterm-${v}-win-arm64.tar.gz`,
+        `sarmaterm-${v}-win-x64-installer.exe`,
+        `sarmaterm-${v}-win-x64-installer.exe.blockmap`,
+        `sarmaterm-${v}-win-x64-loose.tar.gz`,
+        `sarmaterm-${v}-win-x64-portable.tar.gz`,
+        `sarmaterm-${v}-win-x64.appx`,
+        `sarmaterm-${v}-win-x64.tar.gz`,
+        `sarmaterm-${v}-win7.tar.gz`
       ]
     })
 
     it('should match exactly one tar.gz file for win-x64', () => {
       const { pattern } = getDownloadPattern('win32', 'x64', {})
       const matches = releaseFiles.filter(f => pattern.test(f))
-      expect(matches).toEqual([`electerm-${cachedVersion}-win-x64.tar.gz`])
+      expect(matches).toEqual([`sarmaterm-${cachedVersion}-win-x64.tar.gz`])
     })
 
     it('should match exactly one tar.gz file for win-arm64', () => {
       const { pattern } = getDownloadPattern('win32', 'arm64', {})
       const matches = releaseFiles.filter(f => pattern.test(f))
-      expect(matches).toEqual([`electerm-${cachedVersion}-win-arm64.tar.gz`])
+      expect(matches).toEqual([`sarmaterm-${cachedVersion}-win-arm64.tar.gz`])
     })
 
     it('should match exactly one tar.gz file for win7', () => {
       const { pattern } = getDownloadPattern('win32', 'x64', { win7: true })
       const matches = releaseFiles.filter(f => pattern.test(f))
-      expect(matches).toEqual([`electerm-${cachedVersion}-win7.tar.gz`])
+      expect(matches).toEqual([`sarmaterm-${cachedVersion}-win7.tar.gz`])
     })
 
     it('should match exactly one dmg file for mac-x64', () => {
       const { pattern } = getDownloadPattern('darwin', 'x64', {})
       const matches = releaseFiles.filter(f => pattern.test(f))
-      expect(matches).toEqual([`electerm-${cachedVersion}-mac-x64.dmg`])
+      expect(matches).toEqual([`sarmaterm-${cachedVersion}-mac-x64.dmg`])
     })
 
     it('should match exactly one dmg file for mac-arm64', () => {
       const { pattern } = getDownloadPattern('darwin', 'arm64', {})
       const matches = releaseFiles.filter(f => pattern.test(f))
-      expect(matches).toEqual([`electerm-${cachedVersion}-mac-arm64.dmg`])
+      expect(matches).toEqual([`sarmaterm-${cachedVersion}-mac-arm64.dmg`])
     })
 
     it('should match exactly one dmg file for mac10-x64', () => {
       const { pattern } = getDownloadPattern('darwin', 'x64', { mac10: true })
       const matches = releaseFiles.filter(f => pattern.test(f))
-      expect(matches).toEqual([`electerm-${cachedVersion}-mac10-x64.dmg`])
+      expect(matches).toEqual([`sarmaterm-${cachedVersion}-mac10-x64.dmg`])
     })
 
     it('should match exactly one tar.gz file for linux-x64', () => {
       const { pattern } = getDownloadPattern('linux', 'x64', {})
       const matches = releaseFiles.filter(f => pattern.test(f))
-      expect(matches).toEqual([`electerm-${cachedVersion}-linux-x64.tar.gz`])
+      expect(matches).toEqual([`sarmaterm-${cachedVersion}-linux-x64.tar.gz`])
     })
 
     it('should match exactly one tar.gz file for linux-x64-legacy', () => {
       const { pattern } = getDownloadPattern('linux', 'x64', { linuxLegacy: true })
       const matches = releaseFiles.filter(f => pattern.test(f))
-      expect(matches).toEqual([`electerm-${cachedVersion}-linux-x64-legacy.tar.gz`])
+      expect(matches).toEqual([`sarmaterm-${cachedVersion}-linux-x64-legacy.tar.gz`])
     })
 
     it('should match exactly one tar.gz file for linux-arm64', () => {
       const { pattern } = getDownloadPattern('linux', 'arm64', {})
       const matches = releaseFiles.filter(f => pattern.test(f))
-      expect(matches).toEqual([`electerm-${cachedVersion}-linux-arm64.tar.gz`])
+      expect(matches).toEqual([`sarmaterm-${cachedVersion}-linux-arm64.tar.gz`])
     })
 
     it('should match exactly one tar.gz file for linux-arm64-legacy', () => {
       const { pattern } = getDownloadPattern('linux', 'arm64', { linuxLegacy: true })
       const matches = releaseFiles.filter(f => pattern.test(f))
-      expect(matches).toEqual([`electerm-${cachedVersion}-linux-arm64-legacy.tar.gz`])
+      expect(matches).toEqual([`sarmaterm-${cachedVersion}-linux-arm64-legacy.tar.gz`])
     })
 
     it('should match exactly one tar.gz file for linux-armv7l', () => {
       const { pattern } = getDownloadPattern('linux', 'arm', {})
       const matches = releaseFiles.filter(f => pattern.test(f))
-      expect(matches).toEqual([`electerm-${cachedVersion}-linux-armv7l.tar.gz`])
+      expect(matches).toEqual([`sarmaterm-${cachedVersion}-linux-armv7l.tar.gz`])
     })
 
     it('should match exactly one tar.gz file for linux-armv7l-legacy', () => {
       const { pattern } = getDownloadPattern('linux', 'arm', { linuxLegacy: true })
       const matches = releaseFiles.filter(f => pattern.test(f))
-      expect(matches).toEqual([`electerm-${cachedVersion}-linux-armv7l-legacy.tar.gz`])
+      expect(matches).toEqual([`sarmaterm-${cachedVersion}-linux-armv7l-legacy.tar.gz`])
     })
   })
 })

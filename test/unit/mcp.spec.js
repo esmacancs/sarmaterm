@@ -1,4 +1,4 @@
-const { test, describe, before } = require('node:test')
+﻿const { test, describe, before } = require('node:test')
 const assert = require('assert/strict')
 const axios = require('axios')
 
@@ -43,7 +43,7 @@ async function initSession () {
       protocolVersion: '2024-11-05',
       capabilities: {},
       clientInfo: {
-        name: 'electerm-test-client',
+        name: 'sarmaterm-test-client',
         version: '1.0.0'
       }
     }
@@ -80,9 +80,9 @@ async function callTool (sid, id, toolName, args) {
   return jsonData
 }
 
-// Helper: check if renderer is available by trying list_electerm_tabs
+// Helper: check if renderer is available by trying list_sarmaterm_tabs
 async function checkRenderer (sid) {
-  const jsonData = await callTool(sid, 999, 'list_electerm_tabs', {})
+  const jsonData = await callTool(sid, 999, 'list_sarmaterm_tabs', {})
   return !jsonData.error
 }
 
@@ -119,7 +119,7 @@ describe('mcp-widget', function () {
         protocolVersion: '2024-11-05',
         capabilities: {},
         clientInfo: {
-          name: 'electerm-test-client',
+          name: 'sarmaterm-test-client',
           version: '1.0.0'
         }
       }
@@ -151,7 +151,7 @@ describe('mcp-widget', function () {
     assert.ok(jsonData.result)
     assert.equal(jsonData.result.protocolVersion, '2024-11-05')
     assert.ok(jsonData.result.serverInfo)
-    assert.equal(jsonData.result.serverInfo.name, 'electerm-mcp-server')
+    assert.equal(jsonData.result.serverInfo.name, 'sarmaterm-mcp-server')
   })
 
   test('should list available tools', { timeout: 100000 }, async function () {
@@ -188,15 +188,15 @@ describe('mcp-widget', function () {
     assert.ok(jsonData.result.tools.length > 0)
 
     const toolNames = jsonData.result.tools.map(tool => tool.name)
-    assert.ok(toolNames.includes('list_electerm_tabs'))
-    assert.ok(toolNames.includes('get_electerm_active_tab'))
-    assert.ok(toolNames.includes('send_electerm_terminal_command'))
-    assert.ok(toolNames.includes('get_electerm_terminal_status'))
-    assert.ok(toolNames.includes('cancel_electerm_terminal_command'))
-    assert.ok(toolNames.includes('run_electerm_background_command'))
-    assert.ok(toolNames.includes('get_electerm_background_task_status'))
-    assert.ok(toolNames.includes('get_electerm_background_task_log'))
-    assert.ok(toolNames.includes('cancel_electerm_background_task'))
+    assert.ok(toolNames.includes('list_sarmaterm_tabs'))
+    assert.ok(toolNames.includes('get_sarmaterm_active_tab'))
+    assert.ok(toolNames.includes('send_sarmaterm_terminal_command'))
+    assert.ok(toolNames.includes('get_sarmaterm_terminal_status'))
+    assert.ok(toolNames.includes('cancel_sarmaterm_terminal_command'))
+    assert.ok(toolNames.includes('run_sarmaterm_background_command'))
+    assert.ok(toolNames.includes('get_sarmaterm_background_task_status'))
+    assert.ok(toolNames.includes('get_sarmaterm_background_task_log'))
+    assert.ok(toolNames.includes('cancel_sarmaterm_background_task'))
   })
 
   // ─── Tool call protocol tests ───────────────────────────────────────────
@@ -204,7 +204,7 @@ describe('mcp-widget', function () {
   test('should return error when calling tool without renderer', { timeout: 100000 }, async function () {
     assert.ok(sessionId)
 
-    const jsonData = await callTool(sessionId, 3, 'open_electerm_local_terminal', {})
+    const jsonData = await callTool(sessionId, 3, 'open_sarmaterm_local_terminal', {})
 
     if (hasRenderer) {
       // With renderer: tool call should succeed
@@ -222,7 +222,7 @@ describe('mcp-widget', function () {
   test('should handle multiple tool calls in sequence', { timeout: 100000 }, async function () {
     assert.ok(sessionId)
 
-    const toolNames = ['list_electerm_tabs', 'get_electerm_active_tab', 'get_electerm_terminal_selection']
+    const toolNames = ['list_sarmaterm_tabs', 'get_sarmaterm_active_tab', 'get_sarmaterm_terminal_selection']
 
     for (let i = 0; i < toolNames.length; i++) {
       const jsonData = await callTool(sessionId, 10 + i, toolNames[i], {})
@@ -241,7 +241,7 @@ describe('mcp-widget', function () {
     if (!hasRenderer) return test.skip('No renderer available')
 
     // Step 1: Open a local terminal
-    const openData = await callTool(sessionId, 20, 'open_electerm_local_terminal', {})
+    const openData = await callTool(sessionId, 20, 'open_sarmaterm_local_terminal', {})
     assert.ok(openData.result, 'open_local_terminal should succeed')
     const openResult = JSON.parse(openData.result.content[0].text)
     assert.equal(openResult.success, true)
@@ -254,7 +254,7 @@ describe('mcp-widget', function () {
     const uniqueId = Date.now()
     const testCommand = `echo "MCP_TEST_${uniqueId}"`
 
-    const cmdData = await callTool(sessionId, 21, 'send_electerm_terminal_command', {
+    const cmdData = await callTool(sessionId, 21, 'send_sarmaterm_terminal_command', {
       command: testCommand
     })
     assert.ok(cmdData.result, 'send_terminal_command should succeed')
@@ -265,7 +265,7 @@ describe('mcp-widget', function () {
     await new Promise(resolve => setTimeout(resolve, 2000))
 
     // Step 3: Get terminal output and verify command was executed
-    const outputData = await callTool(sessionId, 22, 'get_electerm_terminal_output', {
+    const outputData = await callTool(sessionId, 22, 'get_sarmaterm_terminal_output', {
       lines: 20
     })
     assert.ok(outputData.result, 'get_terminal_output should succeed')
@@ -281,7 +281,7 @@ describe('mcp-widget', function () {
   test('should get terminal output', { timeout: 100000 }, async function () {
     if (!hasRenderer) return test.skip('No renderer available')
 
-    const jsonData = await callTool(sessionId, 30, 'get_electerm_terminal_output', {
+    const jsonData = await callTool(sessionId, 30, 'get_sarmaterm_terminal_output', {
       lines: 10
     })
     assert.ok(jsonData.result, 'get_terminal_output should succeed')
@@ -305,7 +305,7 @@ describe('mcp-widget', function () {
     const bookmarkTitle = `MCP1_SSH_Test_${uniqueId}`
 
     // Step 1: Create SSH bookmark
-    const addData = await callTool(sessionId, 40, 'add_electerm_bookmark_ssh', {
+    const addData = await callTool(sessionId, 40, 'add_sarmaterm_bookmark_ssh', {
       title: bookmarkTitle,
       host: TEST_HOST,
       port: parseInt(TEST_PORT, 10),
@@ -320,7 +320,7 @@ describe('mcp-widget', function () {
 
     try {
       // Step 2: Open/connect to the bookmark
-      const openData = await callTool(sessionId, 41, 'open_electerm_bookmark', {
+      const openData = await callTool(sessionId, 41, 'open_sarmaterm_bookmark', {
         id: bookmarkId
       })
       assert.ok(openData.result, 'open_bookmark should succeed')
@@ -336,7 +336,7 @@ describe('mcp-widget', function () {
 
       let cmdResult = null
       for (let attempt = 1; attempt <= 3; attempt++) {
-        const cmdData = await callTool(sessionId, 42, 'send_electerm_terminal_command', {
+        const cmdData = await callTool(sessionId, 42, 'send_sarmaterm_terminal_command', {
           command: testCommand
         })
         if (cmdData.error) {
@@ -355,7 +355,7 @@ describe('mcp-widget', function () {
       await new Promise(resolve => setTimeout(resolve, 2000))
 
       // Step 4: Get terminal output and verify command was executed
-      const outputData = await callTool(sessionId, 43, 'get_electerm_terminal_output', {
+      const outputData = await callTool(sessionId, 43, 'get_sarmaterm_terminal_output', {
         lines: 30
       })
       assert.ok(outputData.result, 'get_terminal_output should succeed')
@@ -368,7 +368,7 @@ describe('mcp-widget', function () {
       )
     } finally {
       // Step 5: Clean up - delete the test bookmark
-      const deleteData = await callTool(sessionId, 44, 'delete_electerm_bookmark', {
+      const deleteData = await callTool(sessionId, 44, 'delete_sarmaterm_bookmark', {
         id: bookmarkId
       })
       if (deleteData.result) {
@@ -377,7 +377,7 @@ describe('mcp-widget', function () {
       }
 
       // Step 6: Verify the bookmark was actually deleted
-      const listData = await callTool(sessionId, 45, 'list_electerm_bookmarks', {})
+      const listData = await callTool(sessionId, 45, 'list_sarmaterm_bookmarks', {})
       assert.ok(listData.result, 'list_bookmarks should succeed')
       const bookmarks = JSON.parse(listData.result.content[0].text)
       const deletedBookmark = bookmarks.find(b => b.id === bookmarkId)
@@ -392,7 +392,7 @@ describe('mcp-widget', function () {
     const bookmarkTitle = `MCP1_Telnet_Test_${uniqueId}`
 
     // Create Telnet bookmark
-    const addData = await callTool(sessionId, 50, 'add_electerm_bookmark_telnet', {
+    const addData = await callTool(sessionId, 50, 'add_sarmaterm_bookmark_telnet', {
       title: bookmarkTitle,
       host: '127.0.0.1',
       port: 23,
@@ -406,7 +406,7 @@ describe('mcp-widget', function () {
     const bookmarkId = addResult.id
 
     // Verify bookmark was created by listing bookmarks
-    const listData = await callTool(sessionId, 51, 'list_electerm_bookmarks', {})
+    const listData = await callTool(sessionId, 51, 'list_sarmaterm_bookmarks', {})
     assert.ok(listData.result, 'list_bookmarks should succeed')
     const bookmarks = JSON.parse(listData.result.content[0].text)
     const createdBookmark = bookmarks.find(b => b.id === bookmarkId)
@@ -431,7 +431,7 @@ describe('mcp-widget', function () {
     const tabTitle = `MCP_Direct_SSH_${uniqueId}`
 
     // Step 1: Open SSH tab directly (no bookmark created)
-    const openData = await callTool(sessionId, 70, 'open_electerm_tab_ssh', {
+    const openData = await callTool(sessionId, 70, 'open_sarmaterm_tab_ssh', {
       title: tabTitle,
       host: TEST_HOST,
       port: parseInt(TEST_PORT, 10),
@@ -454,7 +454,7 @@ describe('mcp-widget', function () {
 
       let cmdResult = null
       for (let attempt = 1; attempt <= 3; attempt++) {
-        const cmdData = await callTool(sessionId, 71, 'send_electerm_terminal_command', {
+        const cmdData = await callTool(sessionId, 71, 'send_sarmaterm_terminal_command', {
           command: testCommand
         })
         if (cmdData.error) {
@@ -473,7 +473,7 @@ describe('mcp-widget', function () {
       await new Promise(resolve => setTimeout(resolve, 2000))
 
       // Step 3: Get terminal output and verify command was executed
-      const outputData = await callTool(sessionId, 72, 'get_electerm_terminal_output', {
+      const outputData = await callTool(sessionId, 72, 'get_sarmaterm_terminal_output', {
         lines: 30
       })
       assert.ok(outputData.result, 'get_terminal_output should succeed')
@@ -485,7 +485,7 @@ describe('mcp-widget', function () {
       )
 
       // Step 4: Verify no bookmark was created for this connection
-      const listData = await callTool(sessionId, 73, 'list_electerm_bookmarks', {})
+      const listData = await callTool(sessionId, 73, 'list_sarmaterm_bookmarks', {})
       assert.ok(listData.result, 'list_bookmarks should succeed')
       const bookmarks = JSON.parse(listData.result.content[0].text)
       const foundBookmark = bookmarks.find(b => b.title === tabTitle)
@@ -493,7 +493,7 @@ describe('mcp-widget', function () {
     } finally {
       // Step 5: Close the tab
       const tabId = openResult.tabId
-      await callTool(sessionId, 74, 'close_electerm_tab', { tabId })
+      await callTool(sessionId, 74, 'close_sarmaterm_tab', { tabId })
     }
   })
 
@@ -518,10 +518,10 @@ describe('mcp-widget', function () {
     const jsonData = JSON.parse(dataLine.substring(6))
     const toolNames = jsonData.result.tools.map(tool => tool.name)
 
-    assert.ok(toolNames.includes('open_electerm_tab_ssh'), 'Missing open_electerm_tab_ssh')
-    assert.ok(toolNames.includes('open_electerm_tab_telnet'), 'Missing open_electerm_tab_telnet')
-    assert.ok(toolNames.includes('open_electerm_tab_serial'), 'Missing open_electerm_tab_serial')
-    assert.ok(toolNames.includes('open_electerm_tab_local'), 'Missing open_electerm_tab_local')
+    assert.ok(toolNames.includes('open_sarmaterm_tab_ssh'), 'Missing open_sarmaterm_tab_ssh')
+    assert.ok(toolNames.includes('open_sarmaterm_tab_telnet'), 'Missing open_sarmaterm_tab_telnet')
+    assert.ok(toolNames.includes('open_sarmaterm_tab_serial'), 'Missing open_sarmaterm_tab_serial')
+    assert.ok(toolNames.includes('open_sarmaterm_tab_local'), 'Missing open_sarmaterm_tab_local')
   })
 
   // ─── onData test ────────────────────────────────────────────────────────
@@ -529,7 +529,7 @@ describe('mcp-widget', function () {
   test('list_tabs should include onData field for each tab', { timeout: 100000 }, async function () {
     if (!hasRenderer) return test.skip('No renderer available')
 
-    const jsonData = await callTool(sessionId, 60, 'list_electerm_tabs', {})
+    const jsonData = await callTool(sessionId, 60, 'list_sarmaterm_tabs', {})
     assert.ok(jsonData.result, 'list_tabs should succeed')
 
     const tabs = JSON.parse(jsonData.result.content[0].text)
@@ -546,7 +546,7 @@ describe('mcp-widget', function () {
   test('should wait for terminal idle after a quick echo command', { timeout: 100000 }, async function () {
     if (!hasRenderer) return test.skip('No renderer available')
 
-    const openData = await callTool(sessionId, 61, 'open_electerm_local_terminal', {})
+    const openData = await callTool(sessionId, 61, 'open_sarmaterm_local_terminal', {})
     assert.ok(openData.result, 'open_local_terminal should succeed')
     const openResult = JSON.parse(openData.result.content[0].text)
     assert.equal(openResult.success, true)
@@ -555,12 +555,12 @@ describe('mcp-widget', function () {
 
     const marker = `IDLE_TEST_${Date.now()}`
 
-    const sendData = await callTool(sessionId, 62, 'send_electerm_terminal_command', {
+    const sendData = await callTool(sessionId, 62, 'send_sarmaterm_terminal_command', {
       command: `echo "${marker}"`
     })
     assert.ok(sendData.result, 'send_command should succeed')
 
-    const waitData = await callTool(sessionId, 63, 'wait_for_electerm_terminal_idle', {
+    const waitData = await callTool(sessionId, 63, 'wait_for_sarmaterm_terminal_idle', {
       timeout: 20000,
       lines: 30
     })
@@ -580,18 +580,18 @@ describe('mcp-widget', function () {
   test('should correctly wait for a longer-running command to finish', { timeout: 100000 }, async function () {
     if (!hasRenderer) return test.skip('No renderer available')
 
-    const openData = await callTool(sessionId, 64, 'open_electerm_local_terminal', {})
+    const openData = await callTool(sessionId, 64, 'open_sarmaterm_local_terminal', {})
     assert.ok(openData.result, 'open_local_terminal should succeed')
     await new Promise(resolve => setTimeout(resolve, 3000))
 
     const marker = `SLOW_TEST_${Date.now()}`
 
-    const sendData = await callTool(sessionId, 65, 'send_electerm_terminal_command', {
+    const sendData = await callTool(sessionId, 65, 'send_sarmaterm_terminal_command', {
       command: `sleep 5 && echo "${marker}"`
     })
     assert.ok(sendData.result, 'send_command should succeed')
 
-    const waitData = await callTool(sessionId, 66, 'wait_for_electerm_terminal_idle', {
+    const waitData = await callTool(sessionId, 66, 'wait_for_sarmaterm_terminal_idle', {
       timeout: 30000,
       lines: 30
     })
@@ -609,16 +609,16 @@ describe('mcp-widget', function () {
   test('should return timedOut:true when terminal never becomes idle within timeout', { timeout: 100000 }, async function () {
     if (!hasRenderer) return test.skip('No renderer available')
 
-    const openData = await callTool(sessionId, 67, 'open_electerm_local_terminal', {})
+    const openData = await callTool(sessionId, 67, 'open_sarmaterm_local_terminal', {})
     assert.ok(openData.result, 'open_local_terminal should succeed')
     await new Promise(resolve => setTimeout(resolve, 3000))
 
-    const sendData = await callTool(sessionId, 68, 'send_electerm_terminal_command', {
+    const sendData = await callTool(sessionId, 68, 'send_sarmaterm_terminal_command', {
       command: 'ping -c 30 localhost'
     })
     assert.ok(sendData.result, 'send_command should succeed')
 
-    const waitData = await callTool(sessionId, 69, 'wait_for_electerm_terminal_idle', {
+    const waitData = await callTool(sessionId, 69, 'wait_for_sarmaterm_terminal_idle', {
       timeout: 8000,
       lines: 20,
       minWait: 500

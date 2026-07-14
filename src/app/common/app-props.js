@@ -1,4 +1,4 @@
-/**
+﻿/**
  * app path
  */
 const { app } = require('electron')
@@ -14,8 +14,8 @@ function getDataPath () {
   if (!constants.isWin) {
     return defaultValue
   }
-  const exePath = app.getPath('exe').replace('\\electerm.exe', '')
-  const p = exePath + '\\' + 'electerm'
+  const exePath = app.getPath('exe').replace('\\sarmaterm.exe', '')
+  const p = exePath + '\\' + 'sarmaterm'
   if (
     installSrc === 'win-x64-portable.tar.gz' ||
     require('fs').existsSync(

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * data import/export
  */
 
@@ -113,7 +113,7 @@ export default function DataTransport (props) {
           </Space>
         )}
         <HelpIcon
-          link='https://github.com/electerm/electerm/wiki/Auto-data-Sync'
+          link='https://github.com/sarmaterm/sarmaterm/wiki/Auto-data-Sync'
         />
       </div>
     </div>

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * handle sync with github/gitee
  */
 
@@ -6,8 +6,8 @@ const log = require('../common/log')
 const rp = require('axios')
 const { createProxyAgent } = require('../lib/proxy-agent')
 const {
-  electermSync
-} = require('electerm-sync')
+  sarmatermSync
+} = require('sarmaterm-sync')
 const doWebdavSync = require('./webdav-sync')
 
 rp.defaults.proxy = false
@@ -30,7 +30,7 @@ async function doSync (type, func, args, token, proxy) {
   if (type === 'cloud') {
     args[0] = ''
   }
-  return electermSync(axiosInst, type, func, args, token)
+  return sarmatermSync(axiosInst, type, func, args, token)
     .then(r => {
       return r
     })

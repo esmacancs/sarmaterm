@@ -1,4 +1,4 @@
-const { spawn } = require('child_process')
+﻿const { spawn } = require('child_process')
 
 function encodeUtf8Base64 (value) {
   return Buffer.from(String(value), 'utf8').toString('base64')
@@ -109,8 +109,8 @@ function openFileWithEditor (filePath, editorCommand) {
 
   if (process.platform === 'win32') {
     const script = [
-      '$editor = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($env:ELECTERM_EDITOR_COMMAND_B64))',
-      '$editorArgsJson = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($env:ELECTERM_EDITOR_ARGS_B64))',
+      '$editor = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($env:SARMATERM_EDITOR_COMMAND_B64))',
+      '$editorArgsJson = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($env:SARMATERM_EDITOR_ARGS_B64))',
       '$editorArgs = @((ConvertFrom-Json -InputObject $editorArgsJson))',
       '& $editor @editorArgs',
       'if ($LASTEXITCODE -ne $null) { exit $LASTEXITCODE }'
@@ -124,8 +124,8 @@ function openFileWithEditor (filePath, editorCommand) {
       windowsHide: true,
       env: {
         ...process.env,
-        ELECTERM_EDITOR_COMMAND_B64: encodeUtf8Base64(parsed.command),
-        ELECTERM_EDITOR_ARGS_B64: encodeUtf8Base64(JSON.stringify([...parsed.args, filePath]))
+        SARMATERM_EDITOR_COMMAND_B64: encodeUtf8Base64(parsed.command),
+        SARMATERM_EDITOR_ARGS_B64: encodeUtf8Base64(JSON.stringify([...parsed.args, filePath]))
       }
     })
   }

@@ -1,11 +1,11 @@
-/**
+﻿/**
  * nedb api wrapper
  * Accepts appPath and defaultUserName as parameters to avoid electron dependency
  */
 
 const { resolve } = require('path')
 const fs = require('fs')
-const Datastore = require('@electerm/nedb')
+const Datastore = require('@sarmaterm/nedb')
 
 // Tables whose stored data values should be encrypted at rest
 const ENC_TABLES = new Set(['bookmarks', 'profiles', 'data', 'history', 'terminalCommandHistory', 'aiChatHistory'])
@@ -19,14 +19,14 @@ const ENC_PREFIX = 'enc:'
 function createDb (appPath, defaultUserName, { enc, dec } = {}) {
   const db = {}
 
-  const appDataPath = process.env.DATA_PATH || resolve(appPath, 'electerm')
+  const appDataPath = process.env.DATA_PATH || resolve(appPath, 'sarmaterm')
 
   if (!fs.existsSync(appDataPath)) {
     fs.mkdirSync(appDataPath, { recursive: true })
   }
 
   const reso = (name) => {
-    return resolve(appDataPath, 'users', defaultUserName, `electerm.${name}.nedb`)
+    return resolve(appDataPath, 'users', defaultUserName, `sarmaterm.${name}.nedb`)
   }
   const tables = [
     'bookmarks',

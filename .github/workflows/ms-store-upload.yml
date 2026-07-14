@@ -1,4 +1,4 @@
-# Upload APPX to Microsoft Store after a new release is published.
+﻿# Upload APPX to Microsoft Store after a new release is published.
 # Downloads the .appx artifact from the GitHub release and submits
 # a new Store submission via the Partner Center Ingestion API. 
 
@@ -114,15 +114,15 @@ jobs:
         }
 
         Write-Host 'Package identifiers in this repo are not valid Store Product IDs:'
-        Write-Host '  Electron appId: org.electerm.electerm'
-        Write-Host '  APPX applicationId: electerm'
-        Write-Host '  APPX identityName: 64159ZHAOXudong.electerm'
+        Write-Host '  Electron appId: org.sarmaterm.sarmaterm'
+        Write-Host '  APPX applicationId: sarmaterm'
+        Write-Host '  APPX identityName: 64159ZHAOXudong.sarmaterm'
         Write-Host 'Accessible Microsoft Store packaged apps for this account:'
         Write-StoreLog "Configured Store Product ID: $configuredProductId"
         Write-StoreLog 'Package identifiers in this repo are not valid Store Product IDs:'
-        Write-StoreLog '  Electron appId: org.electerm.electerm'
-        Write-StoreLog '  APPX applicationId: electerm'
-        Write-StoreLog '  APPX identityName: 64159ZHAOXudong.electerm'
+        Write-StoreLog '  Electron appId: org.sarmaterm.sarmaterm'
+        Write-StoreLog '  APPX applicationId: sarmaterm'
+        Write-StoreLog '  APPX identityName: 64159ZHAOXudong.sarmaterm'
         Write-StoreLog 'Accessible Microsoft Store packaged apps for this account:'
 
         Write-StoreLog ''
@@ -270,9 +270,9 @@ jobs:
           }
 
           $knownWrongAppIds = @(
-            'org.electerm.electerm',
-            'electerm',
-            '64159ZHAOXudong.electerm'
+            'org.sarmaterm.sarmaterm',
+            'sarmaterm',
+            '64159ZHAOXudong.sarmaterm'
           )
           if ($knownWrongAppIds -contains $productId) {
             throw "Configured store identifier '$productId' is a package identifier. Use the Microsoft Store Partner Center product id instead."
@@ -422,7 +422,7 @@ jobs:
 
           # 8. Create ZIP and upload to Azure Blob SAS URL
           #    (SAS URL carries its own auth — do not include the Bearer token here)
-          $zipPath = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), 'electerm-appx-upload.zip')
+          $zipPath = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), 'sarmaterm-appx-upload.zip')
           if (Test-Path $zipPath) { Remove-Item $zipPath }
           Compress-Archive -Path $appx.FullName -DestinationPath $zipPath
           $zipSizeMB = [Math]::Round((Get-Item $zipPath).Length / 1MB, 1)

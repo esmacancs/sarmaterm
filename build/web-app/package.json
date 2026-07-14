@@ -1,16 +1,16 @@
-{
-  "name": "@electerm/electerm-react",
+﻿{
+  "name": "@sarmaterm/sarmaterm-react",
   "version": "1.34.30",
-  "description": "react components src for electerm",
+  "description": "react components src for sarmaterm",
   "main": "./client/components/main/main.jsx",
   "license": "MIT",
-  "langugeRepo": "https://github.com/electerm/electerm-locales",
-  "privacyNoticeLink": "https://github.com/electerm/electerm/wiki/privacy-notice",
-  "knownIssuesLink": "https://github.com/electerm/electerm/wiki/Know-issues",
-  "sponsorLink": "https://electerm.org/sponsor-electerm.html",
+  "langugeRepo": "https://github.com/sarmaterm/sarmaterm-locales",
+  "privacyNoticeLink": "https://github.com/sarmaterm/sarmaterm/wiki/privacy-notice",
+  "knownIssuesLink": "https://github.com/sarmaterm/sarmaterm/wiki/Know-issues",
+  "sponsorLink": "https://sarmaterm.github.io/sponsor-sarmaterm.html",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/electerm/electerm.git"
+    "url": "git+https://github.com/sarmaterm/sarmaterm.git"
   },
   "author": {
     "name": "ZHAO Xudong",
@@ -18,10 +18,10 @@
     "url": "https://github.com/zxdong262"
   },
   "bugs": {
-    "url": "https://github.com/electerm/electerm/issues"
+    "url": "https://github.com/sarmaterm/sarmaterm/issues"
   },
-  "homepage": "https://electerm.org",
-  "releases": "https://github.com/electerm/electerm/releases",
+  "homepage": "https://sarmaterm.github.io",
+  "releases": "https://github.com/sarmaterm/sarmaterm/releases",
   "engines": {
     "node": ">=18.0.0"
   },

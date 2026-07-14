@@ -1,4 +1,4 @@
-/**
+﻿/**
  * AI-powered bookmark generation form
  */
 import { useState, useEffect } from 'react'
@@ -407,7 +407,7 @@ export default function AIBookmarkForm (props) {
           <RobotOutlined className='mg1r' />
           {e('createBookmarkByAI')}
         </span>
-        <HelpIcon link='https://github.com/electerm/electerm/wiki/Create-bookmark-by-AI' />
+        <HelpIcon link='https://github.com/sarmaterm/sarmaterm/wiki/Create-bookmark-by-AI' />
       </div>
       <div className='pd1b'>
         <Alert

@@ -1,4 +1,4 @@
-const {
+﻿const {
   test: it, expect
 } = require('@playwright/test')
 const { describe } = it
@@ -16,7 +16,7 @@ describe('load-widget', function () {
 
   // Helper to create test files
   async function createTestFiles () {
-    testDir = path.join(os.tmpdir(), 'electerm-test-' + Date.now())
+    testDir = path.join(os.tmpdir(), 'sarmaterm-test-' + Date.now())
     await fs.mkdir(testDir)
 
     // Create a test index.html
@@ -31,7 +31,7 @@ Test Page
 </head>
 <body>
 <h1>
-Hello from Electerm Test
+Hello from Sarmaterm Test
 
 </h1>
 <p>
@@ -115,7 +115,7 @@ Timestamp: ${new Date().toISOString()}
       const response = await axios.get(serverUrl)
       expect(response.status).toBe(200)
       expect(response.headers['content-type']).toMatch(/text\/html/)
-      expect(response.data).toContain('Hello from Electerm Test')
+      expect(response.data).toContain('Hello from Sarmaterm Test')
 
       // Test caching headers
       expect(response.headers['cache-control']).toBeTruthy()

@@ -1,4 +1,4 @@
-const { dbAction } = require('./db')
+﻿const { dbAction } = require('./db')
 const defaultSetting = require('../common/config-default')
 const getPort = require('./get-port')
 const { userConfigId, userNoEncryptConfigId } = require('../common/constants')
@@ -13,7 +13,7 @@ exports.getConfig = async (inited) => {
   delete userConfig._id
   delete userConfig.host
   delete userConfig.terminalTypes
-  delete userConfig.tokenElecterm
+  delete userConfig.tokenSarmaterm
   delete userConfig.hashedPassword
   delete userConfig.salt
   const port = inited
@@ -24,7 +24,7 @@ exports.getConfig = async (inited) => {
     ...userConfig,
     requireAuth,
     port,
-    tokenElecterm: inited ? globalState.get('config').tokenElecterm : generate()
+    tokenSarmaterm: inited ? globalState.get('config').tokenSarmaterm : generate()
   }
   return {
     userConfig,

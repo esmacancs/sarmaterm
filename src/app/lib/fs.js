@@ -1,4 +1,4 @@
-const fss = require('fs/promises')
+﻿const fss = require('fs/promises')
 const fs = require('fs')
 const log = require('../common/log')
 const path = require('path')
@@ -196,7 +196,7 @@ const touch = (localFilePath) => {
  */
 const openFile = (localFilePath) => {
   if (isWin) {
-    const script = '$path = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($env:ELECTERM_OPEN_FILE_PATH_B64)); Invoke-Item -LiteralPath $path'
+    const script = '$path = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($env:SARMATERM_OPEN_FILE_PATH_B64)); Invoke-Item -LiteralPath $path'
     return spawnDetachedCommand('powershell.exe', [
       '-NoLogo',
       '-NonInteractive',
@@ -206,7 +206,7 @@ const openFile = (localFilePath) => {
       windowsHide: true,
       env: {
         ...process.env,
-        ELECTERM_OPEN_FILE_PATH_B64: encodeUtf8Base64(localFilePath)
+        SARMATERM_OPEN_FILE_PATH_B64: encodeUtf8Base64(localFilePath)
       }
     })
   }
@@ -219,7 +219,7 @@ const openFile = (localFilePath) => {
  */
 const zipFolder = (localFolerPath) => {
   const n = uid()
-  const p = path.resolve(tempDir, `electerm-temp-${n}.tar`)
+  const p = path.resolve(tempDir, `sarmaterm-temp-${n}.tar`)
   const cwd = path.dirname(localFolerPath)
   const file = path.basename(localFolerPath)
   const tar = require('tar')
@@ -233,7 +233,7 @@ const zipFolder = (localFolerPath) => {
 
 const handleWindowsDrive = async (localFilePath, targetFolderPath) => {
   const tar = require('tar')
-  const tempExtractDir = path.join(tempDir, `electerm-unzip-${uid()}`)
+  const tempExtractDir = path.join(tempDir, `sarmaterm-unzip-${uid()}`)
   await fss.mkdir(tempExtractDir, { recursive: true })
 
   try {

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * XMODEM client handler for web terminal
  * Handles UI interactions and communicates with server-side xmodem
  * Unlike zmodem/trzsz, XMODEM requires explicit user initiation
@@ -76,7 +76,7 @@ export class XmodemClient extends TransferClientBase {
   }
 
   /**
-   * Auto-triggered: device is sending a file, electerm should receive it.
+   * Auto-triggered: device is sending a file, sarmaterm should receive it.
    * Opens save folder dialog then starts xmodem receive.
    * @param {string} fileName - Original filename from the device
    */
@@ -104,7 +104,7 @@ export class XmodemClient extends TransferClientBase {
   }
 
   /**
-   * Auto-triggered: device wants to receive a file, electerm should send it.
+   * Auto-triggered: device wants to receive a file, sarmaterm should send it.
    * Opens file select dialog then starts xmodem send.
    */
   async handleAutoSend () {

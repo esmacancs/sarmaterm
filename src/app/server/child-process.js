@@ -1,4 +1,4 @@
-/**
+﻿/**
  * run server in child process
  *
  */
@@ -26,7 +26,7 @@ module.exports = (config, env, sysLocale) => {
   let extraCaFile
   const systemCAs = getSystemCAs()
   if (systemCAs) {
-    extraCaFile = join(tmpdir(), `electerm-system-ca-${Date.now()}.pem`)
+    extraCaFile = join(tmpdir(), `sarmaterm-system-ca-${Date.now()}.pem`)
     writeFileSync(extraCaFile, systemCAs)
   }
 
@@ -39,10 +39,10 @@ module.exports = (config, env, sysLocale) => {
     env: Object.assign(
       {
         LANG: `${sysLocale.replace(/-/, '_')}.UTF-8`,
-        electermPort: config.port,
-        electermHost: config.host,
+        sarmatermPort: config.port,
+        sarmatermHost: config.host,
         requireAuth: config.requireAuth || '',
-        tokenElecterm: config.tokenElecterm,
+        tokenSarmaterm: config.tokenSarmaterm,
         sshKeysPath: env.sshKeysPath,
         NODE_OPTIONS: nodeOpts || undefined,
         NODE_EXTRA_CA_CERTS: extraCaFile || undefined

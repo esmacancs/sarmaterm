@@ -1,4 +1,4 @@
-/**
+﻿/**
  * app system menu config
  */
 const {
@@ -157,14 +157,14 @@ function buildMenu () {
           label: e('reportIssue'),
           click () {
             shell
-              .openExternal('https://github.com/electerm/electerm/issues/new')
+              .openExternal('https://github.com/sarmaterm/sarmaterm/issues/new')
           }
         },
         {
           label: 'github',
           click () {
             shell
-              .openExternal('https://github.com/electerm/electerm')
+              .openExternal('https://github.com/sarmaterm/sarmaterm')
           }
         },
         {

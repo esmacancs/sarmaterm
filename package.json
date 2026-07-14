@@ -1,9 +1,9 @@
-{
-  "name": "electerm",
+﻿{
+  "name": "sarmaterm",
   "version": "3.15.128",
   "description": "Terminal/ssh/telnet/serialport/sftp client(linux, mac, win)",
   "main": "app.js",
-  "bin": "npm/electerm",
+  "bin": "npm/sarmaterm",
   "scripts": {
     "app": "node build/bin/app",
     "build": "npm run vite-build",
@@ -31,13 +31,13 @@
     "lock": "npm i --package-lock-only"
   },
   "license": "MIT",
-  "langugeRepo": "https://github.com/electerm/electerm-locales",
-  "privacyNoticeLink": "https://github.com/electerm/electerm/wiki/privacy-notice",
-  "knownIssuesLink": "https://github.com/electerm/electerm/wiki/Know-issues",
-  "sponsorLink": "https://electerm.org/sponsor-electerm",
+  "langugeRepo": "https://github.com/sarmaterm/sarmaterm-locales",
+  "privacyNoticeLink": "https://github.com/sarmaterm/sarmaterm/wiki/privacy-notice",
+  "knownIssuesLink": "https://github.com/sarmaterm/sarmaterm/wiki/Know-issues",
+  "sponsorLink": "https://sarmaterm.github.io/sponsor-sarmaterm",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/electerm/electerm.git"
+    "url": "git+https://github.com/sarmaterm/sarmaterm.git"
   },
   "author": {
     "name": "ZHAO Xudong",
@@ -45,17 +45,17 @@
     "url": "https://github.com/zxdong262"
   },
   "bugs": {
-    "url": "https://github.com/electerm/electerm/issues"
+    "url": "https://github.com/sarmaterm/sarmaterm/issues"
   },
-  "homepage": "https://electerm.org",
-  "releases": "https://github.com/electerm/electerm/releases",
+  "homepage": "https://sarmaterm.github.io",
+  "releases": "https://github.com/sarmaterm/sarmaterm/releases",
   "engines": {
     "node": ">=16.0.0"
   },
   "preferGlobal": true,
   "devDependencies": {
     "@ant-design/icons": "6.2.5",
-    "@electerm/electerm-resource": "2.1.7",
+    "@sarmaterm/sarmaterm-resource": "2.1.7",
     "@fontsource/maple-mono": "^5.2.5",
     "@novnc/novnc": "1.7.0",
     "@types/node": "22.9.3",
@@ -73,7 +73,7 @@
     "classnames": "2.5.1",
     "cross-env": "7.0.3",
     "dotenv": "16.4.5",
-    "electerm-icons": "1.0.1",
+    "sarmaterm-icons": "1.0.1",
     "electron": "41.2.0",
     "electron-builder": "26.9.0",
     "filesize": "10.1.6",
@@ -96,17 +96,17 @@
     "vite": "8.1.0"
   },
   "dependencies": {
-    "@electerm/electerm-locales": "2.2.16",
-    "@electerm/electerm-themes": "^1.0.1",
-    "@electerm/ftp-srv": "1.0.5",
-    "@electerm/nedb": "2.0.0",
-    "@electerm/ssh2": "1.19.0",
+    "@sarmaterm/sarmaterm-locales": "2.2.16",
+    "@sarmaterm/sarmaterm-themes": "^1.0.1",
+    "@sarmaterm/ftp-srv": "1.0.5",
+    "@sarmaterm/nedb": "2.0.0",
+    "@sarmaterm/ssh2": "1.19.0",
     "@xterm/headless": "6.1.0-beta.288",
     "axios": "1.18.1",
     "basic-ftp": "6.0.1",
     "commander": "12.1.0",
     "diffie-hellman": "^5.0.3",
-    "electerm-sync": "2.0.0",
+    "sarmaterm-sync": "2.0.0",
     "electron-log": "4.3.5",
     "express": "5.2.1",
     "express-ws": "5.0.2",

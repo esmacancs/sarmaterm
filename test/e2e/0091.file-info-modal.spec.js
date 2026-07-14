@@ -1,4 +1,4 @@
-const { _electron: electron } = require('@playwright/test')
+﻿const { _electron: electron } = require('@playwright/test')
 const { test: it, expect } = require('@playwright/test')
 const { describe } = it
 it.setTimeout(100000)
@@ -120,7 +120,7 @@ async function testEditFolderPermission (client, folderType) {
 }
 
 async function testFileInfoModal (client, fileType, closeMethod) {
-  const fname = `${fileType}-test-electerm-${nanoid()}`
+  const fname = `${fileType}-test-sarmaterm-${nanoid()}`
 
   // Create a new folder
   await client.rightClick(`.session-current .file-list.${fileType} .real-file-item`, 10, 10)

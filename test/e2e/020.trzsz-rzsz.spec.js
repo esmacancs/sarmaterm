@@ -1,4 +1,4 @@
-/**
+﻿/**
  * trzsz / rzsz file-transfer test
  *
  * Tests all four transfer commands in a single SSH session:
@@ -155,8 +155,8 @@ describe('trzsz-rzsz-transfer', function () {
     const rzszSaveDir = path.join(os.tmpdir(), `rzsz-save-${timestamp}`)
 
     // Create local files used for uploads
-    fs.writeFileSync(trzszLocalFile, `electerm trzsz test ${timestamp}`)
-    fs.writeFileSync(rzszLocalFile, `electerm rzsz test ${timestamp}`)
+    fs.writeFileSync(trzszLocalFile, `sarmaterm trzsz test ${timestamp}`)
+    fs.writeFileSync(rzszLocalFile, `sarmaterm rzsz test ${timestamp}`)
     fs.mkdirSync(trzszSaveDir, { recursive: true })
     fs.mkdirSync(rzszSaveDir, { recursive: true })
     log(`020: local test files created: ${trzszLocalFile}, ${rzszLocalFile}`)

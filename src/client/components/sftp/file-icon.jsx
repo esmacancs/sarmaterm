@@ -1,8 +1,8 @@
-/**
+﻿/**
  * file/folder icon by ext or name
  */
 
-import { getIconForFile, getIconForFolder } from 'electerm-icons'
+import { getIconForFile, getIconForFolder } from 'sarmaterm-icons'
 // import Icon from '@ant-design/icons'
 
 export default function FileIcon ({ file, ...extra }) {

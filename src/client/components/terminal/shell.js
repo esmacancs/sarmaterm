@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Client-side Shell Integration Commands
  *
  * These are minimal shell integration commands that can be sent directly
@@ -24,8 +24,8 @@ import { runCmd } from './terminal-apis.js'
 function getBashInlineIntegration () {
   // Each statement is complete and can be joined with semicolons
   return [
-    'if [[ $- == *i* ]] && [[ -z "${ELECTERM_SHELL_INTEGRATION:-}" ]]',
-    'then export ELECTERM_SHELL_INTEGRATION=1',
+    'if [[ $- == *i* ]] && [[ -z "${SARMATERM_SHELL_INTEGRATION:-}" ]]',
+    'then export SARMATERM_SHELL_INTEGRATION=1',
     '__e_esc() { local v="$1"; v="${v//\\\\/\\\\\\\\}"; v="${v//;/\\\\x3b}"; printf \'%s\' "$v"; }',
     '__e_pre() { [[ "$BASH_COMMAND" == "$PROMPT_COMMAND" ]] && return; [[ "$BASH_COMMAND" == "__e_"* ]] && return; [[ "${__e_in:-0}" == "0" ]] && { __e_in=1; printf \'\\e]633;E;%s\\a\\e]633;C\\a\' "$(__e_esc "$BASH_COMMAND")"; }; }',
     '__e_cmd() { local c="$?"; [[ "${__e_in:-0}" == "1" ]] && { printf \'\\e]633;D;%s\\a\' "$c"; __e_in=0; }; printf \'\\e]633;P;Cwd=%s\\a\\e]633;A\\a\' "$(__e_esc "$PWD")"; return "$c"; }',
@@ -43,8 +43,8 @@ function getZshInlineIntegration () {
   // Each statement is complete and can be joined with semicolons
   // Note: 'then' must have a space/newline before the next command, not semicolon
   return [
-    'if [[ -o interactive ]] && [[ -z "${ELECTERM_SHELL_INTEGRATION:-}" ]]',
-    'then export ELECTERM_SHELL_INTEGRATION=1',
+    'if [[ -o interactive ]] && [[ -z "${SARMATERM_SHELL_INTEGRATION:-}" ]]',
+    'then export SARMATERM_SHELL_INTEGRATION=1',
     '__e_esc() { local v="$1"; v="${v//\\\\/\\\\\\\\}"; v="${v//;/\\\\x3b}"; builtin printf \'%s\' "$v"; }',
     '__e_preexec() { __e_cmd="$1"; builtin printf \'\\e]633;E;%s\\a\\e]633;C\\a\' "$(__e_esc "$1")"; }',
     '__e_precmd() { local c="$?"; [[ -n "$__e_cmd" ]] && builtin printf \'\\e]633;D;%s\\a\' "$c"; __e_cmd=""; builtin printf \'\\e]633;P;Cwd=%s\\a\\e]633;A\\a\' "$(__e_esc "$PWD")"; }',
@@ -60,8 +60,8 @@ function getZshInlineIntegration () {
  */
 function getFishInlineIntegration () {
   return [
-    'if status is-interactive; and not set -q ELECTERM_SHELL_INTEGRATION',
-    'set -g ELECTERM_SHELL_INTEGRATION 1',
+    'if status is-interactive; and not set -q SARMATERM_SHELL_INTEGRATION',
+    'set -g SARMATERM_SHELL_INTEGRATION 1',
     'function __e_esc; echo $argv | string replace -a \'\\\\\' \'\\\\\\\\\' | string replace -a \';\' \'\\\\x3b\'; end',
     'function __e_prompt --on-event fish_prompt; printf \'\\e]633;A\\a\\e]633;P;Cwd=%s\\a\' (__e_esc "$PWD"); end',
     'function __e_preexec --on-event fish_preexec; printf \'\\e]633;E;%s\\a\\e]633;C\\a\' (__e_esc "$argv"); end',
@@ -76,8 +76,8 @@ function getFishInlineIntegration () {
  */
 function getShInlineIntegration () {
   return [
-    'if [ -z "$ELECTERM_SHELL_INTEGRATION" ]',
-    'then export ELECTERM_SHELL_INTEGRATION=1',
+    'if [ -z "$SARMATERM_SHELL_INTEGRATION" ]',
+    'then export SARMATERM_SHELL_INTEGRATION=1',
     '__e_esc() { printf "%s" "$1" | sed "s/\\\\/\\\\\\\\/g; s/;/\\\\x3b/g"; }',
     // We wrap the current PS1 with OSC 633 sequences.
     // \033]633;P;Cwd=... \007 marks the directory

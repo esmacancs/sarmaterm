@@ -1,4 +1,4 @@
-/**
+﻿/**
  * sync data to github gist related
  */
 
@@ -35,7 +35,7 @@ async function fetchData (type, func, args, token, proxy) {
 }
 
 function updateSyncServerStatusFromGist (store, gist, type) {
-  const statusContent = get(gist, 'files["electerm-status.json"].content')
+  const statusContent = get(gist, 'files["sarmaterm-status.json"].content')
   const status = statusContent ? parseJsonSafe(statusContent) : undefined
   store.syncServerStatus[type] = status
 }
@@ -114,7 +114,7 @@ export default (Store) => {
   //   store.isSyncingSetting = true
   //   const token = store.getSyncToken(type)
   //   const data = {
-  //     description: 'sync electerm data',
+  //     description: 'sync sarmaterm data',
   //     files: {
   //       'placeholder.js': {
   //         content: 'placeholder'
@@ -230,7 +230,7 @@ export default (Store) => {
         store.getSyncProxy(type)
       )
       if (gist && gist.files) {
-        const statusContent = get(gist, 'files["electerm-status.json"].content')
+        const statusContent = get(gist, 'files["sarmaterm-status.json"].content')
         const status = statusContent ? parseJsonSafe(statusContent) : undefined
         store.syncServerStatus[type] = status
       }
@@ -278,7 +278,7 @@ export default (Store) => {
     // Update status
     if (type === syncTypes.webdav) {
       if (serverGist && serverGist.files) {
-        const statusContent = get(serverGist, 'files["electerm-status.json"].content')
+        const statusContent = get(serverGist, 'files["sarmaterm-status.json"].content')
         const status = statusContent ? parseJsonSafe(statusContent) : undefined
         store.syncServerStatus[type] = status
       }
@@ -392,7 +392,7 @@ export default (Store) => {
     const now = Date.now()
     const status = {
       lastSyncTime: now,
-      electermVersion: packVer,
+      sarmatermVersion: packVer,
       deviceName: window.pre.osInfo().find(r => r.k === 'hostname')?.v || 'unknown'
     }
 
@@ -402,7 +402,7 @@ export default (Store) => {
       for (const [key, value] of Object.entries(objs)) {
         uploadData[key] = value.content
       }
-      uploadData['electerm-status.json'] = JSON.stringify(status)
+      uploadData['sarmaterm-status.json'] = JSON.stringify(status)
 
       const res = await fetchData(
         type,
@@ -421,10 +421,10 @@ export default (Store) => {
     }
 
     const gistData = {
-      description: 'sync electerm data',
+      description: 'sync sarmaterm data',
       files: {
         ...objs,
-        'electerm-status.json': {
+        'sarmaterm-status.json': {
           content: JSON.stringify(status)
         }
       }
@@ -476,7 +476,7 @@ export default (Store) => {
         store.getSyncProxy(type)
       )
       if (gist && gist.files) {
-        const statusContent = get(gist, 'files["electerm-status.json"].content')
+        const statusContent = get(gist, 'files["sarmaterm-status.json"].content')
         const status = statusContent ? parseJsonSafe(statusContent) : undefined
         store.syncServerStatus[type] = status
 
@@ -612,10 +612,10 @@ export default (Store) => {
   //     return
   //   }
   //   gist = gist.data
-  //   if (!gist.files['electerm-status.json']) {
+  //   if (!gist.files['sarmaterm-status.json']) {
   //     return
   //   }
-  //   const status = JSON.parse(gist.files['electerm-status.json'].content)
+  //   const status = JSON.parse(gist.files['sarmaterm-status.json'].content)
   //   if (status.lastSyncTime > store.lastUpdateTime) {
   //     store.uploadSetting()
   //   } else if (status.lastSyncTime < store.lastUpdateTime) {
@@ -657,7 +657,7 @@ export default (Store) => {
     }
     objs.config = store.config
     const text = JSON.stringify(objs)
-    const name = dayjs().format('YYYY-MM-DD-HH-mm-ss') + '-electerm-all-data.json'
+    const name = dayjs().format('YYYY-MM-DD-HH-mm-ss') + '-sarmaterm-all-data.json'
     download(name, text)
   }
 

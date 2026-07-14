@@ -1,5 +1,5 @@
-/**
- * Lightweight zod replacement for electerm
+﻿/**
+ * Lightweight zod replacement for sarmaterm
  * Covers only the API surface used in the project:
  * z.string(), z.number(), z.boolean(), z.any(),
  * z.enum(), z.object(), z.array(), z.record(),

@@ -1,4 +1,4 @@
-process.env.NODE_ENV = 'development'
+﻿process.env.NODE_ENV = 'development'
 
 const { describe, test, beforeEach, afterEach } = require('node:test')
 const assert = require('node:assert/strict')
@@ -8,16 +8,16 @@ const path = require('node:path')
 const { once } = require('node:events')
 const { spawnSync } = require('node:child_process')
 const { setTimeout: delay } = require('node:timers/promises')
-const { Server, utils } = require('@electerm/ssh2')
+const { Server, utils } = require('@sarmaterm/ssh2')
 const { session } = require('../../src/app/server/session-ssh')
 
 const USERNAME = 'tester'
-const PASSWORD = 'electerm-test'
+const PASSWORD = 'sarmaterm-test'
 const OTP = '123456'
-const PASSPHRASE = 'electerm-passphrase'
+const PASSPHRASE = 'sarmaterm-passphrase'
 
 const HOST_KEY = utils.generateKeyPairSync('ed25519', {
-  comment: 'electerm-test-host'
+  comment: 'sarmaterm-test-host'
 })
 
 function parseKey (key, passphrase) {
@@ -39,7 +39,7 @@ function matchesPublicKey (ctx, publicKey) {
 }
 
 function makeTmpDir () {
-  return fs.mkdtempSync(path.join(os.tmpdir(), 'electerm-ssh-test-'))
+  return fs.mkdtempSync(path.join(os.tmpdir(), 'sarmaterm-ssh-test-'))
 }
 
 function setEnvVar (name, value) {
@@ -78,7 +78,7 @@ function generateClientKey ({ dir, name, type, passphrase, bits }) {
     '-f',
     keyPath,
     '-C',
-    `electerm-${name}`
+    `sarmaterm-${name}`
   )
 
   runCommand('ssh-keygen', args)
@@ -110,7 +110,7 @@ async function startServer (authHandler) {
         sshSession.on('pty', (accept) => accept())
         sshSession.on('shell', (accept) => {
           const stream = accept()
-          stream.write('electerm ready\n')
+          stream.write('sarmaterm ready\n')
         })
       })
     })
@@ -190,7 +190,7 @@ function sameRoundKeyboardInteractiveAuth () {
       return ctx.prompt([
         { prompt: 'Password:', echo: false },
         { prompt: 'Verification code:', echo: false }
-      ], 'electerm-test', 'same-round otp', (responses) => {
+      ], 'sarmaterm-test', 'same-round otp', (responses) => {
         if (responses[0] === PASSWORD && responses[1] === OTP) {
           ctx.accept()
         } else {
@@ -211,14 +211,14 @@ function splitRoundKeyboardInteractiveAuth (rounds = []) {
       rounds.push('otp')
       return ctx.prompt([
         { prompt: 'Verification code:', echo: false }
-      ], 'electerm-test', 'otp round', (otpResponses) => {
+      ], 'sarmaterm-test', 'otp round', (otpResponses) => {
         if (otpResponses[0] !== OTP) {
           return ctx.reject(['keyboard-interactive'])
         }
         rounds.push('password')
         ctx.prompt([
           { prompt: 'Password:', echo: false }
-        ], 'electerm-test', 'password round', (passwordResponses) => {
+        ], 'sarmaterm-test', 'password round', (passwordResponses) => {
           if (passwordResponses[0] === PASSWORD) {
             ctx.accept()
           } else {

@@ -1,4 +1,4 @@
-import { config as conf } from 'dotenv'
+﻿import { config as conf } from 'dotenv'
 import { readFileSync } from 'fs'
 import { resolve } from 'path'
 
@@ -13,15 +13,15 @@ export const version = pack.version
 export const viewPath = resolve(cwd, '../../src/client/views')
 export const staticPaths = [
   {
-    dir: resolve(cwd, '../../node_modules/electerm-icons/icons'),
+    dir: resolve(cwd, '../../node_modules/sarmaterm-icons/icons'),
     path: '/icons'
   },
   {
-    dir: resolve(cwd, '../../node_modules/@electerm/electerm-resource/tray-icons'),
+    dir: resolve(cwd, '../../node_modules/@sarmaterm/sarmaterm-resource/tray-icons'),
     path: '/images'
   },
   {
-    dir: resolve(cwd, '../../node_modules/@electerm/electerm-resource/res/imgs'),
+    dir: resolve(cwd, '../../node_modules/@sarmaterm/sarmaterm-resource/res/imgs'),
     path: '/images'
   },
   {
