@@ -8,7 +8,7 @@ const path = require('node:path')
 const { once } = require('node:events')
 const { spawnSync } = require('node:child_process')
 const { setTimeout: delay } = require('node:timers/promises')
-const { Server, utils } = require('@sarmaterm/ssh2')
+const { Server, utils } = require('@electerm/ssh2')
 const { session } = require('../../src/app/server/session-ssh')
 
 const USERNAME = 'tester'

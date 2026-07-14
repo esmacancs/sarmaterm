@@ -33,7 +33,7 @@ const os = require('node:os')
 const path = require('node:path')
 const { once } = require('node:events')
 const { spawnSync } = require('node:child_process')
-const { Server, utils } = require('@sarmaterm/ssh2')
+const { Server, utils } = require('@electerm/ssh2')
 const { session, test: sshTest } = require('../../src/app/server/session-ssh')
 
 // ─── constants ────────────────────────────────────────────────────────────────

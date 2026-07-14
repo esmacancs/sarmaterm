@@ -1,9 +1,9 @@
 ﻿/**
  * constants
  */
-import logoPath1Ref from '@sarmaterm/sarmaterm-resource/res/imgs/sarmaterm-round-128x128.png'
-import logoPath2Ref from '@sarmaterm/sarmaterm-resource/res/imgs/sarmaterm.png'
-import logoPath3Ref from '@sarmaterm/sarmaterm-resource/res/imgs/sarmaterm-watermark.png'
+import logoPath1Ref from '@electerm/electerm-resource/res/imgs/sarmaterm-round-128x128.png'
+import logoPath2Ref from '@electerm/electerm-resource/res/imgs/sarmaterm.png'
+import logoPath3Ref from '@electerm/electerm-resource/res/imgs/sarmaterm-watermark.png'
 export const packInfo = typeof window.et.packInfo === 'undefined' ? window.pre.packInfo : window.et.packInfo
 const buildConst = (props) => {
   return props.reduce((prev, key) => {

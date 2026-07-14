@@ -2,7 +2,7 @@
 const fs = require('fs')
 const os = require('os')
 const { dirname, join } = require('path')
-const { parseKey } = require('@sarmaterm/ssh2/lib/protocol/keyParser.js')
+const { parseKey } = require('@electerm/ssh2/lib/protocol/keyParser.js')
 
 function normalizeHost (host = '') {
   if (typeof host !== 'string') {

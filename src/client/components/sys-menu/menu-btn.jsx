@@ -6,7 +6,7 @@ import { PureComponent } from 'react'
 import {
   Popover
 } from 'antd'
-import logoSvg from '@sarmaterm/sarmaterm-resource/res/imgs/sarmaterm.svg?raw'
+import logoSvg from '@electerm/electerm-resource/res/imgs/sarmaterm.svg?raw'
 import { shortcutDescExtend } from '../shortcuts/shortcut-handler.js'
 import MenuRender from './sys-menu.jsx'
 import { refsStatic } from '../common/ref.js'

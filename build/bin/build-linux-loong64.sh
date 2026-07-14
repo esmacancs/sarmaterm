@@ -269,7 +269,7 @@ merge_loong64() {
             find "$output_dir" -path "*@serialport/bindings-cpp*" -name "*.node" -exec cp "$native_modules_dir/serialport-bindings.node" {} \; 2>/dev/null || true
         fi
         if [ -f "$native_modules_dir/ssh2-crypto.node" ]; then
-            find "$output_dir" -path "*@sarmaterm/ssh2*" -name "*.node" -exec cp "$native_modules_dir/ssh2-crypto.node" {} \; 2>/dev/null || true
+            find "$output_dir" -path "*@electerm/ssh2*" -name "*.node" -exec cp "$native_modules_dir/ssh2-crypto.node" {} \; 2>/dev/null || true
         fi
     fi
 
@@ -345,7 +345,7 @@ build_deb() {
     cp -r "$output_dir"/* "$deb_dir/opt/sarmaterm/"
 
     # Install icon
-    local icon_src="$PROJECT_ROOT/node_modules/@sarmaterm/sarmaterm-resource/res/imgs/sarmaterm-round-128x128.png"
+    local icon_src="$PROJECT_ROOT/node_modules/@electerm/electerm-resource/res/imgs/sarmaterm-round-128x128.png"
     if [ -f "$icon_src" ]; then
         cp "$icon_src" "$deb_dir/usr/share/icons/hicolor/128x128/apps/sarmaterm.png"
     fi

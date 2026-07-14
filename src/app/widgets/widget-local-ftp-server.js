@@ -1,6 +1,6 @@
 ﻿const os = require('os')
 const uid = require('../common/uid')
-const FtpSrv = require('@sarmaterm/ftp-srv')
+const FtpSrv = require('@electerm/ftp-srv')
 
 const widgetInfo = {
   name: 'Local FTP Server',

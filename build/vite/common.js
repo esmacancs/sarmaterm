@@ -17,11 +17,11 @@ export const staticPaths = [
     path: '/icons'
   },
   {
-    dir: resolve(cwd, '../../node_modules/@sarmaterm/sarmaterm-resource/tray-icons'),
+    dir: resolve(cwd, '../../node_modules/@electerm/electerm-resource/tray-icons'),
     path: '/images'
   },
   {
-    dir: resolve(cwd, '../../node_modules/@sarmaterm/sarmaterm-resource/res/imgs'),
+    dir: resolve(cwd, '../../node_modules/@electerm/electerm-resource/res/imgs'),
     path: '/images'
   },
   {

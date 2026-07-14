@@ -3,5 +3,5 @@
  */
 
 export default (lang) => {
-  return `https://github.com/sarmaterm/sarmaterm-locales/edit/master/locales/${lang}.js`
+  return `https://github.com/sarmaterm/electerm-locales/edit/master/locales/${lang}.js`
 }

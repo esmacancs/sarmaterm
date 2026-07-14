@@ -4,7 +4,7 @@ const crypto = require('crypto')
 const fs = require('fs')
 const os = require('os')
 const { join } = require('path')
-const { generateKeyPairSync } = require('@sarmaterm/ssh2/lib/keygen.js')
+const { generateKeyPairSync } = require('@electerm/ssh2/lib/keygen.js')
 
 const {
   appendKnownHost,

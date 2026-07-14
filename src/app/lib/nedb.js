@@ -5,7 +5,7 @@
 
 const { resolve } = require('path')
 const fs = require('fs')
-const Datastore = require('@sarmaterm/nedb')
+const Datastore = require('@electerm/nedb')
 
 // Tables whose stored data values should be encrypted at rest
 const ENC_TABLES = new Set(['bookmarks', 'profiles', 'data', 'history', 'terminalCommandHistory', 'aiChatHistory'])

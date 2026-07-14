@@ -18,7 +18,7 @@ const iconPath = resolve(
   __dirname,
   (
     isDev
-      ? '../../../node_modules/@sarmaterm/sarmaterm-resource/res/imgs/sarmaterm-round-128x128.png'
+      ? '../../../node_modules/@electerm/electerm-resource/res/imgs/sarmaterm-round-128x128.png'
       : '../assets/images/sarmaterm-round-128x128.png'
   )
 )
@@ -26,7 +26,7 @@ const trayIconPath = resolve(
   __dirname,
   (
     isDev
-      ? '../../../node_modules/@sarmaterm/sarmaterm-resource/tray-icons/sarmaterm-tray.png'
+      ? '../../../node_modules/@electerm/electerm-resource/tray-icons/sarmaterm-tray.png'
       : '../assets/images/sarmaterm-tray.png'
   )
 )
