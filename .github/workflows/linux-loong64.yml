@@ -1,4 +1,4 @@
-﻿# Build sarmaterm for loong64 (LoongArch64) Linux
+# Build sarmaterm for loong64 (LoongArch64) Linux
 #
 # This workflow:
 # 1. Builds x64 version with electron v39.2.7 to get the asar
@@ -25,7 +25,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Use Node.js 24.x
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v7
       with:
         node-version: 24.x
 

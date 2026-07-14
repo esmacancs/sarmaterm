@@ -1,4 +1,4 @@
-﻿# Upload APPX to Microsoft Store after a new release is published.
+# Upload APPX to Microsoft Store after a new release is published.
 # Downloads the .appx artifact from the GitHub release and submits
 # a new Store submission via the Partner Center Ingestion API. 
 
@@ -19,7 +19,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Use Node.js 24.x
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v7
       with:
         node-version: 24.x
 
