@@ -1,0 +1,10 @@
+﻿#!/bin/bash
+cd `dirname $0`
+cd ../..
+git co master
+git pull
+git pull
+git delete-branch sarmaterm-react
+git create-branch sarmaterm-react
+git push origin sarmaterm-react -u
+git co -

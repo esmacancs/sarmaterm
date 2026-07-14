@@ -1,0 +1,33 @@
+﻿{
+  "name": "@electerm/electerm-react",
+  "version": "1.34.30",
+  "description": "react components src for sarmaterm",
+  "main": "./client/components/main/main.jsx",
+  "license": "MIT",
+  "langugeRepo": "https://github.com/sarmaterm/sarmaterm-locales",
+  "privacyNoticeLink": "https://github.com/sarmaterm/sarmaterm/wiki/privacy-notice",
+  "knownIssuesLink": "https://github.com/sarmaterm/sarmaterm/wiki/Know-issues",
+  "sponsorLink": "https://sarmaterm.org/sponsor-sarmaterm.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sarmaterm/sarmaterm.git"
+  },
+  "author": {
+    "name": "ZHAO Xudong",
+    "email": "zxdong@gmail.com",
+    "url": "https://github.com/zxdong262"
+  },
+  "bugs": {
+    "url": "https://github.com/sarmaterm/sarmaterm/issues"
+  },
+  "homepage": "https://sarmaterm.org",
+  "releases": "https://github.com/sarmaterm/sarmaterm/releases",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "client",
+    "README.md",
+    "LICENSE"
+  ]
+}

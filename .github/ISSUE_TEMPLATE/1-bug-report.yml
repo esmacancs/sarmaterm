@@ -1,0 +1,62 @@
+﻿name: "\U0001F41B Bug report(æäº¤bug)"
+description: Create a report to help us improve
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting an issue.
+
+        This issue tracker is for bugs and issues found within sarmaterm.
+        If you require more general support please start a discussion on our discussion board https://github.com/sarmaterm/sarmaterm/discussions
+
+        Please fill in as much of the form below as you're able.
+
+        Before continue, make sure you are using the latest release: check https://github.com/sarmaterm/sarmaterm/releases for latest release, also please
+
+        ä»…ç”¨æ¥è¿½è¸ªbug, å¦‚æžœæœ‰å…¶ä»–çš„è®¨è®ºè¯·ç§»æ­¥è®¨è®ºåŒº https://github.com/sarmaterm/sarmaterm/discussions, è¯·åŠ¡å¿…ç¡®ä¿é—®é¢˜æ˜¯åŸºäºŽæœ€æ–°ç‰ˆæœ¬: https://github.com/sarmaterm/sarmaterm/releases
+
+  - type: input
+    attributes:
+      label: sarmaterm Version and download file extension(sarmatermç‰ˆæœ¬å’Œä¸‹è½½æ–‡ä»¶åŽç¼€)
+      description: |
+        - sarmaterm-xx.xx.xx-linux-amd64.deb
+        - sarmaterm-xx.xx.xx-linux-amd64.snap
+        - sarmaterm-xx.xx.xx-linux-x64.tar.gz
+        - sarmaterm-xx.xx.xx-linux-x86_64.rpm
+        - sarmaterm-xx.xx.xx-mac-arm64.dmg
+        - sarmaterm-xx.xx.xx-mac-x64.dmg
+        - sarmaterm-xx.xx.xx-win-x64-installer.exe
+        - sarmaterm-xx.xx.xx-win-x64-loose.tar.gz
+        - sarmaterm-xx.xx.xx-win-x64.appx
+        - sarmaterm-xx.xx.xx-win-x64.tar.gz
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Platform detail (å¹³å°è¯¦æƒ…)
+      description: |
+        windows 7/8/10/11, mac os(ARM or x64), or linux
+        UNIX: output of `uname -a`
+        Windows: output of `"$([Environment]::OSVersion | ForEach-Object VersionString) $(if ([Environment]::Is64BitOperatingSystem) { "x64" } else { "x86" })"` in PowerShell console
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: What steps will reproduce the bug?(é‡çŽ°é—®é¢˜çš„è¯¦ç»†æ­¥éª¤)
+      description: Enter details about your bug, preferably a simple code snippet that can be run using `node` directly without installing third-party dependencies.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: What should have happened?(æœŸæœ›çš„ç»“æžœ)
+      description: If possible please provide screenshots.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Would this happen in other terminal app(æ˜¯å¦èƒ½å¤Ÿåœ¨å…¶ä»–åŒç±»è½¯ä»¶é‡çŽ°è¿™ä¸ªé—®é¢˜)
+      description: really important.
+  - type: textarea
+    attributes:
+      label: Additional information(å…¶ä»–ä»»ä½•ç›¸å…³ä¿¡æ¯)
+      description: Tell us anything else you think we should know.
